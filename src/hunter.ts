@@ -12,47 +12,47 @@ export type Race =
 
 export class Hunter {
   constructor(
-    protected id: number,
-    protected name: string,
-    protected race: Race,
-    protected location: string,
+    protected _id: number,
+    protected _name: string,
+    protected _race: Race,
+    protected _location: string,
   ) {
-    this.id = id + 30000;
+    this._id = _id + 30000;
   }
 
   get hunter(): Hunter {
     return this;
   }
 
-  getID(): number {
-    return this.id;
+  get id(): number {
+    return this._id;
   }
 
-  getName(): string {
-    return this.name;
+  get name(): string {
+    return this._name;
   }
 
-  getRace(): Race {
-    return this.race;
+  get race(): Race {
+    return this._race;
   }
 
-  getLocation(): string {
-    return this.location;
+  get location(): string {
+    return this._location;
   }
 
-  setID(newID: number) {
-    this.id = newID;
+  set id(newID: number) {
+    this._id = newID;
   }
 
-  setName(newName: string) {
-    this.name = newName;
+  set name(newName: string) {
+    this._name = newName;
   }
 
-  setRace(newRace: Race) {
-    this.race = newRace;
+  set race(newRace: Race) {
+    this._race = newRace;
   }
 
-  setLocation(newLocation: string) {
-    this.location = newLocation;
+  set location(newLocation: string) {
+    this._location = newLocation;
   }
 }

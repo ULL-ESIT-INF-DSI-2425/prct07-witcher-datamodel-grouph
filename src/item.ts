@@ -160,4 +160,26 @@ export class Potion extends Item {
   getEffect(): Effect {
     return this.effect;
   }
+
+  setID(newID: number) {
+    this.id = newID;
+  }
+  setName(newName: string) {
+    this.name = newName;
+  }
+  setDescription(newDescription: string) {
+    this.description = newDescription;
+  }
+  setMaterial(newMaterial: PotionMaterial) {
+    this.material = newMaterial;
+  }
+  setWeight(newWeight: number) {
+    this.weight = newWeight;
+  }
+  setPrice(newPrice: number) {
+    this.price = newPrice;
+  }
+  setEffect(newEffect: Effect) {
+    this.effect = newEffect;
+  }
 }

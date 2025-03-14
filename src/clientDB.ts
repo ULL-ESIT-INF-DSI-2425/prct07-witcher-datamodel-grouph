@@ -20,7 +20,7 @@ async function initHDB() {
 async function AddClient(new_hunter: Hunter) {
   await ClientDB.read(); // Asegurarse de que los datos están actualizados
   if (
-    ClientDB.data.clients.find((hunter) => hunter.hunter.getID() === new_hunter.getID())
+    ClientDB.data.clients.find((hunter) => hunter.hunter.id === new_hunter.id)
   ) {
     console.log("/// WARNING: El cazador ya existe ///");
     return;
