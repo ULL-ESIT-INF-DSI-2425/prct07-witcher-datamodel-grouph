@@ -1,0 +1,35 @@
+{
+  "items": [
+    {
+      "item": {
+        "id": 1,
+        "name": "Excalibur",
+        "description": "Espada legendaria",
+        "material": "Acero",
+        "weight": 10,
+        "price": 1000
+      }
+    },
+    {
+      "item": {
+        "id": 2,
+        "name": "Cota de malla",
+        "description": "Armadura de placas",
+        "material": "Malla de acero",
+        "weight": 20,
+        "price": 2000
+      }
+    },
+    {
+      "item": {
+        "id": 3,
+        "name": "Sangre de ghoul",
+        "description": "Poción de regeneración",
+        "material": "Sangre de ghoul",
+        "weight": 5,
+        "price": 500,
+        "effect": "Regeneración de vitalidad"
+      }
+    }
+  ]
+}

@@ -50,77 +50,114 @@ export type Effect =
 
 export abstract class Item {
   constructor(
-    public readonly id: number,
-    public readonly name: string,
-    public readonly description: string,
-    public readonly material: GenericMaterial,
-    public readonly weight: number,
-    public readonly price: number,
+    protected id: number,
+    protected name: string,
+    protected description: string,
+    protected material: GenericMaterial,
+    protected weight: number,
+    protected price: number,
   ) {}
+  abstract getID(): number;
+  abstract getName(): string;
+  abstract getDescription(): string;
+  abstract getMaterial(): GenericMaterial;
+  abstract getWeight(): number;
+  abstract getPrice(): number;
 }
 
 export class Armor extends Item {
   constructor(
-    public readonly id: number,
-    public readonly name: string,
-    public readonly description: string,
-    public readonly material: ArmorMaterial,
-    public readonly weight: number,
-    public readonly price: number,
+    protected id: number,
+    protected name: string,
+    protected description: string,
+    protected material: ArmorMaterial,
+    protected weight: number,
+    protected price: number,
   ) {
     super(10000 + id, name, description, material, weight, price);
+  }
+  getID(): number {
+    return this.id;
+  }
+  getName(): string {
+    return this.name;
+  }
+  getDescription(): string {
+    return this.description;
+  }
+  getMaterial(): ArmorMaterial {
+    return this.material;
+  }
+  getWeight(): number {
+    return this.weight;
+  }
+  getPrice(): number {
+    return this.price;
   }
 }
 
 export class Weapon extends Item {
   constructor(
-    public readonly id: number,
-    public readonly name: string,
-    public readonly description: string,
-    public readonly material: WeaponMaterial,
-    public readonly weight: number,
-    public readonly price: number,
+    protected id: number,
+    protected name: string,
+    protected description: string,
+    protected material: WeaponMaterial,
+    protected weight: number,
+    protected price: number,
   ) {
     super(11000 + id, name, description, material, weight, price);
+  }
+  getID(): number {
+    return this.id;
+  }
+  getName(): string {
+    return this.name;
+  }
+  getDescription(): string {
+    return this.description;
+  }
+  getMaterial(): WeaponMaterial {
+    return this.material;
+  }
+  getWeight(): number {
+    return this.weight;
+  }
+  getPrice(): number {
+    return this.price;
   }
 }
 
 export class Potion extends Item {
   constructor(
-    public readonly id: number,
-    public readonly name: string,
-    public readonly description: string,
-    public readonly material: PotionMaterial,
-    public readonly weight: number,
-    public readonly price: number,
-    public readonly effect: Effect,
+    protected id: number,
+    protected name: string,
+    protected description: string,
+    protected material: PotionMaterial,
+    protected weight: number,
+    protected price: number,
+    protected effect: Effect,
   ) {
     super(12000 + id, name, description, material, weight, price);
   }
+  getID(): number {
+    return this.id;
+  }
+  getName(): string {
+    return this.name;
+  }
+  getDescription(): string {
+    return this.description;
+  }
+  getMaterial(): PotionMaterial {
+    return this.material;
+  }
+  getWeight(): number {
+    return this.weight;
+  }
+  getPrice(): number {
+    return this.price;
+  }
+  getEffect(): Effect {
+    return this.effect;
+  }
 }
-
-const Excalibur = new Weapon(
-  1,
-  "Excalibur",
-  "Espada legendaria",
-  "Acero",
-  10,
-  1000,
-);
-const CotaDeMalla = new Armor(
-  1,
-  "Cota de malla",
-  "Armadura de placas",
-  "Malla de acero",
-  20,
-  2000,
-);
-const EsenciaVampirica = new Potion(
-  1,
-  "Sangre de ghoul",
-  "Poción de regeneración",
-  "Sangre de ghoul",
-  5,
-  500,
-  "Regeneración de vitalidad",
-);
