@@ -1,6 +1,7 @@
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
 import { Merchant } from "./merchant";
+import { fileURLToPath } from "url";
 
 type MerchantDataBaseSchema = { merchants: { merchant: Merchant }[] };
 
@@ -19,11 +20,7 @@ async function initMDB() {
 
 async function AddMerchant(new_merchant: Merchant) {
   await MerchantDB.read(); // Asegurarse de que los datos están actualizados
-  if (
-    MerchantDB.data.merchants.find(
-      (merchant) => merchant.merchant.id === new_merchant.id,
-    )
-  ) {
+  if (MerchantDB.data.merchants.find((merchant) => merchant.merchant.id === new_merchant.id)) {
     console.log("/// WARNING: El usuario ya existe ///");
     return;
   } else {
@@ -31,6 +28,17 @@ async function AddMerchant(new_merchant: Merchant) {
   }
   await MerchantDB.write(); // Guardar cambios en db.json
 }
+
+async function RemoveMerchant(remove_id: number) {
+  await MerchantDB.read();
+  MerchantDB.data.merchants.forEach(removing_merchant => {
+    if (removing_merchant.merchant.id === remove_id) {
+      MerchantDB.data.merchants.filter(merchant => merchant.merchant.id !== remove_id);
+    }
+  });
+  await MerchantDB.write();
+}
+
 
 async function GetMerchants() {
   await MerchantDB.read(); // Cargar los datos desde db.json
@@ -42,4 +50,7 @@ const Lucien = new Merchant(1, "Lucien", "Druida", "Añaza");
 const Russel = new Merchant(2, "Russel", "Herrero", "Añaza");
 AddMerchant(Lucien);
 AddMerchant(Russel);
+
+RemoveMerchant(1);
+
 GetMerchants();

@@ -18,16 +18,32 @@ async function initIDB() {
 }
 
 async function AddItem(newItem: Item) {
+<<<<<<< Updated upstream
   await ItemDB.read(); // Asegurarse de que los datos están actualizados
   if (
     ItemDB.data.items.find((item) => item.item.id === newItem.id)
   ) {
+=======
+  await ItemDB.read();
+
+  if (ItemDB.data.items.find((item) => item.item.id === newItem.id)) {
+>>>>>>> Stashed changes
     console.log("/// WARNING: El item ya existe ///");
     return;
   } else {
-    ItemDB.data.items.push({ item: newItem }); // Agregar usuario
+    ItemDB.data.items.push({ item: newItem });
   }
-  await ItemDB.write(); // Guardar cambios en db.json
+  await ItemDB.write();
+}
+
+async function RemoveItem(remove_id: number) {
+  await ItemDB.read();
+  ItemDB.data.items.forEach(removing_item => {
+    if (removing_item.item.id === remove_id) {
+      ItemDB.data.items.filter(item => item.item.id !== remove_id);
+    }
+  });
+  await ItemDB.write();
 }
 
 async function Getitems() {
