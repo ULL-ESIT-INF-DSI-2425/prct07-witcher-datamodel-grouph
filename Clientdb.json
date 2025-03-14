@@ -1,0 +1,28 @@
+{
+  "clients": [
+    {
+      "hunter": {
+        "id": 30001,
+        "name": "Gerald de Rivia",
+        "race": "Humano",
+        "location": "YoKeSeHermano"
+      }
+    },
+    {
+      "hunter": {
+        "id": 30002,
+        "name": "Yennefer de Vengerberg",
+        "race": "Elfo",
+        "location": "Añaza"
+      }
+    },
+    {
+      "hunter": {
+        "id": 30003,
+        "name": "Gerald de Rivia",
+        "race": "Humano",
+        "location": "YoKeSeHermano"
+      }
+    }
+  ]
+}
