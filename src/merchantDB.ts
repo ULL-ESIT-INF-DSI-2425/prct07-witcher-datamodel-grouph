@@ -41,11 +41,11 @@ async function RemoveMerchant(remove_id: number) {
     return;
   }
   
-  const newmerchants = MerchantDB.data.merchants.filter(
+  const newNerchants = MerchantDB.data.merchants.filter(
     client => client.merchant.id !== remove_id
   );
 
-  MerchantDB.data.merchants = newmerchants;
+  MerchantDB.data.merchants = newNerchants;
   await MerchantDB.write(); 
 }
 
@@ -61,6 +61,6 @@ const Russel = new Merchant(2, "Russel", "Herrero", "Añaza");
 AddMerchant(Lucien);
 AddMerchant(Russel);
 
-RemoveMerchant(1);
+RemoveMerchant(20001);
 
 GetMerchants();

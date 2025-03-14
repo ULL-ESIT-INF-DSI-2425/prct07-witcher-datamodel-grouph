@@ -2,14 +2,6 @@
   "merchants": [
     {
       "merchant": {
-        "id": 20001,
-        "name": "Lucien",
-        "profession": "Druida",
-        "location": "Añaza"
-      }
-    },
-    {
-      "merchant": {
         "id": 20002,
         "name": "Russel",
         "profession": "Herrero",
