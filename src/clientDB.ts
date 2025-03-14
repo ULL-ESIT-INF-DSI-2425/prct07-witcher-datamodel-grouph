@@ -30,6 +30,16 @@ async function AddClient(new_hunter: Hunter) {
   await ClientDB.write(); // Guardar cambios en db.json
 }
 
+async function RemoveClient(remove_id: number) {
+  await ClientDB.read(); // Asegurarse de que los datos están actualizados
+    ClientDB.data.clients.forEach(removing_hunter => {
+      if (removing_hunter.hunter.id === remove_id) {
+        ClientDB.data.clients.filter(client => client.hunter.id !== remove_id)
+      }
+    })
+  await ClientDB.write(); // Guardar cambios en db.json
+}
+
 async function GetClients() {
   await ClientDB.read(); // Cargar los datos desde db.json
   console.log(ClientDB.data.clients); // Mostrar todos los clientes

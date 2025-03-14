@@ -34,7 +34,7 @@ async function AddMerchant(new_merchant: Merchant) {
 
 async function GetMerchants() {
   await MerchantDB.read(); // Cargar los datos desde db.json
-  console.log(MerchantDB.data.merchants); // Mostrar todos los mercaderes
+  console.log(MerchantDB.data.merchants); // Mostrar todos los mercaderes[]
 }
 
 initMDB();

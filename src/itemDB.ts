@@ -20,7 +20,7 @@ async function initIDB() {
 async function AddItem(newItem: Item) {
   await ItemDB.read(); // Asegurarse de que los datos están actualizados
   if (
-    ItemDB.data.items.find((item) => item.item.getID() === newItem.getID())
+    ItemDB.data.items.find((item) => item.item.id === newItem.id)
   ) {
     console.log("/// WARNING: El item ya existe ///");
     return;
