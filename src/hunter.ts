@@ -40,19 +40,19 @@ export class Hunter {
     return this._location;
   }
 
-  set id(newID: number) {
-    this._id = newID;
+  set id(new_id: number) {
+    this._id = new_id;
   }
 
-  set name(newName: string) {
-    this._name = newName;
+  set name(new_name: string) {
+    this._name = new_name;
   }
 
-  set race(newRace: Race) {
-    this._race = newRace;
+  set race(new_race: Race) {
+    this._race = new_race;
   }
 
-  set location(newLocation: string) {
-    this._location = newLocation;
+  set location(new_location: string) {
+    this._location = new_location;
   }
 }
