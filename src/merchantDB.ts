@@ -31,12 +31,22 @@ async function AddMerchant(new_merchant: Merchant) {
 
 async function RemoveMerchant(remove_id: number) {
   await MerchantDB.read();
-  MerchantDB.data.merchants.forEach(removing_merchant => {
-    if (removing_merchant.merchant.id === remove_id) {
-      MerchantDB.data.merchants.filter(merchant => merchant.merchant.id !== remove_id);
-    }
-  });
-  await MerchantDB.write();
+  if (MerchantDB.data.merchants.length === 0) {
+    console.log("/// WARNING: No hay marchants registrados ///");
+    return;
+  }
+
+  if (!MerchantDB.data.merchants.find((merchant) => merchant.merchant.id === remove_id)) {
+    console.log("/// WARNING: El merchant no existe ///");
+    return;
+  }
+  
+  const newmerchants = MerchantDB.data.merchants.filter(
+    client => client.merchant.id !== remove_id
+  );
+
+  MerchantDB.data.merchants = newmerchants;
+  await MerchantDB.write(); 
 }
 
 

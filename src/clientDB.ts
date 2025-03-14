@@ -31,13 +31,23 @@ async function AddClient(new_hunter: Hunter) {
 }
 
 async function RemoveClient(remove_id: number) {
-  await ClientDB.read(); // Asegurarse de que los datos están actualizados
-    ClientDB.data.clients.forEach(removing_hunter => {
-      if (removing_hunter.hunter.id === remove_id) {
-        ClientDB.data.clients.filter(client => client.hunter.id !== remove_id)
-      }
-    })
-  await ClientDB.write(); // Guardar cambios en db.json
+  await ClientDB.read();
+  if (ClientDB.data.clients.length === 0) {
+    console.log("/// WARNING: No hay cazadores registrados ///");
+    return;
+  }
+
+  if (!ClientDB.data.clients.find((hunter) => hunter.hunter.id === remove_id)) {
+    console.log("/// WARNING: El cazador no existe ///");
+    return;
+  }
+  
+  const newClients = ClientDB.data.clients.filter(
+    client => client.hunter.id !== remove_id
+  );
+
+  ClientDB.data.clients = newClients;
+  await ClientDB.write(); 
 }
 
 async function GetClients() {
@@ -50,4 +60,7 @@ const Gerald = new Hunter(3, "Gerald de Rivia", "Humano", "YoKeSeHermano");
 const Yenne = new Hunter(2, "Yennefer de Vengerberg", "Elfo", "Añaza");
 AddClient(Gerald);
 AddClient(Yenne);
+
+RemoveClient(30002);
+
 GetClients();

@@ -18,16 +18,10 @@ async function initIDB() {
 }
 
 async function AddItem(newItem: Item) {
-<<<<<<< Updated upstream
   await ItemDB.read(); // Asegurarse de que los datos están actualizados
   if (
     ItemDB.data.items.find((item) => item.item.id === newItem.id)
   ) {
-=======
-  await ItemDB.read();
-
-  if (ItemDB.data.items.find((item) => item.item.id === newItem.id)) {
->>>>>>> Stashed changes
     console.log("/// WARNING: El item ya existe ///");
     return;
   } else {
@@ -38,12 +32,22 @@ async function AddItem(newItem: Item) {
 
 async function RemoveItem(remove_id: number) {
   await ItemDB.read();
-  ItemDB.data.items.forEach(removing_item => {
-    if (removing_item.item.id === remove_id) {
-      ItemDB.data.items.filter(item => item.item.id !== remove_id);
-    }
-  });
-  await ItemDB.write();
+  if (ItemDB.data.items.length === 0) {
+    console.log("/// WARNING: No hay items registrados ///");
+    return;
+  }
+
+  if (!ItemDB.data.items.find((item) => item.item.id === remove_id)) {
+    console.log("/// WARNING: El item no existe ///");
+    return;
+  }
+  
+  const newitems = ItemDB.data.items.filter(
+    client => client.item.id !== remove_id
+  );
+
+  ItemDB.data.items = newitems;
+  await ItemDB.write(); 
 }
 
 async function Getitems() {
@@ -82,5 +86,7 @@ const EsenciaVampirica = new Potion(
 AddItem(Excalibur);
 AddItem(CotaDeMalla); 
 AddItem(EsenciaVampirica);
+
+RemoveItem(2);
 
 Getitems();

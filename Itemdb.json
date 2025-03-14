@@ -12,16 +12,6 @@
     },
     {
       "item": {
-        "id": 2,
-        "name": "Cota de malla",
-        "description": "Armadura de placas",
-        "material": "Malla de acero",
-        "weight": 20,
-        "price": 2000
-      }
-    },
-    {
-      "item": {
         "id": 3,
         "name": "Sangre de ghoul",
         "description": "Poción de regeneración",
