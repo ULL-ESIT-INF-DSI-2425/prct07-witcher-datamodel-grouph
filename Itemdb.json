@@ -2,23 +2,33 @@
   "items": [
     {
       "item": {
-        "id": 1,
-        "name": "Excalibur",
-        "description": "Espada legendaria",
-        "material": "Acero",
-        "weight": 10,
-        "price": 1000
+        "_id": 1,
+        "_name": "Excalibur",
+        "_description": "Espada legendaria",
+        "_material": "Acero",
+        "_weight": 10,
+        "_price": 1000
       }
     },
     {
       "item": {
-        "id": 3,
-        "name": "Sangre de ghoul",
-        "description": "Poción de regeneración",
-        "material": "Sangre de ghoul",
-        "weight": 5,
-        "price": 500,
-        "effect": "Regeneración de vitalidad"
+        "_id": 5,
+        "_name": "Espada Maestra",
+        "_description": "Espada legendaria",
+        "_material": "Acero",
+        "_weight": 10,
+        "_price": 5000
+      }
+    },
+    {
+      "item": {
+        "_id": 3,
+        "_name": "Sangre de ghoul",
+        "_description": "Poción de regeneración",
+        "_material": "Sangre de ghoul",
+        "_weight": 5,
+        "_price": 500,
+        "_effect": "Regeneración de vitalidad"
       }
     }
   ]

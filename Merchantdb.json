@@ -2,10 +2,18 @@
   "merchants": [
     {
       "merchant": {
-        "id": 20002,
-        "name": "Russel",
-        "profession": "Herrero",
-        "location": "Añaza"
+        "_id": 20001,
+        "_name": "Lucien",
+        "_profession": "Druida",
+        "_location": "Añaza"
+      }
+    },
+    {
+      "merchant": {
+        "_id": 20002,
+        "_name": "Russel",
+        "_profession": "Herrero",
+        "_location": "La Laguna"
       }
     }
   ]

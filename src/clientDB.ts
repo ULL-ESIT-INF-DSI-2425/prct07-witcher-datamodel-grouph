@@ -1,6 +1,6 @@
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
-import { Hunter } from "./hunter";
+import { Hunter, Race } from "./hunter";
 
 type ClientDataBaseSchema = { clients: { hunter: Hunter }[] };
 
@@ -52,7 +52,48 @@ async function RemoveClient(remove_id: number) {
 
 async function GetClients() {
   await ClientDB.read(); // Cargar los datos desde db.json
-  console.log(ClientDB.data.clients); // Mostrar todos los clientes
+  ClientDB.data.clients.forEach((hunter) => {
+    console.log("ID: " + hunter.hunter.id);
+    console.log("Name: " + hunter.hunter.name);
+    console.log("Race: " + hunter.hunter.race);
+    console.log("Location: " + hunter.hunter.location);
+    console.log("-------------------------------");
+  });
+}
+
+type ClientAtributte = "name" | "race" | "location";
+
+async function ModifyClient(id: number, atributte: ClientAtributte, value: string | Race) {
+
+  await ClientDB.read(); // Cargar los datos desde db.json
+  if (ClientDB.data.clients.length === 0) {
+    console.log("/// WARNING: No hay cazadores registrados ///");
+    return;
+  }
+  const hunter = ClientDB.data.clients.find((hunter) => hunter.hunter.id === id);
+
+  if (!hunter) {
+    console.log("/// WARNING: El cazador no existe ///");
+    return;
+  }
+
+  switch (atributte) {
+    case "name":
+      hunter.hunter.name = value as string;
+      break
+    case "race":
+      hunter.hunter.race = value as Race;
+      break
+    case "location":
+      hunter.hunter.location = value as string;
+      break
+  }
+  await ClientDB.write();
+}
+
+async function GetClientBy(parameter: ClientAtributte, value: string | Race): Promise<{ hunter: Hunter }[] | undefined> {
+  await ClientDB.read(); // Cargar los datos desde db.json
+  return ClientDB.data.clients.filter((hunter) => hunter.hunter[parameter] === value);
 }
 
 initHDB();
@@ -63,4 +104,9 @@ AddClient(Yenne);
 
 RemoveClient(30002);
 
-GetClients();
+// GetClients();
+GetClientBy("race", "Humano").then((hunters) => {
+  console.log(hunters);
+}
+);
+

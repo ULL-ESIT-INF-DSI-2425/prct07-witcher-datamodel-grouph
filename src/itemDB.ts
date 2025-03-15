@@ -1,6 +1,6 @@
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
-import { Item, Armor, Weapon, Potion } from "./item";
+import { Item, Armor, Weapon, Potion, GenericMaterial } from "./item";
 
 type ItemDataBaseSchema = { items: { item: Item }[] };
 
@@ -52,11 +52,81 @@ async function RemoveItem(remove_id: number) {
 
 async function Getitems() {
   await ItemDB.read(); // Cargar los datos desde db.json
-  console.log(ItemDB.data.items); // Mostrar todos los clientes
+  ItemDB.data.items.forEach((item) => {
+    console.log("ID: " + item.item.id);
+    console.log("Name: " + item.item.name);
+    console.log("Description: " + item.item.description);
+    console.log("Material: " + item.item.material);
+    console.log("Weight: " + item.item.weight);
+    console.log("Price: " + item.item.price);
+    console.log("-------------------------------");
+  });
 }
 
-initIDB();
+type ItemAtributte = "name" | "description" | "material" | "weight" | "price";
 
+async function ModifyItem(id: number, attribute: ItemAtributte, value: string | number | GenericMaterial) {
+  await ItemDB.read();
+  if (ItemDB.data.items.length === 0) {
+    console.log("/// WARNING: No hay items registrados ///");
+    return;
+  }
+  const item = ItemDB.data.items.find((item) => item.item.id === id);
+  if (!item) {
+    console.log("/// WARNING: El item no existe ///");
+    return;
+  }
+  switch (attribute) {
+    case "name":
+      item.item.name = value as string;
+      break;
+    case "description":
+      item.item.description = value as string;
+      break;
+    case "material":
+      item.item.material = value as GenericMaterial;
+      break;
+    case "weight":
+      item.item.weight = value as number;
+      break;
+    case "price":
+      item.item.price = value as number;
+      break;
+  }
+  await ItemDB.write();
+}
+
+async function GetItemBy(parametro: ItemAtributte, value: string | number | GenericMaterial, order: "asc" | "desc" = "asc"): Promise<{ item: Item }[] | undefined> {
+  await ItemDB.read();
+  const items = ItemDB.data.items.filter((item) => item.item[parametro] === value);
+  if (items.length === 0) {
+    console.log("/// WARNING: No se encontraron items ///");
+    return;
+  }
+  // Ordenar items
+  if (typeof value === "string") {
+    if (order === "asc") {
+      items.sort((a, b) => a.item.name.localeCompare(b.item.name));
+    }
+    if (order === "desc") {
+      items.sort((a, b) => b.item.name.localeCompare(a.item.name));
+    }
+  }
+  if (typeof value === "number") {
+    if (order === "asc") {
+      items.sort((a, b) => a.item.price - b.item.price);
+    }
+    if (order === "desc") {
+      items.sort((a, b) => b.item.price - a.item.price);
+    }
+  }
+  
+  return items;
+}
+
+
+
+initIDB();
 const Excalibur = new Weapon(
   1,
   "Excalibur",
@@ -64,6 +134,14 @@ const Excalibur = new Weapon(
   "Acero",
   10,
   1000,
+);
+const EspadaMaestra = new Weapon(
+  5,
+  "Espada Maestra",
+  "Espada legendaria",
+  "Acero",
+  10,
+  5000,
 );
 const CotaDeMalla = new Armor(
   2,
@@ -84,9 +162,23 @@ const EsenciaVampirica = new Potion(
 );
 
 AddItem(Excalibur);
+AddItem(EspadaMaestra);
 AddItem(CotaDeMalla); 
 AddItem(EsenciaVampirica);
 
 RemoveItem(2);
 
-Getitems();
+// Getitems();
+console.log("Items ordenados por precio de forma ascendente");
+GetItemBy("material", "Acero", "asc").then((items) => {
+  items?.forEach((item) => {
+    console.log("ID: " + item.item.id);
+    console.log("Name: " + item.item.name);
+    console.log("Description: " + item.item.description);
+    console.log("Material: " + item.item.material);
+    console.log("Weight: " + item.item.weight);
+    console.log("Price: " + item.item.price);
+    console.log("-------------------------------");
+  });
+}
+);

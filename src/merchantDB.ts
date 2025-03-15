@@ -1,7 +1,8 @@
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
-import { Merchant } from "./merchant";
-import { fileURLToPath } from "url";
+import { Merchant, Profession } from "./merchant";
+import { read } from "fs";
+import { Readline } from "readline/promises";
 
 type MerchantDataBaseSchema = { merchants: { merchant: Merchant }[] };
 
@@ -21,7 +22,7 @@ async function initMDB() {
 async function AddMerchant(new_merchant: Merchant) {
   await MerchantDB.read(); // Asegurarse de que los datos están actualizados
   if (MerchantDB.data.merchants.find((merchant) => merchant.merchant.id === new_merchant.id)) {
-    console.log("/// WARNING: El usuario ya existe ///");
+    console.log("/// WARNING: El mercader ya existe ///");
     return;
   } else {
     MerchantDB.data.merchants.push({ merchant: new_merchant }); // Agregar usuario
@@ -52,7 +53,67 @@ async function RemoveMerchant(remove_id: number) {
 
 async function GetMerchants() {
   await MerchantDB.read(); // Cargar los datos desde db.json
-  console.log(MerchantDB.data.merchants); // Mostrar todos los mercaderes[]
+  MerchantDB.data.merchants.forEach((merchant) => {
+    console.log("ID: " + merchant.merchant.id);
+    console.log("Name: " + merchant.merchant.name);
+    console.log("Profession: " + merchant.merchant.profession);
+    console.log("Location: " + merchant.merchant.location);
+    console.log("-------------------------------");
+  });
+}
+
+type MerchantAtributte = "name" | "profession" | "location";
+
+async function ModifyMerchant(modify_id: number, parameter_to_modify: MerchantAtributte, new_value: string | Profession) {
+  await MerchantDB.read(); // Cargar los datos desde db.json
+  const merchant = MerchantDB.data.merchants.find((merchant) => merchant.merchant.id === modify_id);
+
+  if (MerchantDB.data.merchants.length === 0) {
+    console.log("/// WARNING: No hay marchants registrados ///");
+    return;
+  }
+  if (!merchant) {
+    console.log("/// WARNING: No se pudo modificar, el merchant no existe ///");
+    return;
+  }
+  switch (parameter_to_modify) {
+    case "name":
+      merchant.merchant.name = new_value as string;
+      break;
+    case "profession":
+      merchant.merchant.profession = new_value as Profession;
+      break;
+    case "location":
+      merchant.merchant.location = new_value as string;
+      break;
+  }
+  await MerchantDB.write(); // Guardar cambios en db.json
+}
+
+async function GetMerchantBy(parameter: MerchantAtributte, value: string | Profession): Promise<{ merchant: Merchant }[] | undefined> {
+  await MerchantDB.read(); // Cargar los datos desde db.json
+  if (MerchantDB.data.merchants.length === 0) {
+    console.log("/// WARNING: No hay marchants registrados ///");
+    return;
+  }
+  let result: { merchant: Merchant }[] = [];
+  switch (parameter) {
+    case "name":
+      result = MerchantDB.data.merchants.filter((merchant) => merchant.merchant.name === value);
+      break;
+    case "profession":
+      result = MerchantDB.data.merchants.filter((merchant) => merchant.merchant.profession === value);
+      break;
+    case "location":
+      result = MerchantDB.data.merchants.filter((merchant) => merchant.merchant.location === value);
+      break;
+  }
+
+  if (result.length === 0) {
+    console.log("/// WARNING: No se encontraron mercaderes con ese parámetro ///");
+    return result;
+  }
+  return result;
 }
 
 initMDB();
@@ -61,6 +122,7 @@ const Russel = new Merchant(2, "Russel", "Herrero", "Añaza");
 AddMerchant(Lucien);
 AddMerchant(Russel);
 
-RemoveMerchant(20001);
+ModifyMerchant(20002, "location", "La Laguna");
 
-GetMerchants();
+//GetMerchants();
+console.log(GetMerchantBy("profession", "Herrero").then((result) => console.log(result)));
