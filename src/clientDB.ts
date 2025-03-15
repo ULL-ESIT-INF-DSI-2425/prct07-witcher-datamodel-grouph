@@ -1,6 +1,6 @@
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
-import { Hunter, Race } from "./hunter";
+import { Hunter, Race } from "./hunter.js";
 
 type ClientDataBaseSchema = { clients: { hunter: Hunter }[] };
 
@@ -41,13 +41,13 @@ async function RemoveClient(remove_id: number) {
     console.log("/// WARNING: El cazador no existe ///");
     return;
   }
-  
+
   const newClients = ClientDB.data.clients.filter(
-    client => client.hunter.id !== remove_id
+    (client) => client.hunter.id !== remove_id,
   );
 
   ClientDB.data.clients = newClients;
-  await ClientDB.write(); 
+  await ClientDB.write();
 }
 
 async function GetClients() {
@@ -63,14 +63,19 @@ async function GetClients() {
 
 type ClientAtributte = "name" | "race" | "location";
 
-async function ModifyClient(id: number, atributte: ClientAtributte, value: string | Race) {
-
+async function ModifyClient(
+  id: number,
+  atributte: ClientAtributte,
+  value: string | Race,
+) {
   await ClientDB.read(); // Cargar los datos desde db.json
   if (ClientDB.data.clients.length === 0) {
     console.log("/// WARNING: No hay cazadores registrados ///");
     return;
   }
-  const hunter = ClientDB.data.clients.find((hunter) => hunter.hunter.id === id);
+  const hunter = ClientDB.data.clients.find(
+    (hunter) => hunter.hunter.id === id,
+  );
 
   if (!hunter) {
     console.log("/// WARNING: El cazador no existe ///");
@@ -80,20 +85,25 @@ async function ModifyClient(id: number, atributte: ClientAtributte, value: strin
   switch (atributte) {
     case "name":
       hunter.hunter.name = value as string;
-      break
+      break;
     case "race":
       hunter.hunter.race = value as Race;
-      break
+      break;
     case "location":
       hunter.hunter.location = value as string;
-      break
+      break;
   }
   await ClientDB.write();
 }
 
-async function GetClientBy(parameter: ClientAtributte, value: string | Race): Promise<{ hunter: Hunter }[] | undefined> {
+async function GetClientBy(
+  parameter: ClientAtributte,
+  value: string | Race,
+): Promise<{ hunter: Hunter }[] | undefined> {
   await ClientDB.read(); // Cargar los datos desde db.json
-  return ClientDB.data.clients.filter((hunter) => hunter.hunter[parameter] === value);
+  return ClientDB.data.clients.filter(
+    (hunter) => hunter.hunter[parameter] === value,
+  );
 }
 
 initHDB();
@@ -107,6 +117,4 @@ RemoveClient(30002);
 // GetClients();
 GetClientBy("race", "Humano").then((hunters) => {
   console.log(hunters);
-}
-);
-
+});

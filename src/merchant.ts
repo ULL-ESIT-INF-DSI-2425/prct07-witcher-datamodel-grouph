@@ -8,37 +8,54 @@ export type Profession =
 
 export class Merchant {
   constructor(
-    private _id: number,
-    private _name: string,
-    private _profession: Profession,
-    private _location: string,
-  ) {
-    this._id = _id + 20000;
+    protected _id: string,
+    protected _name: string,
+    protected _profession: Profession,
+    protected _location: string,
+  ) {}
+
+  // Public getters
+  get id(): string {
+    return this._id;
   }
 
-  get id() {
-    return this._id
-  }
-  get name() {
-    return this._name
-  }
-  get profession() {
-    return this._profession
-  }
-  get location() {
-    return this._location
+  get name(): string {
+    return this._name;
   }
 
-  set id(new_id: number) {
-    this._id = new_id
+  get profession(): Profession {
+    return this._profession;
   }
-  set name(new_name: string) {
-    this._name = new_name
+
+  get location(): string {
+    return this._location;
   }
-  set profession(new_profession: Profession) {
-    this._profession = new_profession
+
+  // Public setters
+  set id(newId: string) {
+    this._id = newId;
   }
-  set location(new_location: string) {
-    this._location = new_location
+
+  set name(newName: string) {
+    this._name = newName;
+  }
+
+  set profession(newProfession: Profession) {
+    this._profession = newProfession;
+  }
+
+  set location(newLocation: string) {
+    this._location = newLocation;
+  }
+
+  // Static method to create a Merchant with a prefixed ID
+  static createMerchant(
+    id: number,
+    name: string,
+    profession: Profession,
+    location: string,
+  ): Merchant {
+    const prefixedId = `M-${id}`;
+    return new Merchant(prefixedId, name, profession, location);
   }
 }

@@ -1,6 +1,6 @@
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
-import { Item, Armor, Weapon, Potion, GenericMaterial } from "./item";
+import { Item, Armor, Weapon, Potion, GenericMaterial } from "./item.js";
 
 type ItemDataBaseSchema = { items: { item: Item }[] };
 
@@ -19,9 +19,7 @@ async function initIDB() {
 
 async function AddItem(newItem: Item) {
   await ItemDB.read(); // Asegurarse de que los datos están actualizados
-  if (
-    ItemDB.data.items.find((item) => item.item.id === newItem.id)
-  ) {
+  if (ItemDB.data.items.find((item) => item.item.id === newItem.id)) {
     console.log("/// WARNING: El item ya existe ///");
     return;
   } else {
@@ -41,13 +39,13 @@ async function RemoveItem(remove_id: number) {
     console.log("/// WARNING: El item no existe ///");
     return;
   }
-  
+
   const newitems = ItemDB.data.items.filter(
-    client => client.item.id !== remove_id
+    (client) => client.item.id !== remove_id,
   );
 
   ItemDB.data.items = newitems;
-  await ItemDB.write(); 
+  await ItemDB.write();
 }
 
 async function Getitems() {
@@ -65,7 +63,11 @@ async function Getitems() {
 
 type ItemAtributte = "name" | "description" | "material" | "weight" | "price";
 
-async function ModifyItem(id: number, attribute: ItemAtributte, value: string | number | GenericMaterial) {
+async function ModifyItem(
+  id: number,
+  attribute: ItemAtributte,
+  value: string | number | GenericMaterial,
+) {
   await ItemDB.read();
   if (ItemDB.data.items.length === 0) {
     console.log("/// WARNING: No hay items registrados ///");
@@ -96,9 +98,15 @@ async function ModifyItem(id: number, attribute: ItemAtributte, value: string | 
   await ItemDB.write();
 }
 
-async function GetItemBy(parametro: ItemAtributte, value: string | number | GenericMaterial, order: "asc" | "desc" = "asc"): Promise<{ item: Item }[] | undefined> {
+async function GetItemBy(
+  parametro: ItemAtributte,
+  value: string | number | GenericMaterial,
+  order: "asc" | "desc" = "asc",
+): Promise<{ item: Item }[] | undefined> {
   await ItemDB.read();
-  const items = ItemDB.data.items.filter((item) => item.item[parametro] === value);
+  const items = ItemDB.data.items.filter(
+    (item) => item.item[parametro] === value,
+  );
   if (items.length === 0) {
     console.log("/// WARNING: No se encontraron items ///");
     return;
@@ -120,11 +128,9 @@ async function GetItemBy(parametro: ItemAtributte, value: string | number | Gene
       items.sort((a, b) => b.item.price - a.item.price);
     }
   }
-  
+
   return items;
 }
-
-
 
 initIDB();
 const Excalibur = new Weapon(
@@ -163,7 +169,7 @@ const EsenciaVampirica = new Potion(
 
 AddItem(Excalibur);
 AddItem(EspadaMaestra);
-AddItem(CotaDeMalla); 
+AddItem(CotaDeMalla);
 AddItem(EsenciaVampirica);
 
 RemoveItem(2);
@@ -180,5 +186,4 @@ GetItemBy("material", "Acero", "asc").then((items) => {
     console.log("Price: " + item.item.price);
     console.log("-------------------------------");
   });
-}
-);
+});
