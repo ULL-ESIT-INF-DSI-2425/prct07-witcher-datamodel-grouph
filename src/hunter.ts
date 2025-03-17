@@ -1,14 +1,14 @@
 export type Race =
-  | "Humano"
-  | "Elfo"
-  | "Enano"
-  | "Mediano"
-  | "Brujo"
-  | "Licantrópico"
+  | "Human"
+  | "Elf"
+  | "Dwarf"
+  | "Halfling"
+  | "Warlock"
+  | "Lycanthropic"
   | "Vran"
-  | "Dríada"
-  | "Gato espectral"
-  | "Semielfo";
+  | "Dryad"
+  | "Spectral Cat"
+  | "Half-Elf";
 
 export class Hunter {
   constructor(
