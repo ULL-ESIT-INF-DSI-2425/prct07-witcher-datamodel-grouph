@@ -107,8 +107,8 @@ async function GetClientBy(
 }
 
 initHDB();
-const Gerald = new Hunter(3, "Gerald de Rivia", "Humano", "YoKeSeHermano");
-const Yenne = new Hunter(2, "Yennefer de Vengerberg", "Elfo", "Añaza");
+const Gerald = new Hunter(3, "Gerald de Rivia", "Human", "YoKeSeHermano");
+const Yenne = new Hunter(2, "Yennefer de Vengerberg", "Elf", "Añaza");
 AddClient(Gerald);
 AddClient(Yenne);
 

@@ -3,9 +3,9 @@ import { Merchant } from "./merchant.js";
 import { JsonMerchantCollection } from "./merchantDB.js";
 
 // Create merchants using the static method
-const Lucien = Merchant.createMerchant(1, "Lucien", "Druida", "Añaza");
-const Russel = Merchant.createMerchant(2, "Russel", "Herrero", "Añaza");
-const Elena = Merchant.createMerchant(3, "Elena", "Alquimista", "La Laguna");
+const Lucien = Merchant.createMerchant(1, "Lucien", "Alchemist", "Añaza");
+const Russel = Merchant.createMerchant(2, "Russel", "Blacksmith", "Añaza");
+const Elena = Merchant.createMerchant(3, "Elena", "Butcher", "La Laguna");
 
 // Initialize the JsonMerchantCollection
 const merchantCollection = new JsonMerchantCollection();
@@ -31,8 +31,8 @@ console.log("\nModifying Lucien's location...");
 merchantCollection.modifyMerchant("M-1", "location", "La Laguna");
 
 // Get merchants by profession
-console.log("\nMerchants with profession 'Herrero':");
-console.log(merchantCollection.getMerchantBy("profession", "Herrero"));
+console.log("\nMerchants with profession 'Blacksmith':");
+console.log(merchantCollection.getMerchantBy("profession", "Blacksmith"));
 
 // Remove a merchant
 console.log("\nRemoving Russel...");
