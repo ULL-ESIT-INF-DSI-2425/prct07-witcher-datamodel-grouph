@@ -1,52 +1,52 @@
 export type WeaponMaterial =
-  | "Acero"
-  | "Acero élfico"
-  | "Acero meteorítico"
-  | "Plata"
-  | "Plata reforzada"
-  | "Madera de ébano"
-  | "Hueso de monstruo"
-  | "Vidrio volcánico"
+  | "Steel"
+  | "Elven Steel"
+  | "Meteoric Steel"
+  | "Silver"
+  | "Reinforced Silver"
+  | "Ebony Wood"
+  | "Monster Bone"
+  | "Volcanic Glass"
   | "Mithril"
-  | "Adamantita";
+  | "Adamantite";
 
 export type ArmorMaterial =
-  | "Cuero"
-  | "Cuero endurecido"
-  | "Malla de acero"
-  | "Malla de plata"
-  | "Escamas de dragón"
-  | "Placas de adamantita"
+  | "Leather"
+  | "Hardened Leather"
+  | "Steel Mesh"
+  | "Silver Mesh"
+  | "Dragon Scales"
+  | "Adamantite Plates"
   | "Mithril"
-  | "Tela encantada"
-  | "Hueso de monstruo"
-  | "Chitin de insectoide";
+  | "Enchanted Fabric"
+  | "Monster Bone"
+  | "Insectoid Chitin";
 
 export type PotionMaterial =
-  | "Flor de celandina"
-  | "Mandrágora"
-  | "Vérvain"
-  | "Raíz de bryonia"
-  | "Cráneo de kikimora triturado"
-  | "Glándula de nekkers"
-  | "Esencia de espectro"
-  | "Médula de grifo"
-  | "Mucosidad de endriaga"
-  | "Sangre de ghoul";
+  | "Celandine Flower"
+  | "Mandrake"
+  | "Vervain"
+  | "Bryonia Root"
+  | "Crushed Kikimora Skull"
+  | "Nekker Gland"
+  | "Wraith Essence"
+  | "Griffin Marrow"
+  | "Endrega Mucus"
+  | "Ghoul Blood";
 
 export type GenericMaterial = ArmorMaterial | WeaponMaterial | PotionMaterial;
 
 export type Effect =
-  | "Regeneración de vitalidad"
-  | "Visión en la oscuridad"
-  | "Resistencia al veneno"
-  | "Aumento de fuerza"
-  | "Aumento de velocidad"
-  | "Aumento de daño con señales"
-  | "Reducción de toxicidad"
-  | "Detección de seres invisibles"
-  | "Parálisis temporal de enemigos"
-  | "Absorción de vida";
+  | "Vitality Regeneration"
+  | "Night Vision"
+  | "Poison Resistance"
+  | "Strength Boost"
+  | "Speed Boost"
+  | "Increased Sign Damage"
+  | "Toxicity Reduction"
+  | "Invisible Creature Detection"
+  | "Temporary Enemy Paralysis"
+  | "Life Absorption";
 
 export abstract class Item {
   constructor(
