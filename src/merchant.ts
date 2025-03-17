@@ -1,10 +1,10 @@
 export type Profession =
-  | "Herrero"
-  | "Alquimista"
-  | "Mercader General"
-  | "Carnicero"
-  | "Druida"
-  | "Contrabandista";
+  | "Blacksmith"
+  | "Alchemist"
+  | "General Merchant"
+  | "Butcher"
+  | "Druid"
+  | "Smuggler";
 
 export class Merchant {
   constructor(
