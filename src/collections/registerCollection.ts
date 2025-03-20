@@ -2,76 +2,90 @@ import { Armor, Weapon, Potion } from "../item.js";
 import { Merchant } from "../merchant.js";
 import { Hunter } from "../hunter.js";
 
-export type OperationType = "buy" | "sell" | "return";
-export type Operation = {
-  hunter: Hunter;
-  operation: OperationType;
-  object: Armor | Weapon | Potion;
-  merchant: Merchant;
-};
+type Item = Armor | Weapon | Potion;
 
-export class RegisterCollection {
-  protected _operations: Operation[] = [];
+export type OperationType = "buy" | "sell" | "return";
+
+export interface BaseTransaction {
+  date: Date;
+  items: Item[];
+  crowns: number;
+}
+
+export interface SaleTransaction extends BaseTransaction {
+  client: Hunter,
+  operationType: "sell";
+}
+
+export interface PurchaseTransaction extends BaseTransaction {
+  merchant: Merchant,
+  operationType: "buy";
+}
+
+export interface ReturnTransaction extends BaseTransaction {
+  from: Hunter | Merchant,
+  reason: string,
+  operationType: "return";
+}
+
+export type Transaction = SaleTransaction | PurchaseTransaction | ReturnTransaction;
+
+export interface TransactionCollection {
+  add(transaction: Transaction): void;
+  getAll(): Transaction[];
+  getSales(): SaleTransaction[];
+  getPurchases(): PurchaseTransaction[];
+  getReturns(): ReturnTransaction[];
+  getTransactionsByClient(hunter: Hunter): SaleTransaction[];
+  getTransactionsByMerchant(merchant: Merchant): PurchaseTransaction[];
+  getTransactionsByItem(item: Item): Transaction[];
+  getTransactionsByDate(date: Date): Transaction[];
+  getTransactionsByDateRange(start: Date, end: Date): Transaction[];
+}
+
+export class RegisterCollection implements TransactionCollection {
+  private _transactions: Transaction[] = [];
 
   constructor() {
-    this._operations = [];
+    this._transactions = [];
   }
 
-  addOperation(newOperation: Operation): void {
-    this._operations.push(newOperation);
+  add(transaction: Transaction): void {
+    this._transactions.push(transaction);
+  }
+  getAll(): Transaction[] {
+    return this._transactions;
   }
 
-  get operations(): Operation[] {
-    return this._operations;
+  getSales(): SaleTransaction[] {
+    return this._transactions.filter((t) => t.operationType === "sell") as SaleTransaction[];
+  }
+  getPurchases(): PurchaseTransaction[] {
+    return this._transactions.filter((t) => t.operationType === "buy") as PurchaseTransaction[];
+  }
+  getReturns(): ReturnTransaction[] {
+    return this._transactions.filter((t) => t.operationType === "return") as ReturnTransaction[];
+  }
+  getTransactionsByClient(hunter: Hunter): SaleTransaction[] {
+    return this._transactions.filter((t) => t.operationType === "sell" && (t as SaleTransaction).client === hunter) as SaleTransaction[];
+  }
+  getTransactionsByMerchant(merchant: Merchant): PurchaseTransaction[] {
+    return this._transactions.filter((t) => t.operationType === "buy" && (t as PurchaseTransaction).merchant === merchant) as PurchaseTransaction[];
+  }
+  getTransactionsByItem(item: Item): Transaction[] {
+    return this._transactions.filter((t) => t.items.includes(item));
+  }
+  getTransactionsByDate(date: Date): Transaction[] {
+    return this._transactions.filter((t) => t.date.toDateString() === date.toDateString());
+  }
+  getTransactionsByDateRange(start: Date, end: Date): Transaction[] {
+    return this._transactions.filter((t) => t.date >= start && t.date <= end);
   }
 
-  get buyOperations(): Operation[] {
-    let result: Operation[] = [];
-    this._operations.forEach((o) => {
-      if (o.operation === "buy") {
-        result.push(o);
-      }
-    });
-    return result;
+  getClientReturns(): ReturnTransaction[] {
+    return this.getReturns().filter((t) => t.operationType === "return" && t.from instanceof Hunter) as ReturnTransaction[];
   }
-
-  get sellOperations(): Operation[] {
-    let result: Operation[] = [];
-    this._operations.forEach((o) => {
-      if (o.operation === "sell") {
-        result.push(o);
-      }
-    });
-    return result;
-  }
-
-  get returnOperations(): Operation[] {
-    let result: Operation[] = [];
-    this._operations.forEach((o) => {
-      if (o.operation === "return") {
-        result.push(o);
-      }
-    });
-    return result;
-  }
-
-  getHunterOperations(hunter: Hunter): Operation[] {
-    let result: Operation[] = [];
-    this._operations.forEach((o) => {
-      if (o.hunter === hunter) {
-        result.push(o);
-      }
-    });
-    return result;
-  }
-
-  getMerchantOperations(merchant: Merchant): Operation[] {
-    let result: Operation[] = [];
-    this._operations.forEach((o) => {
-      if (o.merchant === merchant) {
-        result.push(o);
-      }
-    });
-    return result;
+  getMerchantReturns(): ReturnTransaction[] {
+    return this._transactions.filter((t) => t.operationType === "return" && t.from instanceof Merchant) as ReturnTransaction[];
   }
 }
