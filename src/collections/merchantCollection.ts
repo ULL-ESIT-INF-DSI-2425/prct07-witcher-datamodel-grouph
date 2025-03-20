@@ -1,4 +1,4 @@
-import { Merchant, Profession } from "./merchant.js";
+import { Merchant, Profession } from "../merchant.js";
 
 export class MerchantCollection {
   protected merchants: Merchant[] = [];

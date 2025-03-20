@@ -1,7 +1,7 @@
 import { LowSync } from "lowdb";
 import { JSONFileSync } from "lowdb/node";
-import { Merchant, Profession } from "./merchant.js";
-import { MerchantCollection } from "./merchantCollection.js";
+import { Merchant, Profession } from "../merchant.js";
+import { MerchantCollection } from "../collections/merchantCollection.js";
 
 type MerchantDataBaseSchema = { merchants: Merchant[] };
 

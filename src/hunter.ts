@@ -12,19 +12,14 @@ export type Race =
 
 export class Hunter {
   constructor(
-    protected _id: number,
+    protected _id: string,
     protected _name: string,
     protected _race: Race,
     protected _location: string,
-  ) {
-    this._id = _id + 30000;
-  }
+  ) {}
 
-  get hunter(): Hunter {
-    return this;
-  }
-
-  get id(): number {
+  // Public getters
+  get id(): string {
     return this._id;
   }
 
@@ -40,19 +35,31 @@ export class Hunter {
     return this._location;
   }
 
-  set id(new_id: number) {
-    this._id = new_id;
+  // Public setters
+  set id(newId: string) {
+    this._id = newId;
   }
 
-  set name(new_name: string) {
-    this._name = new_name;
+  set name(newName: string) {
+    this._name = newName;
   }
 
-  set race(new_race: Race) {
-    this._race = new_race;
+  set race(newRace: Race) {
+    this._race = newRace;
   }
 
-  set location(new_location: string) {
-    this._location = new_location;
+  set location(newLocation: string) {
+    this._location = newLocation;
+  }
+
+  // Static method to create a Hunter with a prefixed ID
+  static createHunter(
+    id: number,
+    name: string,
+    race: Race,
+    location: string,
+  ): Hunter {
+    const prefixedId = `H-${id}`;
+    return new Hunter(prefixedId, name, race, location);
   }
 }

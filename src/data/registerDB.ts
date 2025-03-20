@@ -1,6 +1,10 @@
 import { LowSync } from "lowdb";
 import { JSONFileSync } from "lowdb/node";
-import { RegisterCollection, OperationType, Operation } from "./registerCollection.js";
+import {
+  RegisterCollection,
+  OperationType,
+  Operation,
+} from "../collections/registerCollection.js";
 
 type RegisterDataBaseSchema = { operations: Operation[] };
 
@@ -20,7 +24,7 @@ export class JsonRegisterCollection extends RegisterCollection {
       // Deserialize merchants into Merchant instances using the factory function
       this.database.data.operations.forEach((o) => {
         this.addOperation(o);
-      })
+      });
     }
   }
 
@@ -30,8 +34,7 @@ export class JsonRegisterCollection extends RegisterCollection {
     this.database.write();
   }
 
-    get operations(): Operation[] {
-        return this.database.data.operations;
-    }
+  get operations(): Operation[] {
+    return this.database.data.operations;
+  }
 }
-

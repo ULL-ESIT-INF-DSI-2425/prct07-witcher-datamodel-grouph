@@ -1,6 +1,6 @@
 // merchantTest.ts
-import { Merchant } from "./merchant.js";
-import { JsonMerchantCollection } from "./merchantDB.js";
+import { Merchant } from "../merchant.js";
+import { JsonMerchantCollection } from "../data/merchantDB.js";
 
 // Create merchants using the static method
 const Lucien = Merchant.createMerchant(1, "Lucien", "Alchemist", "Añaza");

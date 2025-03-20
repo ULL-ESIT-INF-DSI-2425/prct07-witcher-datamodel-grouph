@@ -1,16 +1,15 @@
 {
   "merchants": [
-    {},
     {
       "_id": "M-1",
       "_name": "Lucien",
-      "_profession": "Druida",
+      "_profession": "Alchemist",
       "_location": "La Laguna"
     },
     {
       "_id": "M-3",
       "_name": "Elena",
-      "_profession": "Alquimista",
+      "_profession": "Butcher",
       "_location": "La Laguna"
     }
   ]

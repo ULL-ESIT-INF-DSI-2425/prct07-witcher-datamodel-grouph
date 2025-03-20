@@ -1,5 +1,5 @@
-import { JsonItemCollection } from "./itemDB.js";
-import { JsonRegisterCollection } from "./registerDB.js";
+import { JsonItemCollection } from "./data/itemDB.js";
+import { JsonRegisterCollection } from "./data/registerDB.js";
 
 export class Inventory {
   protected items: JsonItemCollection;

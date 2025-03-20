@@ -57,201 +57,76 @@ export abstract class Item {
     protected _weight: number,
     protected _price: number,
   ) {}
-  abstract get id(): string;
-  abstract get name(): string;
-  abstract get description(): string;
-  abstract get material(): GenericMaterial;
-  abstract get weight(): number;
-  abstract get price(): number;
 
-  abstract set id( new_id: string );
-  abstract set name(new_name: string);
-  abstract set description(new_description: string);
-  abstract set material(new_material: GenericMaterial);
-  abstract set weight(new_weight: number);
-  abstract set price(new_price: number);
+  // Public getters
+  get id(): string {
+    return this._id;
+  }
+
+  get name(): string {
+    return this._name;
+  }
+
+  get description(): string {
+    return this._description;
+  }
+
+  get material(): GenericMaterial {
+    return this._material;
+  }
+
+  get weight(): number {
+    return this._weight;
+  }
+
+  get price(): number {
+    return this._price;
+  }
+
+  // Public setters
+  set id(newId: string) {
+    this._id = newId;
+  }
+
+  set name(newName: string) {
+    this._name = newName;
+  }
+
+  set description(newDescription: string) {
+    this._description = newDescription;
+  }
+
+  set material(newMaterial: GenericMaterial) {
+    this._material = newMaterial;
+  }
+
+  set weight(newWeight: number) {
+    this._weight = newWeight;
+  }
+
+  set price(newPrice: number) {
+    this._price = newPrice;
+  }
 }
 
 export class Armor extends Item {
   constructor(
-    protected _id: string,
-    protected _name: string,
-    protected _description: string,
+    id: string,
+    name: string,
+    description: string,
     protected _material: ArmorMaterial,
-    protected _weight: number,
-    protected _price: number,
+    weight: number,
+    price: number,
   ) {
-    super('A'+_id, _name, _description, _material, _weight, _price);
+    super(id, name, description, _material, weight, price);
   }
-  get id(): string {
-    return this._id;
-  }
-  get name(): string {
-    return this._name;
-  }
-  get description(): string {
-    return this._description;
-  }
+
   get material(): ArmorMaterial {
     return this._material;
   }
-  get weight(): number {
-    return this._weight;
-  }
-  get price(): number {
-    return this._price;
-  }
 
-  set id( new_id: string ) {
-    this._id = new_id
-  }
-  set name(new_name: string) {
-    this._name = new_name
-  }
-  set description(new_description: string) {
-    this._description = new_description
-  }
-  set material(new_material: ArmorMaterial) {
-    this._material = new_material
-  }
-  set weight(new_weight: number) {
-    this._weight = new_weight
-  }
-  set price(new_price: number) {
-    this._price = new_price
-  }
-}
-
-export class Weapon extends Item {
-  constructor(
-    protected _id: string,
-    protected _name: string,
-    protected _description: string,
-    protected _material: WeaponMaterial,
-    protected _weight: number,
-    protected _price: number,
-  ) {
-    super('W' + _id, _name, _description, _material, _weight, _price);
-  }
-  get id(): string {
-    return this._id;
-  }
-  get name(): string {
-    return this._name;
-  }
-  get description(): string {
-    return this._description;
-  }
-  get material(): WeaponMaterial {
-    return this._material;
-  }
-  get weight(): number {
-    return this._weight;
-  }
-  get price(): number {
-    return this._price;
-  }
-
-  set id( new_id: string ) {
-    this._id = new_id
-  }
-  set name(new_name: string) {
-    this._name = new_name
-  }
-  set description(new_description: string) {
-    this._description = new_description
-  }
-  set material(new_material: WeaponMaterial) {
-    this._material = new_material
-  }
-  set weight(new_weight: number) {
-    this._weight = new_weight
-  }
-  set price(new_price: number) {
-    this._price = new_price
-  }
-}
-
-export class Potion extends Item {
-  constructor(
-    protected _id: string,
-    protected _name: string,
-    protected _description: string,
-    protected _material: PotionMaterial,
-    protected _weight: number,
-    protected _price: number,
-    protected _effect: Effect,
-  ) {
-    super('P' + _id, _name, _description, _material, _weight, _price);
-  }
-  get id(): string {
-    return this._id;
-  }
-  get name(): string {
-    return this._name;
-  }
-  get description(): string {
-    return this._description;
-  }
-  get material(): PotionMaterial {
-    return this._material;
-  }
-  get weight(): number {
-    return this._weight;
-  }
-  get price(): number {
-    return this._price;
-  }
-  get effect(): Effect {
-    return this._effect
-  }
-
-  set id( new_id: string ) {
-    this._id = new_id
-  }
-  set name(new_name: string) {
-    this._name = new_name
-  }
-  set description(new_description: string) {
-    this._description = new_description
-  }
-  set material(new_material: PotionMaterial) {
-    this._material = new_material
-  }
-  set weight(new_weight: number) {
-    this._weight = new_weight
-  }
-  set price(new_price: number) {
-    this._price = new_price
-  }
-  set effect(new_effect: Effect) {
-    this._effect = new_effect
-  }
-
-  // ALBERTO - Ayuda no entiendo el motivo de estos metodos, los añado por si acaso
-  static createPotion(
-    id: string,
-    name: string,
-    description: string,
-    material: PotionMaterial,
-    weight: number,
-    price: number,
-    effect: Effect
-  ): Potion {
-    const prefixedId = `P-${id}`;
-    return new Potion(prefixedId, name, description, material, weight, price, effect)
-  }
-
-  static createWeapon(
-    id: string,
-    name: string,
-    description: string,
-    material: WeaponMaterial,
-    weight: number,
-    price: number
-  ): Weapon {
-    const prefixedId = `W-${id}`;
-    return new Weapon(prefixedId, name, description, material, weight, price)
+  set material(newMaterial: ArmorMaterial) {
+    this._material = newMaterial;
   }
 
   static createArmor(
@@ -260,9 +135,93 @@ export class Potion extends Item {
     description: string,
     material: ArmorMaterial,
     weight: number,
-    price: number
+    price: number,
   ): Armor {
     const prefixedId = `A-${id}`;
-    return new Armor(prefixedId, name, description, material, weight, price)
+    return new Armor(prefixedId, name, description, material, weight, price);
+  }
+}
+
+export class Weapon extends Item {
+  constructor(
+    id: string,
+    name: string,
+    description: string,
+    protected _material: WeaponMaterial,
+    weight: number,
+    price: number,
+  ) {
+    super(id, name, description, _material, weight, price);
+  }
+
+  get material(): WeaponMaterial {
+    return this._material;
+  }
+
+  set material(newMaterial: WeaponMaterial) {
+    this._material = newMaterial;
+  }
+
+  static createWeapon(
+    id: number,
+    name: string,
+    description: string,
+    material: WeaponMaterial,
+    weight: number,
+    price: number,
+  ): Weapon {
+    const prefixedId = `W-${id}`;
+    return new Weapon(prefixedId, name, description, material, weight, price);
+  }
+}
+
+export class Potion extends Item {
+  constructor(
+    id: string,
+    name: string,
+    description: string,
+    protected _material: PotionMaterial,
+    weight: number,
+    price: number,
+    protected _effect: Effect,
+  ) {
+    super(id, name, description, _material, weight, price);
+  }
+
+  get material(): PotionMaterial {
+    return this._material;
+  }
+
+  set material(newMaterial: PotionMaterial) {
+    this._material = newMaterial;
+  }
+
+  get effect(): Effect {
+    return this._effect;
+  }
+
+  set effect(newEffect: Effect) {
+    this._effect = newEffect;
+  }
+
+  static createPotion(
+    id: number,
+    name: string,
+    description: string,
+    material: PotionMaterial,
+    weight: number,
+    price: number,
+    effect: Effect,
+  ): Potion {
+    const prefixedId = `P-${id}`;
+    return new Potion(
+      prefixedId,
+      name,
+      description,
+      material,
+      weight,
+      price,
+      effect,
+    );
   }
 }

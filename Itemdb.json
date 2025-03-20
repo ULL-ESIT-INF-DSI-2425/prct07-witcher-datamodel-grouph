@@ -1,35 +1,29 @@
 {
   "items": [
     {
-      "item": {
-        "_id": 1,
-        "_name": "Excalibur",
-        "_description": "Espada legendaria",
-        "_material": "Acero",
-        "_weight": 10,
-        "_price": 1000
-      }
+      "_id": "A-2",
+      "_name": "Mithril Plate",
+      "_description": "Lightweight armor made from mithril.",
+      "_material": "Mithril",
+      "_weight": 10,
+      "_price": 700
     },
     {
-      "item": {
-        "_id": 5,
-        "_name": "Espada Maestra",
-        "_description": "Espada legendaria",
-        "_material": "Acero",
-        "_weight": 10,
-        "_price": 5000
-      }
+      "_id": "W-2",
+      "_name": "Ebony Bow",
+      "_description": "A powerful bow made of ebony wood.",
+      "_material": "Ebony Wood",
+      "_weight": 3,
+      "_price": 400
     },
     {
-      "item": {
-        "_id": 3,
-        "_name": "Sangre de ghoul",
-        "_description": "Poción de regeneración",
-        "_material": "Sangre de ghoul",
-        "_weight": 5,
-        "_price": 500,
-        "_effect": "Regeneración de vitalidad"
-      }
+      "_id": "P-2",
+      "_name": "Cat Potion",
+      "_description": "Grants night vision.",
+      "_material": "Vervain",
+      "_weight": 1,
+      "_price": 60,
+      "_effect": "Night Vision"
     }
   ]
 }
