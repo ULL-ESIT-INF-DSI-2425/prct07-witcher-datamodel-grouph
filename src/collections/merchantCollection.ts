@@ -49,4 +49,20 @@ export class MerchantCollection {
   ): Merchant[] {
     return this.merchants.filter((m) => m[parameter] === value);
   }
+
+  getMerchantById(id: string): Merchant | undefined {
+    return this.merchants.find((m) => m.id === id);
+  }
+
+  getMerchantByName(name: string): Merchant[] | undefined {
+    return this.merchants.filter((m) => m.name === name);
+  }
+
+  getMerchantByLocation(location: string): Merchant[] {
+    return this.merchants.filter((m) => m.location === location);
+  }
+
+  getMerchantByProfession(profession: Profession): Merchant[] { 
+    return this.merchants.filter((m) => m.profession === profession);
+  }
 }
