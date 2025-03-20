@@ -1,0 +1,232 @@
+{
+  "transactions": [
+    {
+      "date": "2025-03-20T19:48:35.253Z",
+      "items": [
+        {
+          "_id": "W-2",
+          "_name": "Silver Sword",
+          "_description": "A sword made of silver.",
+          "_material": "Silver",
+          "_weight": 5,
+          "_price": 300
+        },
+        {
+          "_id": "P-3",
+          "_name": "Swallow Potion",
+          "_description": "Restores vitality.",
+          "_material": "Celandine Flower",
+          "_weight": 1,
+          "_price": 50,
+          "_effect": "Vitality Regeneration"
+        }
+      ],
+      "crowns": null,
+      "client": {
+        "_id": "H-1",
+        "_name": "Geralt of Rivia",
+        "_race": "Human",
+        "_location": "Kaer Morhen"
+      },
+      "operationType": "sell",
+      "totalCrowns": null
+    },
+    {
+      "date": "2025-03-20T19:48:35.262Z",
+      "items": [
+        {
+          "_id": "A-1",
+          "_name": "Dragon Scale Armor",
+          "_description": "Armor made from dragon scales.",
+          "_material": "Dragon Scales",
+          "_weight": 15,
+          "_price": 500
+        }
+      ],
+      "crowns": null,
+      "merchant": {
+        "_id": "M-1",
+        "_name": "Lucien",
+        "_profession": "Smuggler",
+        "_location": "Añaza"
+      },
+      "operationType": "buy",
+      "totalCrowns": null
+    },
+    {
+      "date": "2025-03-20T19:48:35.262Z",
+      "items": [
+        {
+          "_id": "P-3",
+          "_name": "Swallow Potion",
+          "_description": "Restores vitality.",
+          "_material": "Celandine Flower",
+          "_weight": 1,
+          "_price": 50,
+          "_effect": "Vitality Regeneration"
+        }
+      ],
+      "crowns": null,
+      "from": {
+        "_id": "H-1",
+        "_name": "Geralt of Rivia",
+        "_race": "Human",
+        "_location": "Kaer Morhen"
+      },
+      "reason": "Defective item",
+      "operationType": "return",
+      "totalCrowns": null
+    },
+    {
+      "date": "2025-03-20T19:58:50.084Z",
+      "items": [
+        {
+          "_id": "W-2",
+          "_name": "Silver Sword",
+          "_description": "A sword made of silver.",
+          "_material": "Silver",
+          "_weight": 5,
+          "_price": 300
+        },
+        {
+          "_id": "P-3",
+          "_name": "Swallow Potion",
+          "_description": "Restores vitality.",
+          "_material": "Celandine Flower",
+          "_weight": 1,
+          "_price": 50,
+          "_effect": "Vitality Regeneration"
+        }
+      ],
+      "crowns": 350,
+      "client": {
+        "_id": "H-1",
+        "_name": "Geralt of Rivia",
+        "_race": "Human",
+        "_location": "Kaer Morhen"
+      },
+      "operationType": "sell",
+      "totalCrowns": null
+    },
+    {
+      "date": "2025-03-20T19:58:50.091Z",
+      "items": [
+        {
+          "_id": "A-1",
+          "_name": "Dragon Scale Armor",
+          "_description": "Armor made from dragon scales.",
+          "_material": "Dragon Scales",
+          "_weight": 15,
+          "_price": 500
+        }
+      ],
+      "crowns": 500,
+      "merchant": {
+        "_id": "M-1",
+        "_name": "Lucien",
+        "_profession": "Druid",
+        "_location": "Añaza"
+      },
+      "operationType": "buy",
+      "totalCrowns": null
+    },
+    {
+      "date": "2025-03-20T19:58:50.092Z",
+      "items": [
+        {
+          "_id": "P-3",
+          "_name": "Swallow Potion",
+          "_description": "Restores vitality.",
+          "_material": "Celandine Flower",
+          "_weight": 1,
+          "_price": 50,
+          "_effect": "Vitality Regeneration"
+        }
+      ],
+      "crowns": 50,
+      "from": {
+        "_id": "H-1",
+        "_name": "Geralt of Rivia",
+        "_race": "Human",
+        "_location": "Kaer Morhen"
+      },
+      "reason": "Defective item",
+      "operationType": "return",
+      "totalCrowns": null
+    },
+    {
+      "date": "2025-03-20T20:40:58.192Z",
+      "items": [
+        {
+          "_id": "W-2",
+          "_name": "Silver Sword",
+          "_description": "A sword made of silver.",
+          "_material": "Silver",
+          "_weight": 5,
+          "_price": 300
+        },
+        {
+          "_id": "P-3",
+          "_name": "Swallow Potion",
+          "_description": "Restores vitality.",
+          "_material": "Celandine Flower",
+          "_weight": 1,
+          "_price": 50,
+          "_effect": "Vitality Regeneration"
+        }
+      ],
+      "totalCrowns": 350,
+      "client": {
+        "_id": "H-1",
+        "_name": "Geralt of Rivia",
+        "_race": "Human",
+        "_location": "Kaer Morhen"
+      },
+      "operationType": "sell"
+    },
+    {
+      "date": "2025-03-20T20:40:58.201Z",
+      "items": [
+        {
+          "_id": "A-1",
+          "_name": "Dragon Scale Armor",
+          "_description": "Armor made from dragon scales.",
+          "_material": "Dragon Scales",
+          "_weight": 15,
+          "_price": 500
+        }
+      ],
+      "totalCrowns": 500,
+      "merchant": {
+        "_id": "M-1",
+        "_name": "Lucien",
+        "_profession": "Druid",
+        "_location": "Añaza"
+      },
+      "operationType": "buy"
+    },
+    {
+      "date": "2025-03-20T20:40:58.202Z",
+      "items": [
+        {
+          "_id": "P-3",
+          "_name": "Swallow Potion",
+          "_description": "Restores vitality.",
+          "_material": "Celandine Flower",
+          "_weight": 1,
+          "_price": 50,
+          "_effect": "Vitality Regeneration"
+        }
+      ],
+      "totalCrowns": 50,
+      "from": {
+        "_id": "H-1",
+        "_name": "Geralt of Rivia",
+        "_race": "Human",
+        "_location": "Kaer Morhen"
+      },
+      "reason": "Defective item",
+      "operationType": "return"
+    }
+  ]
+}

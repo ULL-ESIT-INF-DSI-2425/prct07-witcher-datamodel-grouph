@@ -9,26 +9,35 @@ export type OperationType = "buy" | "sell" | "return";
 export interface BaseTransaction {
   date: Date;
   items: Item[];
-  crowns: number;
+  totalCrowns: number;
+}
+
+export interface BaseTransaction {
+  date: Date;
+  items: Item[];
+  totalCrowns: number; // Total cost of the transaction
 }
 
 export interface SaleTransaction extends BaseTransaction {
-  client: Hunter,
+  client: Hunter;
   operationType: "sell";
 }
 
 export interface PurchaseTransaction extends BaseTransaction {
-  merchant: Merchant,
+  merchant: Merchant;
   operationType: "buy";
 }
 
 export interface ReturnTransaction extends BaseTransaction {
-  from: Hunter | Merchant,
-  reason: string,
+  from: Hunter | Merchant;
+  reason: string;
   operationType: "return";
 }
 
-export type Transaction = SaleTransaction | PurchaseTransaction | ReturnTransaction;
+export type Transaction =
+  | SaleTransaction
+  | PurchaseTransaction
+  | ReturnTransaction;
 
 export interface TransactionCollection {
   add(transaction: Transaction): void;
@@ -44,48 +53,81 @@ export interface TransactionCollection {
 }
 
 export class RegisterCollection implements TransactionCollection {
-  private _transactions: Transaction[] = [];
+  protected transactions: Transaction[] = [];
 
   constructor() {
-    this._transactions = [];
+    this.transactions = [];
+  }
+
+  private calculateTotalCrowns(items: Item[]): number {
+    return items.reduce((total, item) => total + item.price, 0);
   }
 
   add(transaction: Transaction): void {
-    this._transactions.push(transaction);
+    transaction.totalCrowns = this.calculateTotalCrowns(transaction.items);
+    this.transactions.push(transaction);
   }
+
   getAll(): Transaction[] {
-    return this._transactions;
+    return this.transactions;
   }
 
   getSales(): SaleTransaction[] {
-    return this._transactions.filter((t) => t.operationType === "sell") as SaleTransaction[];
+    return this.transactions.filter(
+      (t) => t.operationType === "sell",
+    ) as SaleTransaction[];
   }
+
   getPurchases(): PurchaseTransaction[] {
-    return this._transactions.filter((t) => t.operationType === "buy") as PurchaseTransaction[];
+    return this.transactions.filter(
+      (t) => t.operationType === "buy",
+    ) as PurchaseTransaction[];
   }
+
   getReturns(): ReturnTransaction[] {
-    return this._transactions.filter((t) => t.operationType === "return") as ReturnTransaction[];
+    return this.transactions.filter(
+      (t) => t.operationType === "return",
+    ) as ReturnTransaction[];
   }
+
   getTransactionsByClient(hunter: Hunter): SaleTransaction[] {
-    return this._transactions.filter((t) => t.operationType === "sell" && (t as SaleTransaction).client === hunter) as SaleTransaction[];
+    return this.transactions.filter(
+      (t) =>
+        t.operationType === "sell" && (t as SaleTransaction).client === hunter,
+    ) as SaleTransaction[];
   }
+
   getTransactionsByMerchant(merchant: Merchant): PurchaseTransaction[] {
-    return this._transactions.filter((t) => t.operationType === "buy" && (t as PurchaseTransaction).merchant === merchant) as PurchaseTransaction[];
+    return this.transactions.filter(
+      (t) =>
+        t.operationType === "buy" &&
+        (t as PurchaseTransaction).merchant === merchant,
+    ) as PurchaseTransaction[];
   }
+
   getTransactionsByItem(item: Item): Transaction[] {
-    return this._transactions.filter((t) => t.items.includes(item));
+    return this.transactions.filter((t) => t.items.includes(item));
   }
+
   getTransactionsByDate(date: Date): Transaction[] {
-    return this._transactions.filter((t) => t.date.toDateString() === date.toDateString());
+    return this.transactions.filter(
+      (t) => t.date.toDateString() === date.toDateString(),
+    );
   }
+
   getTransactionsByDateRange(start: Date, end: Date): Transaction[] {
-    return this._transactions.filter((t) => t.date >= start && t.date <= end);
+    return this.transactions.filter((t) => t.date >= start && t.date <= end);
   }
 
   getClientReturns(): ReturnTransaction[] {
-    return this.getReturns().filter((t) => t.operationType === "return" && t.from instanceof Hunter) as ReturnTransaction[];
+    return this.getReturns().filter(
+      (t) => t.operationType === "return" && t.from instanceof Hunter,
+    ) as ReturnTransaction[];
   }
+
   getMerchantReturns(): ReturnTransaction[] {
-    return this._transactions.filter((t) => t.operationType === "return" && t.from instanceof Merchant) as ReturnTransaction[];
+    return this.transactions.filter(
+      (t) => t.operationType === "return" && t.from instanceof Merchant,
+    ) as ReturnTransaction[];
   }
 }

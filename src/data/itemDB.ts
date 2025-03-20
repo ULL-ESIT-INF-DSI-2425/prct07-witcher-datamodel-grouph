@@ -1,7 +1,7 @@
 import { LowSync } from "lowdb";
 import { JSONFileSync } from "lowdb/node";
 import {
-  Item,
+  BaseItem,
   Armor,
   Weapon,
   Potion,
@@ -12,7 +12,7 @@ import {
 } from "../item.js";
 import { ItemCollection } from "../collections/itemCollection.js";
 
-type ItemDataBaseSchema = { items: Item[] };
+type ItemDataBaseSchema = { items: BaseItem[] };
 
 export class JsonItemCollection extends ItemCollection {
   private database: LowSync<ItemDataBaseSchema>;
@@ -95,7 +95,7 @@ export class JsonItemCollection extends ItemCollection {
     }
   }
 
-  addItem(newItem: Item): void {
+  addItem(newItem: BaseItem): void {
     super.addItem(newItem);
     this.database.data.items = this.items;
     this.database.write();
@@ -109,7 +109,7 @@ export class JsonItemCollection extends ItemCollection {
 
   modifyItem(
     modifyId: string,
-    parameter: keyof Item,
+    parameter: keyof BaseItem,
     newValue: string | GenericMaterial | number,
   ): void {
     super.modifyItem(modifyId, parameter, newValue);

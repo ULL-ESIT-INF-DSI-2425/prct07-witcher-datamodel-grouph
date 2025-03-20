@@ -48,7 +48,7 @@ export type Effect =
   | "Temporary Enemy Paralysis"
   | "Life Absorption";
 
-export abstract class Item {
+export abstract class BaseItem {
   constructor(
     protected _id: string,
     protected _name: string,
@@ -109,7 +109,7 @@ export abstract class Item {
   }
 }
 
-export class Armor extends Item {
+export class Armor extends BaseItem {
   constructor(
     id: string,
     name: string,
@@ -142,7 +142,7 @@ export class Armor extends Item {
   }
 }
 
-export class Weapon extends Item {
+export class Weapon extends BaseItem {
   constructor(
     id: string,
     name: string,
@@ -175,7 +175,7 @@ export class Weapon extends Item {
   }
 }
 
-export class Potion extends Item {
+export class Potion extends BaseItem {
   constructor(
     id: string,
     name: string,
@@ -225,3 +225,6 @@ export class Potion extends Item {
     );
   }
 }
+
+// Define the Item type as a union of Armor, Weapon, and Potion
+export type Item = Armor | Weapon | Potion;

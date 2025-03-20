@@ -2,39 +2,34 @@ import { LowSync } from "lowdb";
 import { JSONFileSync } from "lowdb/node";
 import {
   RegisterCollection,
-  OperationType,
-  Operation,
+  Transaction,
 } from "../collections/registerCollection.js";
 
-type RegisterDataBaseSchema = { operations: Operation[] };
+type TransactionDataBaseSchema = { transactions: Transaction[] };
 
 export class JsonRegisterCollection extends RegisterCollection {
-  private database: LowSync<RegisterDataBaseSchema>;
+  private database: LowSync<TransactionDataBaseSchema>;
 
   constructor() {
     super();
-    const adapter = new JSONFileSync<RegisterDataBaseSchema>("Registerdb.json");
-    this.database = new LowSync(adapter, { operations: [] });
+    const adapter = new JSONFileSync<TransactionDataBaseSchema>(
+      "Registerdb.json",
+    );
+    this.database = new LowSync(adapter, { transactions: [] });
     this.database.read();
 
     if (this.database.data == null) {
-      this.database.data = { operations: [] };
+      this.database.data = { transactions: [] };
       this.database.write();
     } else {
-      // Deserialize merchants into Merchant instances using the factory function
-      this.database.data.operations.forEach((o) => {
-        this.addOperation(o);
-      });
+      // Deserialize transactions from the database
+      this.database.data.transactions.forEach((t) => this.add(t));
     }
   }
 
-  addOperation(newOperation: Operation): void {
-    super.addOperation(newOperation);
-    this.database.data.operations = this.operations;
+  add(transaction: Transaction): void {
+    super.add(transaction);
+    this.database.data.transactions = this.transactions;
     this.database.write();
-  }
-
-  get operations(): Operation[] {
-    return this.database.data.operations;
   }
 }
