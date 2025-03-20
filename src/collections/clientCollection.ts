@@ -46,4 +46,17 @@ export class ClientCollection {
   getClientBy(parameter: keyof Hunter, value: string | Race): Hunter[] {
     return this.clients.filter((h) => h[parameter] === value);
   }
+
+  getClientById(id: string): Hunter | undefined {
+    return this.clients.find((h) => h.id === id);
+  }
+  getClientByName(name: string): Hunter[] | undefined {
+    return this.clients.filter((h) => h.name === name);
+  }
+  getClientByRace(race: Race): Hunter[] | undefined {
+    return this.clients.filter((h) => h.race === race);
+  }
+  getClientByLocation(location: string): Hunter[] | undefined {
+    return this.clients.filter((h) => h.location === location);
+  }
 }
