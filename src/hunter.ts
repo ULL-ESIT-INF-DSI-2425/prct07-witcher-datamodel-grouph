@@ -16,7 +16,11 @@ export class Hunter {
     protected _name: string,
     protected _race: Race,
     protected _location: string,
-  ) {}
+  ) {
+    if (!_id) throw new Error("ID cannot be empty");
+    if (!_name) throw new Error("Name cannot be empty");
+    if (!_location) throw new Error("Location cannot be empty");
+  }
 
   // Public getters
   get id(): string {
@@ -45,6 +49,9 @@ export class Hunter {
   }
 
   set race(newRace: Race) {
+    if (![ "Human", "Elf", "Dwarf", "Halfling", "Warlock", "Lycanthropic", "Vran", "Dryad", "Spectral Cat", "Half-Elf" ].includes(newRace)) {
+      throw new Error("Invalid race: ${newRace}");
+    }
     this._race = newRace;
   }
 
