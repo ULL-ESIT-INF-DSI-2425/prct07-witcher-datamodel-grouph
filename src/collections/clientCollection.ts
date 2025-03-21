@@ -78,7 +78,9 @@ export class ClientCollection {
    * @returns The client(s) that match the search
    */
   getClientBy(parameter: keyof Hunter, value: string | Race): Hunter[] {
-    return this.clients.filter((h) => h[parameter] === value);
+    const result = this.clients.filter((h) => h[parameter] === value);
+    this.printFormatted(`Clients filtered by ${parameter} = ${value}`, result);
+    return result;
   }
 
   /**
@@ -87,7 +89,13 @@ export class ClientCollection {
    * @returns The client that matches the id
    */
   getClientById(id: string): Hunter | undefined {
-    return this.clients.find((h) => h.id === id);
+    const hunter = this.clients.find((h) => h.id === id);
+    if (hunter) {
+      this.printFormatted(`Client with ID "${id}"`, [hunter]);
+    } else {
+      console.log(`No client found with ID "${id}"`);
+    }
+    return hunter;
   }
 
   /**
@@ -95,18 +103,21 @@ export class ClientCollection {
    * @param name The name of the client to search for
    * @returns The client(s) that match the name
    */
-  getClientByName(name: string): Hunter[] | undefined {
-    return this.clients.filter((h) => h.name === name);
+  getClientByName(name: string): Hunter[] {
+    const result = this.clients.filter((h) => h.name === name);
+    this.printFormatted(`Clients with name "${name}"`, result);
+    return result;
   }
 
   /**
    * Method to get a client by race
    * @param race The race of the client to search for
    * @returns The client(s) that match the race
-   * @returns void
    */
-  getClientByRace(race: Race): Hunter[] | undefined {
-    return this.clients.filter((h) => h.race === race);
+  getClientByRace(race: Race): Hunter[] {
+    const result = this.clients.filter((h) => h.race === race);
+    this.printFormatted(`Clients with race "${race}"`, result);
+    return result;
   }
 
   /**
@@ -114,7 +125,30 @@ export class ClientCollection {
    * @param location The location of the client to search for
    * @returns The client(s) that match the location
    */
-  getClientByLocation(location: string): Hunter[] | undefined {
-    return this.clients.filter((h) => h.location === location);
+  getClientByLocation(location: string): Hunter[] {
+    const result = this.clients.filter((h) => h.location === location);
+    this.printFormatted(`Clients in location "${location}"`, result);
+    return result;
+  }
+
+  /**
+   * Método privado para imprimir de forma formateada una lista de hunters
+   * @param title Título de la operación
+   * @param clients Arreglo de hunters a imprimir
+   */
+  private printFormatted(title: string, clients: Hunter[]): void {
+    console.log(`\n=== ${title} ===`);
+    if (clients.length === 0) {
+      console.log("No clients found.");
+    } else {
+      console.table(
+        clients.map((h) => ({
+          ID: h.id,
+          Name: h.name,
+          Race: h.race,
+          Location: h.location,
+        }))
+      );
+    }
   }
 }

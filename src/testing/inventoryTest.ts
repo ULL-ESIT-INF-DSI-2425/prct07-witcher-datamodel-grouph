@@ -25,6 +25,15 @@ const armor = Armor.createArmor(
   15,
   500,
 );
+
+const armor2 = Armor.createArmor(
+  2,
+  "Camisa Naik",
+  "Armor made from dragon scales.",
+  "Leather",
+  15,
+  500,
+);
 const weapon = Weapon.createWeapon(
   2,
   "Silver Sword",
@@ -233,10 +242,19 @@ try {
 console.log("\nTest 7: Recording a sale with insufficient stock...");
 try {
   // Attempt to sell more weapons than are in stock
-  inventory.recordSale(hunter, [armor, armor, armor, armor, armor, armor]);
+  inventory.recordSale(hunter, [armor, armor, armor, armor, armor, armor, armor]);
   console.log("Sale recorded successfully.");
 } catch (error) {
   handleError(error, "recording sale with insufficient stock");
+}
+
+// Test 8: Recording a return to a merchant (should fail)
+console.log("\nTest 8: Recording a return to a merchant (should fail)...");
+try {
+  inventory.recordReturn(merchant, [armor2], "Defective item");
+  console.log("Return recorded successfully.");
+} catch (error) {
+  handleError(error, " recording return to a merchant");
 }
 
 // List all transactions

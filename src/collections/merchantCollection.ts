@@ -44,6 +44,7 @@ export class MerchantCollection {
    * @returns All merchants in the collection
    */
   getMerchants(): Merchant[] {
+    this.printFormatted("All Merchants", this.merchants);
     return this.merchants;
   }
   
@@ -67,53 +68,72 @@ export class MerchantCollection {
     }
   }
 
-  // /**
-  //  * Method to get a merchant by a specific parameter
-  //  * @param parameter The parameter to search by
-  //  * @param value The value to search for
-  //  * @returns All merchants that match the search criteria
-  //  */
-  // getMerchantBy(
-  //   parameter: keyof Merchant,
-  //   value: string | Profession,
-  // ): Merchant[] {
-  //   return this.merchants.filter((m) => m[parameter] === value);
-  // }
-
-
   /**
    * Method to get a merchant by their id
    * @param id id of the merchant
    * @returns the merchant with the given id, or undefined if not found
    */
   getMerchantById(id: string): Merchant | undefined {
-    return this.merchants.find((m) => m.id === id);
+    const result = this.merchants.find((m) => m.id === id);
+    if (result) {
+      this.printFormatted(`Merchant with ID "${id}"`, [result]);
+    } else {
+      console.log(`No merchant found with ID "${id}"`);
+    }
+    return result;
   }
 
   /**
    * Method to get a merchant by their name
    * @param name name of the merchant
-   * @returns the merchant with the given name, or undefined if not found
+   * @returns the merchant(s) with the given name, or an empty array if not found
    */
-  getMerchantByName(name: string): Merchant[] | undefined {
-    return this.merchants.filter((m) => m.name === name);
+  getMerchantByName(name: string): Merchant[] {
+    const result = this.merchants.filter((m) => m.name === name);
+    this.printFormatted(`Merchants with name "${name}"`, result);
+    return result;
   }
 
   /**
-   * Method to get a merchant by their profession
-   * @param profession profession of the merchant
-   * @returns the merchant with the given profession, or undefined if not found
+   * Method to get merchants by their location
+   * @param location location of the merchant
+   * @returns the merchant(s) that match the location
    */
   getMerchantByLocation(location: string): Merchant[] {
-    return this.merchants.filter((m) => m.location === location);
+    const result = this.merchants.filter((m) => m.location === location);
+    this.printFormatted(`Merchants in location "${location}"`, result);
+    return result;
   }
 
   /**
-   * Method to get a merchant by their profession
+   * Method to get merchants by their profession
    * @param profession profession of the merchant
-   * @returns the merchant with the given profession, or undefined if not found
+   * @returns the merchant(s) that match the profession
    */
   getMerchantByProfession(profession: Profession): Merchant[] { 
-    return this.merchants.filter((m) => m.profession === profession);
+    const result = this.merchants.filter((m) => m.profession === profession);
+    this.printFormatted(`Merchants with profession "${profession}"`, result);
+    return result;
+  }
+
+  /**
+   * Private method to print an array of merchants in a formatted table.
+   * @param title Title of the printed output.
+   * @param merchants Array of merchants to print.
+   */
+  private printFormatted(title: string, merchants: Merchant[]): void {
+    console.log(`\n=== ${title} ===`);
+    if (merchants.length === 0) {
+      console.log("No merchants found.");
+    } else {
+      console.table(
+        merchants.map((m) => ({
+          ID: m.id,
+          Name: m.name,
+          Profession: m.profession,
+          Location: m.location,
+        }))
+      );
+    }
   }
 }
