@@ -26,12 +26,7 @@ export class Merchant {
     protected _name: string,
     protected _profession: Profession,
     protected _location: string,
-  ) {
-    if (!_id) throw new Error("ID cannot be empty");
-    if (!_name) throw new Error("Name cannot be empty");
-    if (!_profession) throw new Error("Profession cannot be empty");
-    if (!_location) throw new Error("Location cannot be empty");
-  }
+  ) {}
 
   /**
    * Getter for the id property

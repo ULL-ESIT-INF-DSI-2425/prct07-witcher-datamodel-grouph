@@ -23,25 +23,21 @@ export class JsonClientCollection extends ClientCollection {
     this.database = new LowSync(adapter, { clients: [] });
     this.database.read();
 
-    if (this.database.data == null) {
+    // Initialize the database if it's empty or invalid
+    if (!this.database.data || !Array.isArray(this.database.data.clients)) {
       this.database.data = { clients: [] };
       this.database.write();
-    } else {
-      // Deserialize clients into Hunter instances using the factory function
-      this.database.data.clients.forEach((h) =>
-        this.addClient(this.createHunter(h.id, h.name, h.race, h.location)),
-      );
     }
-  }
 
-  /**
-   * Method to get all clients
-   * @returns All clients in the collection
-   */
-  addClient(newHunter: Hunter): void {
-    super.addClient(newHunter);
-    this.database.data.clients = this.clients;
-    this.database.write();
+    // Deserialize clients into Hunter instances using the factory function
+    this.database.data.clients.forEach((h) => {
+      if (h.id && h.name && h.race && h.location) {
+        const hunter = this.createHunter(h.id, h.name, h.race, h.location);
+        this.addClient(hunter);
+      } else {
+        console.warn("Skipping invalid client data:", h);
+      }
+    });
   }
 
   /**
@@ -49,10 +45,42 @@ export class JsonClientCollection extends ClientCollection {
    * @param newHunter The new hunter to add
    * @returns void
    */
+  addClient(newHunter: Hunter): void {
+    if (
+      !newHunter.id ||
+      !newHunter.name ||
+      !newHunter.race ||
+      !newHunter.location
+    ) {
+      console.warn("Skipping invalid client:", newHunter);
+      return;
+    }
+
+    // Check if the client already exists
+    const existingClient = this.clients.find(
+      (client) => client.id === newHunter.id,
+    );
+    if (existingClient) {
+      console.warn(`Client with id ${newHunter.id} already exists.`);
+      return;
+    }
+
+    super.addClient(newHunter);
+    this.database.data.clients = this.clients;
+    this.database.write();
+    console.log(`Added client: ${newHunter.name}`);
+  }
+
+  /**
+   * Method to remove a client from the collection
+   * @param removeId The id of the client to remove
+   * @returns void
+   */
   removeClient(removeId: string): void {
     super.removeClient(removeId);
     this.database.data.clients = this.clients;
     this.database.write();
+    console.log(`Removed client with id: ${removeId}`);
   }
 
   /**
@@ -60,7 +88,7 @@ export class JsonClientCollection extends ClientCollection {
    * @param modifyId The id of the client to modify
    * @param parameter The parameter to modify
    * @param newValue The new value for the parameter
-   * @returns
+   * @returns void
    */
   modifyClient(
     modifyId: string,
@@ -70,5 +98,6 @@ export class JsonClientCollection extends ClientCollection {
     super.modifyClient(modifyId, parameter, newValue);
     this.database.data.clients = this.clients;
     this.database.write();
+    console.log(`Modified client with id: ${modifyId}`);
   }
 }

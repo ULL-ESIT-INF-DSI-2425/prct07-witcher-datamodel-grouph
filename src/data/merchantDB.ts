@@ -26,27 +26,26 @@ export class JsonMerchantCollection extends MerchantCollection {
     this.database = new LowSync(adapter, { merchants: [] });
     this.database.read();
 
-    if (this.database.data == null) {
+    // Initialize the database if it's empty or invalid
+    if (!this.database.data || !Array.isArray(this.database.data.merchants)) {
       this.database.data = { merchants: [] };
       this.database.write();
-    } else {
-      // Deserialize merchants into Merchant instances using the factory function
-      this.database.data.merchants.forEach((m) =>
-        this.addMerchant(
-          this.createMerchant(m.id, m.name, m.profession, m.location),
-        ),
-      );
     }
-  }
 
-  /**
-   * Method to get all merchants
-   * @returns All merchants in the collection
-   */
-  addMerchant(newMerchant: Merchant): void {
-    super.addMerchant(newMerchant);
-    this.database.data.merchants = this.merchants;
-    this.database.write();
+    // Deserialize merchants into Merchant instances using the factory function
+    this.database.data.merchants.forEach((m) => {
+      if (m.id && m.name && m.profession && m.location) {
+        const merchant = this.createMerchant(
+          m.id,
+          m.name,
+          m.profession,
+          m.location,
+        );
+        this.addMerchant(merchant);
+      } else {
+        console.warn("Skipping invalid merchant data:", m);
+      }
+    });
   }
 
   /**
@@ -54,10 +53,42 @@ export class JsonMerchantCollection extends MerchantCollection {
    * @param newMerchant The new merchant to add
    * @returns void
    */
+  addMerchant(newMerchant: Merchant): void {
+    if (
+      !newMerchant.id ||
+      !newMerchant.name ||
+      !newMerchant.profession ||
+      !newMerchant.location
+    ) {
+      console.warn("Skipping invalid merchant:", newMerchant);
+      return;
+    }
+
+    // Check if the merchant already exists
+    const existingMerchant = this.merchants.find(
+      (merchant) => merchant.id === newMerchant.id,
+    );
+    if (existingMerchant) {
+      console.warn(`Merchant with id ${newMerchant.id} already exists.`);
+      return;
+    }
+
+    super.addMerchant(newMerchant);
+    this.database.data.merchants = this.merchants;
+    this.database.write();
+    console.log(`Added merchant: ${newMerchant.name}`);
+  }
+
+  /**
+   * Method to remove a merchant from the collection
+   * @param removeId The id of the merchant to remove
+   * @returns void
+   */
   removeMerchant(removeId: string): void {
     super.removeMerchant(removeId);
     this.database.data.merchants = this.merchants;
     this.database.write();
+    console.log(`Removed merchant with id: ${removeId}`);
   }
 
   /**
@@ -65,7 +96,7 @@ export class JsonMerchantCollection extends MerchantCollection {
    * @param modifyId The id of the merchant to modify
    * @param parameter The parameter to modify
    * @param newValue The new value for the parameter
-   * @returns
+   * @returns void
    */
   modifyMerchant(
     modifyId: string,
@@ -75,5 +106,6 @@ export class JsonMerchantCollection extends MerchantCollection {
     super.modifyMerchant(modifyId, parameter, newValue);
     this.database.data.merchants = this.merchants;
     this.database.write();
+    console.log(`Modified merchant with id: ${modifyId}`);
   }
 }
