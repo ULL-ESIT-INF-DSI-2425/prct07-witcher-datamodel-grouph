@@ -1,29 +1,29 @@
 {
   "items": [
     {
-      "_id": "A-2",
-      "_name": "Mithril Plate",
-      "_description": "Lightweight armor made from mithril.",
-      "_material": "Mithril",
-      "_weight": 10,
-      "_price": 700
+      "_id": "A-1",
+      "_name": "Dragon Scale Armor",
+      "_description": "Armor made from dragon scales.",
+      "_material": "Dragon Scales",
+      "_weight": 15,
+      "_price": 500
     },
     {
       "_id": "W-2",
-      "_name": "Ebony Bow",
-      "_description": "A powerful bow made of ebony wood.",
-      "_material": "Ebony Wood",
-      "_weight": 3,
-      "_price": 400
+      "_name": "Silver Sword",
+      "_description": "A sword made of silver.",
+      "_material": "Silver",
+      "_weight": 5,
+      "_price": 300
     },
     {
-      "_id": "P-2",
-      "_name": "Cat Potion",
-      "_description": "Grants night vision.",
-      "_material": "Vervain",
+      "_id": "P-3",
+      "_name": "Swallow Potion",
+      "_description": "Restores vitality.",
+      "_material": "Celandine Flower",
       "_weight": 1,
-      "_price": 60,
-      "_effect": "Night Vision"
+      "_price": 50,
+      "_effect": "Vitality Regeneration"
     }
   ]
 }

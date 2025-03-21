@@ -6,22 +6,44 @@ import {
   SaleTransaction,
   PurchaseTransaction,
   ReturnTransaction,
-} from "./collections/registerCollection.js";
+} from "./transaction.js";
+import { ClientCollection } from "./collections/clientCollection.js";
+import { MerchantCollection } from "./collections/merchantCollection.js";
+import { ItemCollection } from "./collections/itemCollection.js";
 
 type ItemStock = Map<Item, number>;
 
 export class Inventory {
   private transactions: Transaction[] = [];
   private stock: ItemStock = new Map();
+  private clientCollection: ClientCollection;
+  private merchantCollection: MerchantCollection;
+  private itemCollection: ItemCollection;
+
+  constructor(
+    clientCollection: ClientCollection,
+    merchantCollection: MerchantCollection,
+    itemCollection: ItemCollection,
+  ) {
+    this.clientCollection = clientCollection;
+    this.merchantCollection = merchantCollection;
+    this.itemCollection = itemCollection;
+  }
 
   // Add an item to the stock
   addItemToStock(item: Item, quantity: number): void {
+    if (quantity <= 0) {
+      throw new Error(`Quantity must be greater than 0 for item: ${item.name}`);
+    }
     const currentQuantity = this.stock.get(item) || 0;
     this.stock.set(item, currentQuantity + quantity);
   }
 
   // Remove an item from the stock
   removeItemFromStock(item: Item, quantity: number): void {
+    if (quantity <= 0) {
+      throw new Error(`Quantity must be greater than 0 for item: ${item.name}`);
+    }
     const currentQuantity = this.stock.get(item) || 0;
     if (currentQuantity < quantity) {
       throw new Error(`Not enough stock for item: ${item.name}`);
@@ -34,36 +56,94 @@ export class Inventory {
     return this.stock.get(item) || 0;
   }
 
-  // Record a sale transaction
   recordSale(client: Hunter, items: Item[]): void {
+    if (!this.clientCollection.getClientById(client.id)) {
+      throw new Error(`Client with ID ${client.id} does not exist.`);
+    }
+
+    // Count the quantity of each item in the sale
+    const itemQuantities = new Map<Item, number>();
+    items.forEach((item) => {
+      itemQuantities.set(item, (itemQuantities.get(item) || 0) + 1);
+    });
+
+    // Validate stock levels
+    itemQuantities.forEach((quantity, item) => {
+      if (!this.itemCollection.getItems().includes(item)) {
+        throw new Error(`Item with ID ${item.id} does not exist.`);
+      }
+      if (this.getStockLevel(item) < quantity) {
+        throw new Error(`Not enough stock for item: ${item.name}`);
+      }
+    });
+
     const totalCrowns = this.calculateTotalCrowns(items);
     const transaction: SaleTransaction = {
       date: new Date(),
       items,
       client,
       operationType: "sell",
-      totalCrowns, // Include the total cost
+      totalCrowns,
     };
     this.transactions.push(transaction);
-    items.forEach((item) => this.removeItemFromStock(item, 1));
+
+    // Update stock levels
+    itemQuantities.forEach((quantity, item) => {
+      this.removeItemFromStock(item, quantity);
+    });
   }
 
   // Record a purchase transaction
   recordPurchase(merchant: Merchant, items: Item[]): void {
+    if (!this.merchantCollection.getMerchantById(merchant.id)) {
+      throw new Error(`Merchant with ID ${merchant.id} does not exist.`);
+    }
+
+    // Validate items
+    items.forEach((item) => {
+      if (!this.itemCollection.getItems().includes(item)) {
+        throw new Error(`Item with ID ${item.id} does not exist.`);
+      }
+    });
+
     const totalCrowns = this.calculateTotalCrowns(items);
     const transaction: PurchaseTransaction = {
       date: new Date(),
       items,
       merchant,
       operationType: "buy",
-      totalCrowns, // Include the total cost
+      totalCrowns,
     };
     this.transactions.push(transaction);
-    items.forEach((item) => this.addItemToStock(item, 1));
+
+    // Update stock levels
+    items.forEach((item) => {
+      this.addItemToStock(item, 1);
+    });
   }
 
   // Record a return transaction
   recordReturn(from: Hunter | Merchant, items: Item[], reason: string): void {
+    if (from instanceof Hunter) {
+      if (!this.clientCollection.getClientById(from.id)) {
+        throw new Error(`Client with ID ${from.id} does not exist.`);
+      }
+    } else if (from instanceof Merchant) {
+      if (!this.merchantCollection.getMerchantById(from.id)) {
+        throw new Error(`Merchant with ID ${from.id} does not exist.`);
+      }
+
+      // Validate items
+      items.forEach((item) => {
+        if (!this.itemCollection.getItems().includes(item)) {
+          throw new Error(`Item with ID ${item.id} does not exist.`);
+        }
+        if (this.getStockLevel(item) < 1) {
+          throw new Error(`Not enough stock for item: ${item.name}`);
+        }
+      });
+    }
+
     const totalCrowns = this.calculateTotalCrowns(items);
     const transaction: ReturnTransaction = {
       date: new Date(),
@@ -71,15 +151,19 @@ export class Inventory {
       from,
       reason,
       operationType: "return",
-      totalCrowns, // Include the total cost
+      totalCrowns,
     };
     this.transactions.push(transaction);
+
+    // Update stock levels
     if (from instanceof Hunter) {
-      // Return from a hunter: add items back to stock
-      items.forEach((item) => this.addItemToStock(item, 1));
+      items.forEach((item) => {
+        this.addItemToStock(item, 1);
+      });
     } else if (from instanceof Merchant) {
-      // Return to a merchant: remove items from stock
-      items.forEach((item) => this.removeItemFromStock(item, 1));
+      items.forEach((item) => {
+        this.removeItemFromStock(item, 1);
+      });
     }
   }
 

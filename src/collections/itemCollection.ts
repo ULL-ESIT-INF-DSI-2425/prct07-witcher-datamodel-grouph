@@ -50,7 +50,6 @@ export class ItemCollection {
     return this.items.filter((i) => i[parameter] === value);
   }
 
-  // New methods for querying and sorting
 
   getItemsByName(name: string): BaseItem[] {
     return this.items.filter((i) =>

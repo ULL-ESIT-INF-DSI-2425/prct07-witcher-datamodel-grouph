@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import { Inventory } from "../Inventory.js";
+import { Inventory } from "../inventory.js";
 
 async function goodsMenu() {
   while (true) {
