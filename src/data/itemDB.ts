@@ -12,11 +12,20 @@ import {
 } from "../item.js";
 import { ItemCollection } from "../collections/itemCollection.js";
 
+/**
+ * Schema for the item database
+ */
 type ItemDataBaseSchema = { items: BaseItem[] };
 
+/**
+ * Class to manage a collection of items
+ */
 export class JsonItemCollection extends ItemCollection {
   private database: LowSync<ItemDataBaseSchema>;
 
+  /**
+   * Constructor for the JsonItemCollection class
+   */
   constructor() {
     super((id, name, description, material, weight, price) => {
       // Check if the ID is valid
@@ -95,18 +104,35 @@ export class JsonItemCollection extends ItemCollection {
     }
   }
 
+  /**
+   * Method to add a new item to the collection
+   * @param newItem The new item to add
+   * @returns void
+   */
   addItem(newItem: BaseItem): void {
     super.addItem(newItem);
     this.database.data.items = this.items;
     this.database.write();
   }
 
+  /**
+   * Method to remove an item from the collection
+   * @param removeId The ID of the item to remove
+   * @returns void
+   */
   removeItem(removeId: string): void {
     super.removeItem(removeId);
     this.database.data.items = this.items;
     this.database.write();
   }
 
+  /**
+   * Method to modify an item's information
+   * @param modifyId The ID of the item to modify
+   * @param parameter The parameter to modify
+   * @param newValue The new value for the parameter
+   * @returns void
+   */
   modifyItem(
     modifyId: string,
     parameter: keyof BaseItem,

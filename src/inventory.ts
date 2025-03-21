@@ -199,13 +199,39 @@ export class Inventory {
   }
 
   // Get transactions by client
-  getTransactionsByClient(hunter: Hunter): SaleTransaction[] {
-    return this.getSales().filter((t) => t.client === hunter);
+  printTransactionsByClient() {
+    this.getSales().forEach((t) => {
+      console.log("CLIENT:", t.client.name);
+      console.log("\tDate:", t.date.toDateString());
+      console.log("\tItems:", t.items.map((i) => i.name).join(", "));
+      console.log("\tTotal:", t.totalCrowns);
+    });
   }
 
   // Get transactions by merchant
-  getTransactionsByMerchant(merchant: Merchant): PurchaseTransaction[] {
-    return this.getPurchases().filter((t) => t.merchant === merchant);
+  printTransactionsByMerchant() {
+    this.getPurchases().forEach((t) => {
+      console.log("MERCHANT:", t.merchant.name);
+      console.log("\tDate:", t.date.toDateString());
+      console.log("\tItems:", t.items.map((i) => i.name).join(", "));
+      console.log("\tTotal:", t.totalCrowns);
+    });
+  }
+
+  getEarnedCrownsbySales(): number {
+    return this.getSales().reduce((total, t) => total + t.totalCrowns, 0);
+  }
+
+  getSpentCrownsbyPurchases(): number {
+    return this.getPurchases().reduce((total, t) => total + t.totalCrowns, 0);
+  }
+
+  getReturnedCrowns(): number {
+    return this.getReturns().reduce((total, t) => total + t.totalCrowns, 0);
+  }
+
+  getNetCrowns(): number {
+    return this.getEarnedCrownsbySales() - this.getSpentCrownsbyPurchases();
   }
 
   // Get transactions by item
@@ -234,4 +260,6 @@ export class Inventory {
   getMerchantReturns(): ReturnTransaction[] {
     return this.getReturns().filter((t) => t.from instanceof Merchant);
   }
+
+  
 }

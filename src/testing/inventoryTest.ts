@@ -258,3 +258,13 @@ console.log(inventory.getPurchases());
 
 console.log("\nReturns:");
 console.log(inventory.getReturns());
+
+// Verify transactions by client
+console.log("\nTransactions by client:");
+inventory.printTransactionsByClient();
+console.log("\nTransactions by merchant:");
+inventory.printTransactionsByMerchant();
+console.log(inventory.getEarnedCrownsbySales());
+console.log(inventory.getSpentCrownsbyPurchases());
+console.log(inventory.getReturnedCrowns());
+console.log(inventory.getNetCrowns());

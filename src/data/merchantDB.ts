@@ -3,11 +3,20 @@ import { JSONFileSync } from "lowdb/node";
 import { Merchant, Profession } from "../merchant.js";
 import { MerchantCollection } from "../collections/merchantCollection.js";
 
+/**
+ * Schema for the merchant database
+ */
 type MerchantDataBaseSchema = { merchants: Merchant[] };
 
+/**
+ * Class to manage a collection of merchants
+ */
 export class JsonMerchantCollection extends MerchantCollection {
   private database: LowSync<MerchantDataBaseSchema>;
 
+  /**
+   * Constructor for the JsonMerchantCollection class
+   */
   constructor() {
     super(
       (id, name, profession, location) =>
@@ -30,18 +39,34 @@ export class JsonMerchantCollection extends MerchantCollection {
     }
   }
 
+  /**
+   * Method to get all merchants
+   * @returns All merchants in the collection
+   */
   addMerchant(newMerchant: Merchant): void {
     super.addMerchant(newMerchant);
     this.database.data.merchants = this.merchants;
     this.database.write();
   }
 
+  /**
+   * Method to add a new merchant to the collection
+   * @param newMerchant The new merchant to add
+   * @returns void
+   */
   removeMerchant(removeId: string): void {
     super.removeMerchant(removeId);
     this.database.data.merchants = this.merchants;
     this.database.write();
   }
 
+  /**
+   * Method to modify a merchant's information
+   * @param modifyId The id of the merchant to modify
+   * @param parameter The parameter to modify
+   * @param newValue The new value for the parameter
+   * @returns
+   */
   modifyMerchant(
     modifyId: string,
     parameter: keyof Merchant,

@@ -31,8 +31,8 @@ console.log("\nModifying Lucien's location...");
 merchantCollection.modifyMerchant("M-1", "location", "La Laguna");
 
 // Get merchants by profession
-console.log("\nMerchants with profession 'Blacksmith':");
-console.log(merchantCollection.getMerchantBy("profession", "Blacksmith"));
+// console.log("\nMerchants with profession 'Blacksmith':");
+// console.log(merchantCollection.getMerchantBy("profession", "Blacksmith"));
 
 // Remove a merchant
 console.log("\nRemoving Russel...");
