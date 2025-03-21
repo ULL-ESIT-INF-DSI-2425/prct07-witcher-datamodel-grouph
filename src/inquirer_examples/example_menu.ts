@@ -14,22 +14,22 @@ async function goodsMenu() {
           "Modify a good",
           "List all goods",
           new inquirer.Separator(),
-          "Back to main menu"
-        ]
-      }
+          "Back to main menu",
+        ],
+      },
     ]);
     switch (action) {
       case "Add a good":
-  
+
       case "Remove a good":
-  
+
       case "Modify a good":
-  
+
       case "List all goods":
-  
+
       case "Back to main menu":
         return;
-  
+
       default:
         throw new Error("Invalid action");
     }
@@ -49,29 +49,25 @@ async function merchantsMenu() {
           "Modify a merchant",
           "List all merchants",
           new inquirer.Separator(),
-          "Back to main menu"
-        ]
-      }
+          "Back to main menu",
+        ],
+      },
     ]);
-  
+
     switch (action) {
       case "Add a merchant":
-        
         break;
       case "Remove a merchant":
-        
         break;
       case "Modify a merchant":
-        
         break;
       case "View merchants":
-        
         break;
       case "Back to main menu":
         return;
-  
+
       default:
-          throw new Error("Invalid action");
+        throw new Error("Invalid action");
     }
   }
 }
@@ -89,27 +85,23 @@ async function clientsMenu() {
           "Modify a client",
           "List all clients",
           new inquirer.Separator(),
-          "Back to main menu"
-        ]
-      }
+          "Back to main menu",
+        ],
+      },
     ]);
-  
+
     switch (action) {
       case "Add a client":
-        
         break;
       case "Remove a client":
-        
         break;
       case "Modify a client":
-        
         break;
       case "View clients":
-        
         break;
       case "Back to main menu":
         return;
-  
+
       default:
         throw new Error("Invalid action");
     }
@@ -123,23 +115,20 @@ async function transactionsMenu() {
         type: "list",
         name: "transactionType",
         message: "Select transaction type:",
-        choices: ["Sell to client", "Buy from merchant", "Return item", "Back"]
-      }
+        choices: ["Sell to client", "Buy from merchant", "Return item", "Back"],
+      },
     ]);
-  
+
     switch (transactionType) {
       case "Sell to client":
-        
         break;
       case "Buy from merchant":
-        
         break;
       case "Return item":
-        
         break;
       case "Back":
         return;
-  
+
       default:
         throw new Error("Invalid action");
     }
@@ -159,33 +148,28 @@ async function reportsMenu() {
           "Total income and expenses",
           "Transaction history",
           new inquirer.Separator(),
-          "Back"
-        ]
-      }
+          "Back",
+        ],
+      },
     ]);
-  
+
     switch (reportType) {
       case "Stock status":
-        
         break;
       case "Most sold items":
-        
         break;
       case "Total income and expenses":
-        
         break;
       case "Transaction history":
-        
         break;
       case "Back":
         return;
-  
+
       default:
         throw new Error("Invalid action");
     }
   }
 }
-
 
 async function mainMenu() {
   while (true) {
@@ -201,14 +185,14 @@ async function mainMenu() {
           "Register a transaction",
           "Generate reports",
           new inquirer.Separator(),
-          "Exit"
-        ]
-      }
+          "Exit",
+        ],
+      },
     ]);
     switch (option) {
       case "Manage goods":
         await goodsMenu();
-        break
+        break;
       case "Manage merchants":
         await merchantsMenu();
         break;
@@ -218,7 +202,7 @@ async function mainMenu() {
       case "Register a transaction":
         await transactionsMenu();
         break;
-      case "Generate reports":  
+      case "Generate reports":
         await reportsMenu();
         break;
       case "Exit":
@@ -228,8 +212,5 @@ async function mainMenu() {
     }
   }
 }
-
-
-
 
 mainMenu();
