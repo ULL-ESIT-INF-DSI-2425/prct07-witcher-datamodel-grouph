@@ -1,8 +1,11 @@
 // src/inquirer/reportsMenu.ts
 import inquirer from "inquirer";
 import chalk from "chalk";
-import { clearConsole, displayTitle, pressEnterToContinue, showError } from "./menuUtils.js";
-import { mainMenu } from "./mainMenu.js";
+import { clearConsole, displayTitle, pressEnterToContinue, showError } from "../utils/menuUtils.js";
+import { mainMenu } from "../mainMenu.js";
+import { Inventory } from "../../inventory.js";
+import { clientMenu } from "../clientMenu/clientMenu.js";
+import { ClientCollection } from "../../collections/clientCollection.js";
 
 export function reportsMenu(): void {
   displayTitle("Generate Reports");
@@ -117,9 +120,11 @@ export function historyMenu(): void {
       switch (action) {
         case "list":
           console.log("List All Transactions function pending...");
+          
           break;
         case "filterClient":
-          console.log("Filter by Client function pending...");
+          // console.log("Filter by Client function pending...");
+          
           break;
         case "filterMerchant":
           console.log("Filter by Merchant function pending...");

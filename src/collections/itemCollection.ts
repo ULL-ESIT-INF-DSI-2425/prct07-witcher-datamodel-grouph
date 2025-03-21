@@ -120,4 +120,17 @@ export class ItemCollection {
     );
     return result;
   }
+
+  getAllItems(): void {
+    console.table(
+      this.items.map((item) => ({
+        ID: item.id,
+        Name: item.name,
+        Description: item.description,
+        Material: item.material,
+        Weight: item.weight,
+        Price: item.price,
+      }))
+    );
+  }
 }

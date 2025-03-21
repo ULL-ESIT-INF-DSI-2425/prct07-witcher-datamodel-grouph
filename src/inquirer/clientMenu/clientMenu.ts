@@ -1,7 +1,7 @@
 import inquirer from "inquirer";
 import chalk from "chalk";  
-import { displayTitle, pressEnterToContinue, showError, showSuccess } from "./menuUtils.js";
-import { mainMenu } from "./mainMenu.js";
+import { displayTitle, pressEnterToContinue, showError, showSuccess } from "../utils/menuUtils.js";
+import { mainMenu } from "../mainMenu.js";
 
 export function clientMenu(): void {
   displayTitle("Manage Clients");

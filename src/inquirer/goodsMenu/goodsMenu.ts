@@ -1,7 +1,10 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
-import { clearConsole, displayTitle, pressEnterToContinue, showSuccess, showError } from "./menuUtils.js";
-import { mainMenu } from "./mainMenu.js";
+import { clearConsole, displayTitle, pressEnterToContinue, showSuccess, showError } from "../utils/menuUtils.js";
+import { mainMenu } from "../mainMenu.js";
+import { JsonItemCollection } from "../../data/itemDB.js";
+
+const itemCollection = new JsonItemCollection();
 
 export function goodsMenu(): void {
   displayTitle("Manage Goods");
@@ -15,7 +18,7 @@ export function goodsMenu(): void {
           { name: chalk.green("Add Good"), value: "add" },
           { name: chalk.red("Delete Good"), value: "delete" },
           { name: chalk.blue("Update Good"), value: "update" },
-          { name: chalk.magenta("List Goods"), value: "list" },
+          { name: chalk.magenta("Goods List"), value: "list" },
           new inquirer.Separator(),
           { name: chalk.yellow("↩ Return to Main Menu"), value: "back" },
         ],
@@ -34,7 +37,7 @@ export function goodsMenu(): void {
         case "update":
           return updateGood(); // ← Corregido aquí
         case "list":
-          console.log("List Goods function pending...");
+          return goodList();
           break;
         default:
           showError("Invalid action");
@@ -124,6 +127,7 @@ export function updateGood(): void {  // ← Renombrado correctamente
               { name: "Weight", value: "weight" },
               { name: "Price", value: "price" },
             ],
+            loop: false,
           },
         ])
         .then(({ field }) => {
@@ -147,5 +151,58 @@ export function updateGood(): void {  // ← Renombrado correctamente
               pressEnterToContinue().then(() => goodsMenu());
             });
         });
+    });
+}
+
+export function goodList(): void {
+  displayTitle("Goods List Menu");
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "option",
+        message: chalk.white.underline("► Select an option:"),
+        choices: [
+          { name: chalk.magenta("List All Items"), value: "list" },
+          { name: chalk.blue("Filter by Name"), value: "filterName" },
+          { name: chalk.blue("Filter by Type"), value: "filterType" },
+          { name: chalk.blue("Filter by Description"), value: "filterDescription" },
+          { name: chalk.white("Sort by Name"), value: "sortName" },
+          { name: chalk.white("Sort by Price"), value: "sortPrice" },
+          new inquirer.Separator(),
+          { name: chalk.yellow("↩ Return to Goods Menu"), value: "back" },
+        ],
+        loop: false,
+      },
+    ])
+    .then((answers) => {
+      const action = answers["option"] as string;
+      if (action === "back") {
+        return goodsMenu();
+      }
+      switch (action) {
+        case "list":
+          itemCollection.getAllItems();
+          break;
+        case "filterName":
+          itemCollection.getItemsByName("Cat Potion");
+          break;
+        case "filterType":
+          itemCollection.getItemsByType("Potion");
+          break;
+        case "filerDescription":
+          
+          break;
+        case "sortName":
+          itemCollection.sortItemsByName();
+          break;
+
+        case "sortPrice":
+          
+          break;
+        default:
+          showError("Invalid action");
+      }
+      pressEnterToContinue().then(() => goodsMenu());
     });
 }

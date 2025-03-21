@@ -1,8 +1,9 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
 
-import { clearConsole, displayTitle, pressEnterToContinue, showError, showSuccess } from "./menuUtils.js";
-import { mainMenu } from "./mainMenu.js";
+import { clearConsole, displayTitle, pressEnterToContinue, showError, showSuccess } from "../utils/menuUtils.js";
+import { mainMenu } from "../mainMenu.js";
+import { Merchant } from "../../merchant.js";
 
 export function merchantMenu(): void {
   displayTitle("Manage Merchants");

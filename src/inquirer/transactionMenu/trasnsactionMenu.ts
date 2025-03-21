@@ -1,7 +1,7 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
-import { clearConsole, displayTitle, pressEnterToContinue, showError } from "./menuUtils.js";
-import { mainMenu } from "./mainMenu.js";
+import { clearConsole, displayTitle, pressEnterToContinue, showError } from "../utils/menuUtils.js";
+import { mainMenu } from "../mainMenu.js";
 
 
 

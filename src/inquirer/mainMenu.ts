@@ -1,12 +1,21 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
 import boxen from "boxen";
-import { clearConsole, displayTitle, pressEnterToContinue, showError } from "./menuUtils.js";
-import { goodsMenu } from "./goodsMenu.js";
-import { merchantMenu } from "./merchantMenu.js";
-import { clientMenu } from "./clientMenu.js";
-import { transactionsMenu } from "./trasnsactionMenu.js";
-import { reportsMenu } from "./reportsMenu.js";
+import { clearConsole, displayTitle, pressEnterToContinue, showError } from "./utils/menuUtils.js";
+import { goodsMenu } from "./goodsMenu/goodsMenu.js";
+import { merchantMenu } from "./merchantMenu/merchantMenu.js";
+import { clientMenu } from "./clientMenu/clientMenu.js";
+import { transactionsMenu } from "./transactionMenu/trasnsactionMenu.js";
+import { reportsMenu } from "./reportsMenu/reportsMenu.js";
+import { Inventory } from "../inventory.js";
+
+import { JsonClientCollection } from "../data/clientDB.js";
+import { JsonItemCollection } from "../data/itemDB.js";
+import { JsonMerchantCollection } from "../data/merchantDB.js";
+
+const clientCollection = new JsonClientCollection();
+const itemCollection = new JsonItemCollection();
+const merchantCollection = new JsonMerchantCollection();
 
 export function mainMenu(): void {
   displayTitle("Inventory Management System");
@@ -66,15 +75,6 @@ export function mainMenu(): void {
 
 clearConsole();
 
-console.log(
-  boxen(chalk.bold("yeah"), {
-    padding: 1,
-    margin: 1,
-    borderStyle: "round",
-    borderColor: "cyan",
-    backgroundColor: "#222",
-  })
-);
 console.log(chalk.cyan("Starting Inventory Management System..."));
 setTimeout(() => {
   mainMenu();
