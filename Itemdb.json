@@ -10,12 +10,13 @@
       "effect": "Unknown Effect"
     },
     {
-      "id": "A-1742608117374",
-      "name": "me cago",
-      "description": "ayuda",
-      "material": "Leather",
-      "weight": 812498,
-      "price": 1248124
+      "id": "P-1742653422952",
+      "name": "pito",
+      "description": "da pito",
+      "material": "la",
+      "weight": 90,
+      "price": 8888888,
+      "effect": "None"
     }
   ]
 }

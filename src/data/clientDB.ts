@@ -101,4 +101,8 @@ export class JsonClientCollection extends ClientCollection {
     super.modifyClient(modifyId, parameter, newValue);
     this.saveDatabase();
   }
+
+  getClients(): Hunter[] {
+    return this.clients;
+  }
 }

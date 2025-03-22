@@ -59,6 +59,12 @@
       "name": "Dandelion",
       "race": "Human",
       "location": "Kaer Morhen"
+    },
+    {
+      "id": "1742653477958",
+      "name": "Goku",
+      "race": "Human",
+      "location": "geneto"
     }
   ]
 }

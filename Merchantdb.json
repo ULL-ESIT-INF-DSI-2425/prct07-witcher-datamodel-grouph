@@ -1,12 +1,6 @@
 {
   "merchants": [
     {
-      "id": "1742608834241",
-      "name": "asfifasn",
-      "profession": "asfasf",
-      "location": "asf"
-    },
-    {
       "id": "1742608846996",
       "name": "no",
       "profession": "da",
@@ -29,6 +23,12 @@
       "name": "ada",
       "profession": "Druid",
       "location": "adada"
+    },
+    {
+      "id": "1742648640162",
+      "name": "Peter",
+      "profession": "Butcher",
+      "location": "Uganda"
     }
   ]
 }
