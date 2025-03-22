@@ -1,7 +1,16 @@
 import inquirer from "inquirer";
 import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
 import { merchantMenu, merchantDB } from "./merchantMenu.js";
-import { Merchant } from "../../merchant.js";
+import { Merchant, Profession } from "../../merchant.js";
+
+const validProfessions: Profession[] = [
+  "Blacksmith",
+  "Alchemist",
+  "General Merchant",
+  "Butcher",
+  "Druid",
+  "Smuggler",
+] as const;
 
 export function addMerchant(): void {
   displayTitle("Add Merchant");
@@ -16,6 +25,15 @@ export function addMerchant(): void {
         type: "input",
         name: "profession",
         message: "Enter the Merchant's profession:",
+        validate: (input) => {
+          const trimmedInput = input.trim() as Profession;
+          if (input === "") {
+            return "Profession cannot be empty.";
+          }
+          return validProfessions.includes(trimmedInput)
+            ? true
+            : `Invalid profession. Choose from ${validProfessions.join(", ")}.`;
+        }
       },
       {
         type: "input",
