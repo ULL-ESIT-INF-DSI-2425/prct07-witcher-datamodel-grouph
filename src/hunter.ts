@@ -98,7 +98,7 @@ export class Hunter {
         "Half-Elf",
       ].includes(newRace)
     ) {
-      throw new Error("Invalid race: ${newRace}");
+      throw new Error(`Invalid race: ${newRace}`);
     }
     this._race = newRace;
   }
