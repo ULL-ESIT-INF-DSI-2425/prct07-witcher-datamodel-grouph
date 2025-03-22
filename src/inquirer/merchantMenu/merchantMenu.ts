@@ -5,8 +5,12 @@ import { clearConsole, displayTitle, pressEnterToContinue, showError, showSucces
 import { mainMenu } from "../mainMenu.js";
 import { Merchant } from "../../merchant.js";
 import { JsonMerchantCollection } from "../../data/merchantDB.js";
+import { addMerchant } from "./addMerchant.js";
+import { deleteMerchant } from "./deleteMerchant.js";
+import { updateMerchant } from "./updateMerchant.js";
+import { listMerchants } from "./listMerchants.js";
 
-const merchantCollection = new JsonMerchantCollection();
+export const merchantDB = new JsonMerchantCollection();
 
 export function merchantMenu(): void {
   displayTitle("Manage Merchants");
@@ -47,97 +51,4 @@ export function merchantMenu(): void {
     });
 }
 
-export function addMerchant(): void {
-  displayTitle("Add Merchant");
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "name",
-        message: "Enter the Merchant's name:",
-      },
-      {
-        type: "input",
-        name: "profession",
-        message: "Enter the Merchant's profession:",
-      },
-      {
-        type: "input",
-        name: "address",
-        message: "Enter the Merchant's address:",
-      },
-    ])
-    .then((answers) => {
-      // AQUI VA EL CODIGO PARA AGREGAR EL MERCHANT A LA BASE DE DATOS
-      console.log("Add Merchant function pending...");
-      pressEnterToContinue().then(() => merchantMenu());
-    });
-}
 
-export function deleteMerchant(): void {
-  displayTitle("Delete Merchant");
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "id",
-        message: "Enter the Merchant's ID:",
-      },
-    ])
-    .then((answers) => {
-      // AQUI VA EL CODIGO PARA ELIMINAR EL MERCHANT DE LA BASE DE DATOS
-      console.log("Delete Merchant function pending...");
-      pressEnterToContinue().then(() => merchantMenu());
-    });
-}
-
-export function updateMerchant(): void {
-  displayTitle("Update Merchant");
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "id",
-        message: "Enter the Merchant's ID:",
-      },
-    ])
-    .then((answers) => {
-      // AQUI VA EL CODIGO PARA VER SI EL MERCHANT EXISTE Y LUEGO ACTUALIZARLO
-      console.log("Update Merchant function pending...");
-      inquirer
-        .prompt([
-          {
-            type: "list",
-            name: "field",
-            message: "Select the field to update:",
-            choices: [
-              { name: "Name", value: "name" },
-              { name: "Profession", value: "profession" },
-              { name: "Address", value: "address" },
-            ],
-          },
-        ])
-        .then(({ field }) => {
-          inquirer
-            .prompt([
-              {
-                type: "input",
-                name: "value",
-                message: `Enter the new ${field}:`,
-              },
-            ])
-            .then((answers) => {
-              // AQUI VA EL CODIGO PARA ACTUALIZAR EL MERCHANT
-              showSuccess(`\nMerchant ${field} updated successfully!\n`);
-              pressEnterToContinue().then(() => merchantMenu());
-            });
-        });
-    });
-}
-
-export function listMerchants(): void {
-  displayTitle("List Merchants");
-  merchantCollection.getMerchants();
-
-  pressEnterToContinue().then(() => merchantMenu());
-}

@@ -1,21 +1,12 @@
 {
   "items": [
     {
-      "id": "P-1742605549586",
-      "name": "goku",
-      "description": "si",
-      "material": "Mandrake",
-      "weight": 1,
-      "price": 1,
-      "effect": "Unknown Effect"
-    },
-    {
-      "id": "A-1742605578581",
-      "name": "noo",
-      "description": "sii",
-      "material": "Leather",
+      "id": "W-1742606270573",
+      "name": "palo",
+      "description": "palito",
+      "material": "Ebony Wood",
       "weight": 4,
-      "price": 4
+      "price": 1
     }
   ]
 }

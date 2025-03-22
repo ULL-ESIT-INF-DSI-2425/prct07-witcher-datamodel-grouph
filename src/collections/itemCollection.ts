@@ -1,8 +1,15 @@
 import { BaseItem, Armor, Weapon, Potion, GenericMaterial } from "../item.js";
 
+/**
+ * Class to manage a collection of items
+ */
 export class ItemCollection {
   protected items: BaseItem[] = [];
 
+  /**
+   * Constructor for the ItemCollection class
+   * @param createItem - Function to create a new item
+   */
   constructor(
     protected createItem: (
       id: string,
@@ -14,6 +21,11 @@ export class ItemCollection {
     ) => BaseItem,
   ) {}
 
+  /**
+   * Method to add a new item to the collection
+   * @param newItem The new item to add
+   * @returns void
+   */
   addItem(newItem: BaseItem): void {
     if (this.items.some((i) => i.id === newItem.id)) {
       console.log(`/// WARNING: Item with ID ${newItem.id} already exists ///`);
@@ -22,14 +34,30 @@ export class ItemCollection {
     this.items.push(newItem);
   }
 
+  /**
+   * Method to remove an item from the collection
+   * @param removeId The id of the item to remove
+   * @returns void
+   */
   removeItem(removeId: string): void {
     this.items = this.items.filter((i) => i.id !== removeId);
   }
 
+  /**
+   * Method to get all items
+   * @returns All items in the collection
+   */
   getItems(): BaseItem[] {
     return this.items;
   }
 
+  /**
+   * Method to modify an item's information
+   * @param modifyId The id of the item to modify
+   * @param parameter The parameter to modify
+   * @param newValue The new value for the parameter
+   * @returns void
+   */
   modifyItem(
     modifyId: string,
     parameter: keyof BaseItem,
@@ -43,6 +71,7 @@ export class ItemCollection {
     }
   }
 
+  
   private printFormatted(title: string, items: BaseItem[]): void {
     console.log(`\n=== ${title} ===`);
     if (items.length === 0) {
