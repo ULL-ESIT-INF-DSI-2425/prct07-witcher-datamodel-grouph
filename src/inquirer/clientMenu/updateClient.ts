@@ -9,12 +9,9 @@ import { Race } from "../../hunter.js";
 
 export function updateClient(): void {
   displayTitle("Update Client");
-
-  // Solicitar ID del cliente a modificar
   inquirer
     .prompt([{ type: "input", name: "id", message: "Enter the client's ID:" }])
     .then(({ id }) => {
-      // Preguntar cuál campo se desea actualizar
       inquirer
         .prompt([
           {
