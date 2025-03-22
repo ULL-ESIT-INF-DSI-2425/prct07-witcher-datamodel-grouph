@@ -10,12 +10,6 @@ import { ClientCollection } from "../collections/clientCollection.js";
 type ClientDataBaseSchema = { clients: any[] };
 
 /**
- * Path to the database file
- */
-const DB_FILE = "Clientdb.json";
-const adapter = new JSONFileSync<ClientDataBaseSchema>(DB_FILE);
-
-/**
  * Class to manage a collection of clients
  */
 export class JsonClientCollection extends ClientCollection {
@@ -23,23 +17,23 @@ export class JsonClientCollection extends ClientCollection {
 
   /**
    * Constructor for the JsonClientCollection class
+   * @param dbFilePath Path to the database file (optional)
    */
-  constructor() {
+  constructor(dbFilePath: string = "Clientdb.json") {
     super((id, name, race, location) => new Hunter(id, name, race, location));
 
-    // Inicializamos LowSync con defaultData pero luego leemos el contenido real
+    const adapter = new JSONFileSync<ClientDataBaseSchema>(dbFilePath);
     this.database = new LowSync(adapter, { clients: [] });
     this.database.read();
 
-    // Si no hay datos (o los datos no son un array), inicializamos la estructura.
+    // If no data or invalid data, initialize the database
     if (!this.database.data || !Array.isArray(this.database.data.clients)) {
       console.log("📂 Database was empty. Initializing...");
       this.database.data = { clients: [] };
       this.database.write();
     }
 
-    // Al cargar, filtramos objetos vacíos y mapeamos usando las claves correctas.
-    // Se admite que los datos puedan venir con propiedades "id" o "_id", etc.
+    // Load clients from the database
     this.clients = this.database.data.clients
       .filter((h) => Object.keys(h).length > 0)
       .map((h) => {
@@ -54,12 +48,10 @@ export class JsonClientCollection extends ClientCollection {
   }
 
   /**
-   * Guarda el estado actual de la base de datos.
+   * Saves the current state of the database.
    */
   private saveDatabase(): void {
-    // Leer antes de modificar para tener los datos actuales.
     this.database.read();
-    // Guardamos usando el método toJSON de cada cliente si existe.
     this.database.data.clients = this.clients.map((client) =>
       typeof client.toJSON === "function" ? client.toJSON() : client,
     );
@@ -67,18 +59,18 @@ export class JsonClientCollection extends ClientCollection {
   }
 
   /**
-   * Agrega un nuevo cliente a la colección.
-   * @param newHunter El nuevo cliente (Hunter) a agregar.
+   * Adds a new client to the collection.
+   * @param newHunter The new client (Hunter) to add.
    */
   addClient(newHunter: Hunter): void {
-    this.database.read(); // Leer estado actual
+    this.database.read();
     super.addClient(newHunter);
     this.saveDatabase();
   }
 
   /**
-   * Elimina un cliente de la colección.
-   * @param removeId El ID del cliente a eliminar.
+   * Removes a client from the collection.
+   * @param removeId The ID of the client to remove.
    */
   removeClient(removeId: string): void {
     this.database.read();
@@ -87,10 +79,10 @@ export class JsonClientCollection extends ClientCollection {
   }
 
   /**
-   * Modifica la información de un cliente.
-   * @param modifyId El ID del cliente a modificar.
-   * @param parameter El campo a modificar.
-   * @param newValue El nuevo valor para el campo.
+   * Modifies a client's information.
+   * @param modifyId The ID of the client to modify.
+   * @param parameter The field to modify.
+   * @param newValue The new value for the field.
    */
   modifyClient(
     modifyId: string,

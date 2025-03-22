@@ -19,12 +19,6 @@ import { ItemCollection } from "../collections/itemCollection.js";
 type ItemDataBaseSchema = { items: any[] };
 
 /**
- * Path to the database file
- */
-const DB_FILE = "Itemdb.json";
-const adapter = new JSONFileSync<ItemDataBaseSchema>(DB_FILE);
-
-/**
  * Class to manage a collection of items
  */
 export class JsonItemCollection extends ItemCollection {
@@ -32,8 +26,9 @@ export class JsonItemCollection extends ItemCollection {
 
   /**
    * Constructor for the JsonItemCollection class
+   * @param dbFilePath Path to the database file (optional)
    */
-  constructor() {
+  constructor(dbFilePath: string = "Itemdb.json") {
     super((id, name, description, material, weight, price) => {
       if (!id || typeof id !== "string") {
         throw new Error(`Invalid ID: ${id}`);
@@ -71,18 +66,18 @@ export class JsonItemCollection extends ItemCollection {
       }
     });
 
-    // Inicializamos LowSync con defaultData pero luego leemos el contenido real
+    const adapter = new JSONFileSync<ItemDataBaseSchema>(dbFilePath);
     this.database = new LowSync(adapter, { items: [] });
     this.database.read();
 
-    // Si no hay datos (o los datos no son un array), inicializamos la estructura.
+    // Initialize the database if it's empty or invalid
     if (!this.database.data || !Array.isArray(this.database.data.items)) {
       console.log("📂 Item database was empty. Initializing...");
       this.database.data = { items: [] };
       this.database.write();
     }
 
-    // Al cargar, filtramos objetos vacíos y mapeamos correctamente.
+    // Load items from the database
     this.items = this.database.data.items
       .filter((i) => i && Object.keys(i).length > 0 && i.id)
       .map((i) => {
@@ -106,7 +101,7 @@ export class JsonItemCollection extends ItemCollection {
   }
 
   /**
-   * Guarda el estado actual de la base de datos.
+   * Saves the current state of the database.
    */
   private saveDatabase(): void {
     this.database.read();
@@ -117,8 +112,8 @@ export class JsonItemCollection extends ItemCollection {
   }
 
   /**
-   * Agrega un nuevo ítem a la colección.
-   * @param newItem El nuevo ítem a agregar.
+   * Adds a new item to the collection.
+   * @param newItem The new item to add.
    */
   addItem(newItem: BaseItem): void {
     this.database.read();
@@ -127,8 +122,8 @@ export class JsonItemCollection extends ItemCollection {
   }
 
   /**
-   * Elimina un ítem de la colección.
-   * @param removeId El ID del ítem a eliminar.
+   * Removes an item from the collection.
+   * @param removeId The ID of the item to remove.
    */
   removeItem(removeId: string): void {
     this.database.read();
@@ -137,10 +132,10 @@ export class JsonItemCollection extends ItemCollection {
   }
 
   /**
-   * Modifica la información de un ítem.
-   * @param modifyId El ID del ítem a modificar.
-   * @param parameter El campo a modificar.
-   * @param newValue El nuevo valor para el campo.
+   * Modifies an item's information.
+   * @param modifyId The ID of the item to modify.
+   * @param parameter The field to modify.
+   * @param newValue The new value for the field.
    */
   modifyItem(
     modifyId: string,
@@ -152,6 +147,10 @@ export class JsonItemCollection extends ItemCollection {
     this.saveDatabase();
   }
 
+  /**
+   * Returns all items in the collection.
+   * @returns An array of all items.
+   */
   getAll(): BaseItem[] {
     return this.items;
   }

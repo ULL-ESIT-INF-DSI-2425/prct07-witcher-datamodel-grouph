@@ -1,20 +1,8 @@
 {
   "clients": [
     {
-      "id": "H-1",
-      "name": "Ciri",
-      "race": "Half-Elf",
-      "location": "Kaer Morhen"
-    },
-    {
-      "id": "H-2",
-      "name": "Geralt of Rivia",
-      "race": "Human",
-      "location": "Vengerberg"
-    },
-    {
       "id": "H-3",
-      "name": "Yennefer of Vengerberg",
+      "name": "Cirilla",
       "race": "Human",
       "location": "Maribor"
     },
@@ -28,7 +16,7 @@
       "id": "H-5",
       "name": "Vesemir",
       "race": "Lycanthropic",
-      "location": "Kaer Morhen"
+      "location": "Novigrad"
     },
     {
       "id": "H-6",
@@ -65,6 +53,12 @@
       "name": "Goku",
       "race": "Human",
       "location": "geneto"
+    },
+    {
+      "id": "H-1",
+      "name": "Geralt of Rivia",
+      "race": "Human",
+      "location": "Novigrad"
     }
   ]
 }

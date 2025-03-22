@@ -16,13 +16,15 @@ export class JsonMerchantCollection extends MerchantCollection {
 
   /**
    * Constructor for the JsonMerchantCollection class
+   * @param dbFilePath Path to the database file (optional)
    */
-  constructor() {
+  constructor(dbFilePath: string = "Merchantdb.json") {
     super(
       (id, name, profession, location) =>
         new Merchant(id, name, profession, location),
     );
-    const adapter = new JSONFileSync<MerchantDataBaseSchema>("Merchantdb.json");
+
+    const adapter = new JSONFileSync<MerchantDataBaseSchema>(dbFilePath);
     this.database = new LowSync(adapter, { merchants: [] });
     this.database.read();
 
