@@ -30,19 +30,17 @@ export function goodsMenu(): void {
     ])
     .then((answers) => {
       const action = answers.option as string;
-      if (action === "back") {
-        return mainMenu();
-      }
+      if (action === "back") return mainMenu();
+
       switch (action) {
         case "add":
           return addGood();
         case "delete":
           return deleteGood();
         case "update":
-          return updateGood(); // ← Corregido aquí
+          return updateGood();
         case "list":
           return goodList();
-          break;
         default:
           showError("Invalid action");
       }

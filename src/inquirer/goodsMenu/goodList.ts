@@ -28,7 +28,7 @@ export function goodList(): void {
     .then((answers) => {
       const option = answers["option"];
       if (option === "back") {
-        return goodList();
+        return goodsMenu();
       }
 
       switch (option) {
@@ -41,13 +41,10 @@ export function goodList(): void {
         case "filterDescription":
           return filterDescription();
         case "sortName":
-          itemDB.sortItemsByName();
-
+          return sortName();
           break;
         case "sortPrice":
-          itemDB.sortItemsByPrice();
-
-          break;
+          return sortPrice();
         default:
           showError("Invalid action");
       }
@@ -191,4 +188,48 @@ export function filterDescription(): void {
       return pressEnterToContinue();
     })
     .then(() => goodList());
+}
+
+export function sortName(): void {
+  displayTitle("Filter Name");
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "type",
+        message: "Choose what filter you want to apply:",
+        choices: ["Ascending", "Descending"],
+      },
+    ])
+    .then((answers) => {
+      if (answers.type === "Ascending") {
+        itemDB.sortItemsByName();
+      }
+      if (answers.type === "Descending") {
+        itemDB.sortItemsByName(false);
+      }
+      pressEnterToContinue().then(() => goodList());
+    });
+}
+
+export function sortPrice(): void {
+  displayTitle("Filter Price");
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "type",
+        message: "Choose what filter you want to apply:",
+        choices: ["Ascending", "Descending"],
+      },
+    ])
+    .then((answers) => {
+      if (answers.type === "Ascending") {
+        itemDB.sortItemsByPrice();
+      }
+      if (answers.type === "Descending") {
+        itemDB.sortItemsByPrice(false);
+      }
+      pressEnterToContinue().then(() => goodList());
+    });
 }

@@ -109,4 +109,14 @@ export class Merchant {
     const prefixedId = `M-${id}`;
     return new Merchant(prefixedId, name, profession, location);
   }
+
+  toJSON() {
+    return {
+      id: this.id,
+      name: this.name,
+      profession: this.profession,
+      location: this.location,
+    };
+  }
+  
 }

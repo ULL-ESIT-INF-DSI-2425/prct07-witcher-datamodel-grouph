@@ -18,7 +18,6 @@ export class MerchantCollection {
   /**
    * Method to add a new merchant to the collection
    * @param newMerchant The new merchant to add
-   * @returns void
    */
   addMerchant(newMerchant: Merchant): void {
     if (this.merchants.some((m) => m.id === newMerchant.id)) {
@@ -33,7 +32,6 @@ export class MerchantCollection {
   /**
    * Method to remove a merchant from the collection
    * @param removeId The id of the merchant to remove
-   * @returns void
    */
   removeMerchant(removeId: string): void {
     this.merchants = this.merchants.filter((m) => m.id !== removeId);
@@ -44,7 +42,6 @@ export class MerchantCollection {
    * @returns All merchants in the collection
    */
   getMerchants(): Merchant[] {
-    this.printFormatted("All Merchants", this.merchants);
     return this.merchants;
   }
   
@@ -53,7 +50,6 @@ export class MerchantCollection {
    * @param modifyId The id of the merchant to modify
    * @param parameter The parameter to modify
    * @param newValue The new value for the parameter
-   * @returns void
    */
   modifyMerchant(
     modifyId: string,
@@ -70,49 +66,52 @@ export class MerchantCollection {
 
   /**
    * Method to get a merchant by their id
-   * @param id id of the merchant
-   * @returns the merchant with the given id, or undefined if not found
+   * @param id ID of the merchant
+   * @returns The merchant with the given ID, or undefined if not found
    */
   getMerchantById(id: string): Merchant | undefined {
-    const result = this.merchants.find((m) => m.id === id);
-    if (result) {
-      this.printFormatted(`Merchant with ID "${id}"`, [result]);
-    } else {
-      console.log(`No merchant found with ID "${id}"`);
-    }
-    return result;
+    return this.getMerchantBy("id", id)[0];
   }
 
   /**
-   * Method to get a merchant by their name
-   * @param name name of the merchant
-   * @returns the merchant(s) with the given name, or an empty array if not found
+   * Method to get merchants by their name
+   * @param name Name of the merchant
+   * @returns The merchants with the given name
    */
   getMerchantByName(name: string): Merchant[] {
-    const result = this.merchants.filter((m) => m.name === name);
-    this.printFormatted(`Merchants with name "${name}"`, result);
-    return result;
+    return this.getMerchantBy("name", name);
   }
 
   /**
    * Method to get merchants by their location
-   * @param location location of the merchant
-   * @returns the merchant(s) that match the location
+   * @param location Location of the merchant
+   * @returns The merchants that match the location
    */
   getMerchantByLocation(location: string): Merchant[] {
-    const result = this.merchants.filter((m) => m.location === location);
-    this.printFormatted(`Merchants in location "${location}"`, result);
-    return result;
+    return this.getMerchantBy("location", location);
   }
 
   /**
    * Method to get merchants by their profession
-   * @param profession profession of the merchant
-   * @returns the merchant(s) that match the profession
+   * @param profession Profession of the merchant
+   * @returns The merchants that match the profession
    */
   getMerchantByProfession(profession: Profession): Merchant[] { 
-    const result = this.merchants.filter((m) => m.profession === profession);
-    this.printFormatted(`Merchants with profession "${profession}"`, result);
+    return this.getMerchantBy("profession", profession);
+  }
+
+  /**
+   * Private method to get merchants by a specific parameter
+   * @param parameter The parameter to filter by
+   * @param value The value to match
+   * @returns Array of matching merchants
+   */
+  private getMerchantBy(
+    parameter: keyof Merchant,
+    value: string | Profession
+  ): Merchant[] {
+    const result = this.merchants.filter((m) => m[parameter] === value);
+    this.printFormatted(`Merchants filtered by ${parameter} = ${value}`, result);
     return result;
   }
 

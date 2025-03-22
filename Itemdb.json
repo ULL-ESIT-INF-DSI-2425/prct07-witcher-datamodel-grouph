@@ -1,12 +1,21 @@
 {
   "items": [
     {
-      "id": "W-1742606270573",
-      "name": "palo",
-      "description": "palito",
-      "material": "Ebony Wood",
+      "id": "P-1742607943210",
+      "name": "kakaroto",
+      "description": "sisi",
+      "material": "Mandrake",
       "weight": 4,
-      "price": 1
+      "price": 100000000,
+      "effect": "Unknown Effect"
+    },
+    {
+      "id": "A-1742608117374",
+      "name": "me cago",
+      "description": "ayuda",
+      "material": "Leather",
+      "weight": 812498,
+      "price": 1248124
     }
   ]
 }
