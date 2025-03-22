@@ -1,6 +1,6 @@
 import inquirer from "inquirer"; 
 import { displayTitle, pressEnterToContinue, showSuccess } from "../utils/menuUtils.js";
-import { goodsMenu } from "./goodsMenu.js";
+import { goodsMenu, itemDB } from "./goodsMenu.js";
 
 export function updateGood(): void {  // ← Renombrado correctamente
   displayTitle("Update Good");
@@ -12,7 +12,7 @@ export function updateGood(): void {  // ← Renombrado correctamente
         message: "Enter the item's ID:",
       },
     ])
-    .then((answers) => {
+    .then((answer) => {
       console.log("Update function pending...");
       inquirer
         .prompt([
@@ -47,6 +47,7 @@ export function updateGood(): void {  // ← Renombrado correctamente
               },
             ])
             .then((answers) => {
+              itemDB.modifyItem(answer.id, field, answers.value);
               showSuccess(`✔ Item ${field} updated successfully!`);
               pressEnterToContinue().then(() => goodsMenu());
             });

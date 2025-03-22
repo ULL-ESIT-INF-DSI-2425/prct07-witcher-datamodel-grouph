@@ -2,15 +2,63 @@
   "merchants": [
     {
       "_id": "M-1",
-      "_name": "Lucien",
+      "_name": "Geralt of Rivia",
+      "_profession": "Druid",
+      "_location": "Kaer Morhen"
+    },
+    {
+      "_id": "M-2",
+      "_name": "Yennefer of Vengerberg",
       "_profession": "Alchemist",
-      "_location": "La Laguna"
+      "_location": "Vengerberg"
     },
     {
       "_id": "M-3",
-      "_name": "Elena",
+      "_name": "Triss Merigold",
+      "_profession": "Blacksmith",
+      "_location": "Maribor"
+    },
+    {
+      "_id": "M-4",
+      "_name": "Ciri",
+      "_profession": "General Merchant",
+      "_location": "Kaer Morhen"
+    },
+    {
+      "_id": "M-5",
+      "_name": "Vesemir",
+      "_profession": "Smuggler",
+      "_location": "Kaer Morhen"
+    },
+    {
+      "_id": "M-6",
+      "_name": "Lambert",
       "_profession": "Butcher",
-      "_location": "La Laguna"
+      "_location": "Kaer Morhen"
+    },
+    {
+      "_id": "M-7",
+      "_name": "Eskel",
+      "_profession": "Druid",
+      "_location": "Kaer Morhen"
+    },
+    {
+      "_id": "M-8",
+      "_name": "Keira Metz",
+      "_profession": "Alchemist",
+      "_location": "Vengerberg"
+    },
+    {
+      "_id": "M-9",
+      "_name": "Zoltan Chivay",
+      "_profession": "Blacksmith",
+      "_location": "Maribor"
+    },
+    {
+      "_id": "M-10",
+      "_name": "Dandelion",
+      "_profession": "General Merchant",
+      "_location": "Kaer Morhen"
     }
   ]
 }
