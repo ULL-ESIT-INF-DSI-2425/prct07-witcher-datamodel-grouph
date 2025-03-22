@@ -7,6 +7,11 @@ export function deleteClient(): void {
   inquirer
     .prompt([{ type: "input", name: "id", message: "Enter the client's ID:" }])
     .then(({ id }) => {
+      if (!clientDB.getClientById(id)) {
+        console.log("Client not found.");
+        pressEnterToContinue().then(() => clientMenu());
+        return;
+      }
       clientDB.removeClient(id);
 
       console.log(`Client with ID ${id} deleted successfully!`);
