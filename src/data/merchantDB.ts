@@ -76,7 +76,6 @@ export class JsonMerchantCollection extends MerchantCollection {
     super.addMerchant(newMerchant);
     this.database.data.merchants = this.merchants;
     this.database.write();
-    console.log(`Added merchant: ${newMerchant.name}`);
   }
 
   /**
@@ -88,7 +87,6 @@ export class JsonMerchantCollection extends MerchantCollection {
     super.removeMerchant(removeId);
     this.database.data.merchants = this.merchants;
     this.database.write();
-    console.log(`Removed merchant with id: ${removeId}`);
   }
 
   /**
@@ -106,6 +104,5 @@ export class JsonMerchantCollection extends MerchantCollection {
     super.modifyMerchant(modifyId, parameter, newValue);
     this.database.data.merchants = this.merchants;
     this.database.write();
-    console.log(`Modified merchant with id: ${modifyId}`);
   }
 }
