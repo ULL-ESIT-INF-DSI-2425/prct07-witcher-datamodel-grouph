@@ -4,7 +4,8 @@ import {
   pressEnterToContinue,
   showSuccess,
 } from "../utils/menuUtils.js";
-import { clientMenu, clientDB } from "./clientMenu.js";
+import { clientMenu, clientDB, validRaces } from "./clientMenu.js";
+import { Race } from "../../hunter.js";
 
 export function updateClient(): void {
   displayTitle("Update Client");
@@ -34,6 +35,15 @@ export function updateClient(): void {
                 type: "input",
                 name: "value",
                 message: `Enter the new ${field}:`,
+                validate: (input) => {
+                  const trimmedInput = input.trim() as Race;
+                  if (field === "race") {
+                    return validRaces.includes(trimmedInput)
+                      ? true
+                      : `Invalid race. Choose from: ${validRaces.join(", ")}.`;
+                  }
+                  return true;
+                },
               },
             ])
             .then(({ value }) => {
