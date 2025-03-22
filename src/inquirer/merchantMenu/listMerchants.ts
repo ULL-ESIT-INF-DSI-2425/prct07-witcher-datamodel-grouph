@@ -1,8 +1,8 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
 import { displayTitle, pressEnterToContinue, showError } from "../utils/menuUtils.js";
-import { merchantMenu, merchantDB } from "./merchantMenu.js";
-import { Merchant } from "../../merchant.js"; // Asegúrate de que la ruta sea correcta
+import { merchantMenu, merchantDB, validProfessions } from "./merchantMenu.js";
+import { Merchant } from "../../merchant.js";
 
 export function listMerchant(): void {
   displayTitle("Merchants List Menu");
@@ -110,7 +110,7 @@ export function filterMerchantByProfession(): void {
         type: "list",
         name: "profession",
         message: "Select the profession of the merchant:",
-        choices: ["Blacksmith", "Alchemist", "General Merchant", "Butcher", "Druid", "Smuggler"], // Basado en el tipo `Profession`
+        choices: validProfessions,
       },
     ])
     .then((answers) => {

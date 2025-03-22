@@ -1,6 +1,5 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
-
 import {
   displayTitle,
   pressEnterToContinue,
@@ -12,8 +11,18 @@ import { addMerchant } from "./addMerchant.js";
 import { deleteMerchant } from "./deleteMerchant.js";
 import { updateMerchant } from "./updateMerchant.js";
 import { listMerchant } from "./listMerchants.js";
+import { Profession } from "../../merchant.js";
 
 export const merchantDB = new JsonMerchantCollection();
+
+export const validProfessions: Profession[] = [
+  "Blacksmith",
+  "Alchemist",
+  "General Merchant",
+  "Butcher",
+  "Druid",
+  "Smuggler",
+] as const;
 
 export function merchantMenu(): void {
   displayTitle("Manage Merchants");

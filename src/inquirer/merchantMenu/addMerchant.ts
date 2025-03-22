@@ -1,16 +1,7 @@
 import inquirer from "inquirer";
 import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
-import { merchantMenu, merchantDB } from "./merchantMenu.js";
+import { merchantMenu, merchantDB, validProfessions } from "./merchantMenu.js";
 import { Merchant, Profession } from "../../merchant.js";
-
-const validProfessions: Profession[] = [
-  "Blacksmith",
-  "Alchemist",
-  "General Merchant",
-  "Butcher",
-  "Druid",
-  "Smuggler",
-] as const;
 
 export function addMerchant(): void {
   displayTitle("Add Merchant");
