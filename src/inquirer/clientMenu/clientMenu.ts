@@ -2,6 +2,13 @@ import inquirer from "inquirer";
 import chalk from "chalk";  
 import { displayTitle, pressEnterToContinue, showError, showSuccess } from "../utils/menuUtils.js";
 import { mainMenu } from "../mainMenu.js";
+import { addClient } from "./addClient.js";
+import { deleteClient } from "./deleteClient.js";
+import { updateClient } from "./updateClient.js";
+import { listClients } from "./listsClient.js";
+import { JsonClientCollection } from "../../data/clientDB.js";
+
+export const clientDB = new JsonClientCollection(); 
 
 export function clientMenu(): void {
   displayTitle("Manage Clients");
@@ -38,70 +45,4 @@ export function clientMenu(): void {
       }
       pressEnterToContinue().then(() => clientMenu());
     });
-}
-
-export function addClient(): void {
-  displayTitle("Add Client");
-  inquirer
-    .prompt([
-      { type: "input", name: "name", message: "Enter the client's name:" },
-      { type: "input", name: "race", message: "Enter the client's race:" },
-      { type: "input", name: "address", message: "Enter the client's address:" },
-    ])
-    .then((answers) => {
-
-      console.log(`✔ Client "${answers.name}" added successfully!`);
-      pressEnterToContinue().then(() => clientMenu());
-    });
-}
-
-export function deleteClient(): void {
-  displayTitle("Delete Client");
-  inquirer
-    .prompt([
-      { type: "input", name: "id", message: "Enter the client's ID:" },
-    ])
-    .then(({ id }) => {
-      console.log(`✔ Client with ID ${id} deleted successfully!`);
-      pressEnterToContinue().then(() => clientMenu());
-    });
-}
-
-export function updateClient(): void {
-  displayTitle("Update Client");
-  inquirer
-    .prompt([
-      { type: "input", name: "id", message: "Enter the client's ID:" },
-    ])
-    .then(({ id }) => {
-      inquirer
-        .prompt([
-          {
-            type: "list",
-            name: "field",
-            message: "Select the field to update:",
-            choices: [
-              { name: "Name", value: "name" },
-              { name: "Race", value: "race" },
-              { name: "Address", value: "address" },
-            ],
-          },
-        ])
-        .then(({ field }) => {
-          inquirer
-            .prompt([
-              { type: "input", name: "value", message: `Enter the new ${field}:` },
-            ])
-            .then(({ value }) => {
-              showSuccess(`✔ Client ${field} updated successfully!`);
-              pressEnterToContinue().then(() => clientMenu());
-            });
-        });
-    });
-}
-
-export function listClients(): void {
-  displayTitle("List Clients");
-  console.log("List Clients function pending...");
-  pressEnterToContinue().then(() => clientMenu());
 }

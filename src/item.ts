@@ -61,7 +61,9 @@ export type Effect =
   | "Toxicity Reduction"
   | "Invisible Creature Detection"
   | "Temporary Enemy Paralysis"
-  | "Life Absorption";
+  | "Life Absorption"
+  | "Unknown Effect"
+  | "None";
 
 /**
  * Abstract class representing a base item
@@ -179,6 +181,17 @@ export abstract class BaseItem {
    */
   set price(newPrice: number) {
     this._price = newPrice;
+  }
+
+  toJSON() {
+    return {
+      id: this.id,
+      name: this.name,
+      description: this.description,
+      material: this.material,
+      weight: this.weight,
+      price: this.price,
+    };
   }
 }
 
@@ -396,6 +409,18 @@ export class Potion extends BaseItem {
       price,
       effect,
     );
+  }
+
+  toJSON() {
+    return {
+      id: this.id,
+      name: this.name,
+      description: this.description,
+      material: this.material,
+      weight: this.weight,
+      price: this.price,
+      effect: this.effect,
+    };
   }
 }
 

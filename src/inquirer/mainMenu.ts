@@ -7,15 +7,6 @@ import { merchantMenu } from "./merchantMenu/merchantMenu.js";
 import { clientMenu } from "./clientMenu/clientMenu.js";
 import { transactionsMenu } from "./transactionMenu/trasnsactionMenu.js";
 import { reportsMenu } from "./reportsMenu/reportsMenu.js";
-import { Inventory } from "../inventory.js";
-
-import { JsonClientCollection } from "../data/clientDB.js";
-import { JsonItemCollection } from "../data/itemDB.js";
-import { JsonMerchantCollection } from "../data/merchantDB.js";
-
-const clientCollection = new JsonClientCollection();
-const itemCollection = new JsonItemCollection();
-const merchantCollection = new JsonMerchantCollection();
 
 export function mainMenu(): void {
   displayTitle("Inventory Management System");

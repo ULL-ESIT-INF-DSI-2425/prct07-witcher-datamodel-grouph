@@ -4,6 +4,9 @@ import chalk from "chalk";
 import { clearConsole, displayTitle, pressEnterToContinue, showError, showSuccess } from "../utils/menuUtils.js";
 import { mainMenu } from "../mainMenu.js";
 import { Merchant } from "../../merchant.js";
+import { JsonMerchantCollection } from "../../data/merchantDB.js";
+
+const merchantCollection = new JsonMerchantCollection();
 
 export function merchantMenu(): void {
   displayTitle("Manage Merchants");
@@ -35,12 +38,12 @@ export function merchantMenu(): void {
         case "update":
           return updateMerchant();
         case "list":
-          console.log("List Merchants function pending...");
-          return pressEnterToContinue().then(() => merchantMenu());
+          return listMerchants();
         default:
           showError("Invalid action");
           return merchantMenu();
       }
+      pressEnterToContinue().then(() => merchantMenu());
     });
 }
 
@@ -130,4 +133,11 @@ export function updateMerchant(): void {
             });
         });
     });
+}
+
+export function listMerchants(): void {
+  displayTitle("List Merchants");
+  merchantCollection.getMerchants();
+
+  pressEnterToContinue().then(() => merchantMenu());
 }

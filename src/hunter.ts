@@ -128,4 +128,13 @@ export class Hunter {
     const prefixedId = `H-${id}`;
     return new Hunter(prefixedId, name, race, location);
   }
+
+  toJSON() {
+    return {
+      id: this._id,
+      name: this._name,
+      race: this._race,
+      location: this._location
+    };
+  } 
 }

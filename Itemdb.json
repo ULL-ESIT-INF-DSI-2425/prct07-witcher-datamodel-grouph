@@ -1,29 +1,30 @@
 {
   "items": [
     {
-      "_id": "A-2",
-      "_name": "Mithril Plate",
-      "_description": "Lightweight armor made from mithril.",
-      "_material": "Mithril",
-      "_weight": 10,
-      "_price": 700
+      "id": "P-1742605220381",
+      "name": "xD",
+      "description": "koala",
+      "material": "Mandrake",
+      "weight": 1,
+      "price": 1,
+      "effect": "Unknown Effect"
     },
     {
-      "_id": "W-2",
-      "_name": "Ebony Bow",
-      "_description": "A powerful bow made of ebony wood.",
-      "_material": "Ebony Wood",
-      "_weight": 3,
-      "_price": 400
+      "id": "P-1742605549586",
+      "name": "goku",
+      "description": "si",
+      "material": "Mandrake",
+      "weight": 1,
+      "price": 1,
+      "effect": "Unknown Effect"
     },
     {
-      "_id": "P-2",
-      "_name": "Cat Potion",
-      "_description": "Grants night vision.",
-      "_material": "Vervain",
-      "_weight": 1,
-      "_price": 60,
-      "_effect": "Night Vision"
+      "id": "A-1742605578581",
+      "name": "noo",
+      "description": "sii",
+      "material": "Leather",
+      "weight": 4,
+      "price": 4
     }
   ]
 }

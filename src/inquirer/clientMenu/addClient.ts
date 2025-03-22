@@ -1,7 +1,8 @@
 import inquirer from "inquirer";
 import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
-import { clientMenu } from "./clientMenu.js";
-
+import { clientDB, clientMenu } from "./clientMenu.js";
+import { Hunter } from "../../hunter.js";
+import { JsonClientCollection } from "../../data/clientDB.js"; 
 
 export function addClient(): void {
   displayTitle("Add Client");
@@ -12,8 +13,13 @@ export function addClient(): void {
       { type: "input", name: "address", message: "Enter the client's address:" },
     ])
     .then((answers) => {
+      // Genera un id simple; en proyectos reales se podría usar un UUID
+      const newId = Date.now().toString();
+      // Nota: en la clase se espera "location", así que usamos el valor de "address"
+      const newHunter = new Hunter(newId, answers.name, answers.race, answers.address);
 
-      console.log(`✔ Client "${answers.name}" added successfully!`);
+      clientDB.addClient(newHunter);
+      console.log(`Client "${answers.name}" added successfully!`);
       pressEnterToContinue().then(() => clientMenu());
     });
 }
