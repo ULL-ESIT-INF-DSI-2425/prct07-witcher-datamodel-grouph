@@ -11,8 +11,22 @@ import { deleteClient } from "./deleteClient.js";
 import { updateClient } from "./updateClient.js";
 import { listClient } from "./listsClient.js";
 import { JsonClientCollection } from "../../data/clientDB.js";
+import { Race } from "../../hunter.js";
 
 export const clientDB = new JsonClientCollection();
+
+export const validRaces: Race[] = [
+  "Human",
+  "Elf",
+  "Dwarf",
+  "Halfling",
+  "Warlock",
+  "Lycanthropic",
+  "Vran",
+  "Dryad",
+  "Spectral Cat",
+  "Half-Elf",
+] as const;
 
 export function clientMenu(): void {
   displayTitle("Manage Clients");

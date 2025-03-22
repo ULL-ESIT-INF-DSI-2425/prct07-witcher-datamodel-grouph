@@ -1,20 +1,7 @@
 import inquirer from "inquirer";
 import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
-import { clientDB, clientMenu } from "./clientMenu.js";
+import { clientDB, clientMenu, validRaces } from "./clientMenu.js";
 import { Hunter, Race } from "../../hunter.js";
-
-const validRaces: Race[] = [
-  "Human",
-  "Elf",
-  "Dwarf",
-  "Halfling",
-  "Warlock",
-  "Lycanthropic",
-  "Vran",
-  "Dryad",
-  "Spectral Cat",
-  "Half-Elf",
-] as const;
 
 export function addClient(): void {
   displayTitle("Add Client");

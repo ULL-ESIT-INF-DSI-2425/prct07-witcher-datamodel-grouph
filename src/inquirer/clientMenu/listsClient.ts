@@ -1,21 +1,7 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
 import { displayTitle, pressEnterToContinue, showError } from "../utils/menuUtils.js";
-import { clientMenu, clientDB } from "./clientMenu.js";
-import { Hunter, Race } from "../../hunter.js"; // Asegúrate de que la ruta sea correcta
-
-const validRaces: Race[] = [
-  "Human",
-  "Elf",
-  "Dwarf",
-  "Halfling",
-  "Warlock",
-  "Lycanthropic",
-  "Vran",
-  "Dryad",
-  "Spectral Cat",
-  "Half-Elf",
-] as const;
+import { clientMenu, clientDB, validRaces } from "./clientMenu.js";
 
 export function listClient(): void {
   displayTitle("Clients List Menu");
