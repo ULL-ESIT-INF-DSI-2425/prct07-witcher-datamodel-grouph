@@ -2,7 +2,20 @@ import chalk from "chalk";
 import inquirer from "inquirer";
 import { displayTitle, pressEnterToContinue, showError } from "../utils/menuUtils.js";
 import { clientMenu, clientDB } from "./clientMenu.js";
-import { Hunter } from "../../hunter.js"; // Asegúrate de que la ruta sea correcta
+import { Hunter, Race } from "../../hunter.js"; // Asegúrate de que la ruta sea correcta
+
+const validRaces: Race[] = [
+  "Human",
+  "Elf",
+  "Dwarf",
+  "Halfling",
+  "Warlock",
+  "Lycanthropic",
+  "Vran",
+  "Dryad",
+  "Spectral Cat",
+  "Half-Elf",
+] as const;
 
 export function listClient(): void {
   displayTitle("Clients List Menu");
@@ -110,7 +123,7 @@ export function filterClientByRace(): void {
         type: "list",
         name: "race",
         message: "Select the race of the client:",
-        choices: ["Human", "Elf", "Dwarf", "Vran", "Halfling", "Warlock", "Lycanthropic", "Dryad", "Spectral Cat", "Half-Elf"], // Ajusta según las razas disponibles
+        choices: validRaces,
       },
     ])
     .then((answers) => {
