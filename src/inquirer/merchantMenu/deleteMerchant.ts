@@ -6,10 +6,16 @@ export function deleteMerchant(): void {
   displayTitle("Delete Merchant");
   inquirer
     .prompt([
-      {
-        type: "input",
+      { type: "input",
         name: "id",
         message: "Enter the Merchant's ID:",
+        validate: (input) => {
+          if (input === "") return "ID cannot be empty.";
+          return merchantDB.getMerchantById(input)
+            ? true
+            : "Merchant not found.";
+        },
+        filter: (input) => input.trim(),
       },
     ])
     .then((answers) => {
