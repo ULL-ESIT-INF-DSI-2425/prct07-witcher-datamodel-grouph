@@ -9,7 +9,7 @@ import { mainMenu } from "../mainMenu.js";
 import { addClient } from "./addClient.js";
 import { deleteClient } from "./deleteClient.js";
 import { updateClient } from "./updateClient.js";
-import { listClients } from "./listsClient.js";
+import { listClient } from "./listsClient.js";
 import { JsonClientCollection } from "../../data/clientDB.js";
 
 export const clientDB = new JsonClientCollection();
@@ -43,7 +43,7 @@ export function clientMenu(): void {
         case "update":
           return updateClient();
         case "list":
-          return listClients();
+          return listClient();
         default:
           showError("Invalid action");
       }

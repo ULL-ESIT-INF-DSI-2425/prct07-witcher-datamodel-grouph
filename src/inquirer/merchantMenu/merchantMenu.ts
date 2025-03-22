@@ -11,7 +11,7 @@ import { JsonMerchantCollection } from "../../data/merchantDB.js";
 import { addMerchant } from "./addMerchant.js";
 import { deleteMerchant } from "./deleteMerchant.js";
 import { updateMerchant } from "./updateMerchant.js";
-import { listMerchants } from "./listMerchants.js";
+import { listMerchant } from "./listMerchants.js";
 
 export const merchantDB = new JsonMerchantCollection();
 
@@ -45,7 +45,7 @@ export function merchantMenu(): void {
         case "update":
           return updateMerchant();
         case "list":
-          return listMerchants();
+          return listMerchant();
         default:
           showError("Invalid action");
           return merchantMenu();

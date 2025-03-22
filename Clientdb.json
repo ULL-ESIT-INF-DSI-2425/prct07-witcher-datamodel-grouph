@@ -1,70 +1,64 @@
 {
   "clients": [
     {
-      "_id": "1742603725373",
-      "_name": "Gerard",
-      "_race": "Human",
-      "_location": "Ayuda"
+      "id": "H-1",
+      "name": "Ciri",
+      "race": "Half-Elf",
+      "location": "Kaer Morhen"
     },
     {
-      "_id": "H-1",
-      "_name": "Ciri",
-      "_race": "Half-Elf",
-      "_location": "Kaer Morhen"
+      "id": "H-2",
+      "name": "Geralt of Rivia",
+      "race": "Human",
+      "location": "Vengerberg"
     },
     {
-      "_id": "H-2",
-      "_name": "Geralt of Rivia",
-      "_race": "Human",
-      "_location": "Vengerberg"
+      "id": "H-3",
+      "name": "Yennefer of Vengerberg",
+      "race": "Human",
+      "location": "Maribor"
     },
     {
-      "_id": "H-3",
-      "_name": "Yennefer of Vengerberg",
-      "_race": "Human",
-      "_location": "Maribor"
+      "id": "H-4",
+      "name": "Triss Merigold",
+      "race": "Spectral Cat",
+      "location": "Kaer Morhen"
     },
     {
-      "_id": "H-4",
-      "_name": "Triss Merigold",
-      "_race": "Spectral Cat",
-      "_location": "Kaer Morhen"
+      "id": "H-5",
+      "name": "Vesemir",
+      "race": "Lycanthropic",
+      "location": "Kaer Morhen"
     },
     {
-      "_id": "H-5",
-      "_name": "Vesemir",
-      "_race": "Lycanthropic",
-      "_location": "Kaer Morhen"
+      "id": "H-6",
+      "name": "Lambert",
+      "race": "Warlock",
+      "location": "Kaer Morhen"
     },
     {
-      "_id": "H-6",
-      "_name": "Lambert",
-      "_race": "Warlock",
-      "_location": "Kaer Morhen"
+      "id": "H-7",
+      "name": "Eskel",
+      "race": "Vran",
+      "location": "Kaer Morhen"
     },
     {
-      "_id": "H-7",
-      "_name": "Eskel",
-      "_race": "Vran",
-      "_location": "Kaer Morhen"
+      "id": "H-8",
+      "name": "Keira Metz",
+      "race": "Elf",
+      "location": "Vengerberg"
     },
     {
-      "_id": "H-8",
-      "_name": "Keira Metz",
-      "_race": "Elf",
-      "_location": "Vengerberg"
+      "id": "H-9",
+      "name": "Zoltan Chivay",
+      "race": "Dwarf",
+      "location": "Maribor"
     },
     {
-      "_id": "H-9",
-      "_name": "Zoltan Chivay",
-      "_race": "Dwarf",
-      "_location": "Maribor"
-    },
-    {
-      "_id": "H-10",
-      "_name": "Dandelion",
-      "_race": "Human",
-      "_location": "Kaer Morhen"
+      "id": "H-10",
+      "name": "Dandelion",
+      "race": "Human",
+      "location": "Kaer Morhen"
     }
   ]
 }
