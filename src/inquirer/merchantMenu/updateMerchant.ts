@@ -1,6 +1,16 @@
 import inquirer from "inquirer";
 import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
 import { merchantMenu, merchantDB } from "./merchantMenu.js";
+import { Profession } from "../../merchant.js"; // Importa Profession si es un enum o type
+
+const validProfessions: Profession[] = [
+  "Blacksmith",
+  "Alchemist",
+  "General Merchant",
+  "Butcher",
+  "Druid",
+  "Smuggler",
+] as const;
 
 export function updateMerchant(): void {
   displayTitle("Update Merchant");
@@ -13,7 +23,6 @@ export function updateMerchant(): void {
       },
     ])
     .then((answer) => {
-      // AQUI VA EL CODIGO PARA VER SI EL MERCHANT EXISTE Y LUEGO ACTUALIZARLO
       console.log("Update Merchant function pending...");
       inquirer
         .prompt([
@@ -35,10 +44,18 @@ export function updateMerchant(): void {
                 type: "input",
                 name: "value",
                 message: `Enter the new ${field}:`,
+                validate: (input) => {
+                  const trimmedInput = input.trim() as Profession;
+                  if (field === "profession") {
+                    return validProfessions.includes(trimmedInput)
+                      ? true
+                      : `Invalid profession. Choose from: ${validProfessions.join(", ")}.`;
+                  }
+                  return true;
+                },
               },
             ])
             .then((answers) => {
-              // AQUI VA EL CODIGO PARA ACTUALIZAR EL MERCHANT
               merchantDB.modifyMerchant(answer.id, field, answers.value);
               console.log(
                 `Merchant with ID ${answer.id} updated successfully!`,
