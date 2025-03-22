@@ -7,11 +7,17 @@ import {
   pressEnterToContinue,
   showError,
 } from "./utils/menuUtils.js";
-import { goodsMenu } from "./goodsMenu/goodsMenu.js";
-import { merchantMenu } from "./merchantMenu/merchantMenu.js";
-import { clientMenu } from "./clientMenu/clientMenu.js";
-import { transactionsMenu } from "./transactionMenu/transactionMenu.js";
+import { goodsMenu, itemDB } from "./goodsMenu/goodsMenu.js";
+import { merchantDB, merchantMenu } from "./merchantMenu/merchantMenu.js";
+import { clientDB, clientMenu } from "./clientMenu/clientMenu.js";
+//import { transactionsMenu } from "./transactionMenu/transactionMenu.js";
 import { reportsMenu } from "./reportsMenu/reportsMenu.js";
+import { Inventory } from "../inventory.js";
+
+const clientCollection = clientDB;
+const merchantCollection = merchantDB;
+const itemCollection = itemDB;
+const inventory = new Inventory(clientCollection, merchantCollection, itemCollection);
 
 export function mainMenu(): void {
   displayTitle("Inventory Management System");
@@ -60,7 +66,7 @@ export function mainMenu(): void {
           clientMenu();
           break;
         case "transactions":
-          transactionsMenu();
+          //transactionsMenu();
           break;
         case "reports":
           reportsMenu();

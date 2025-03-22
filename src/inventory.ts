@@ -11,6 +11,10 @@ import { ClientCollection } from "./collections/clientCollection.js";
 import { MerchantCollection } from "./collections/merchantCollection.js";
 import { ItemCollection } from "./collections/itemCollection.js";
 
+import { clientDB } from "./inquirer/clientMenu/clientMenu.js";
+import { merchantDB } from  "./inquirer/merchantMenu/merchantMenu.js";
+import { itemDB } from "./inquirer/goodsMenu/goodsMenu.js";
+
 /**
  * Type that represents the stock of items in the inventory.
  * The key is the item ID and the value is an object with the item and the quantity in stock.
