@@ -134,7 +134,7 @@ export class Hunter {
       id: this._id,
       name: this._name,
       race: this._race,
-      location: this._location
+      location: this._location,
     };
-  } 
+  }
 }

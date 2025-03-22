@@ -3,15 +3,25 @@ import { Hunter, Race } from "../src/hunter";
 
 describe("Hunter class", () => {
   test("should create a Hunter instance correctly", () => {
-    const hunter = new Hunter("H-001", "Geralt of Rivia", "Human", "Kaer Morhen");
+    const hunter = new Hunter(
+      "H-001",
+      "Geralt of Rivia",
+      "Human",
+      "Kaer Morhen",
+    );
     expect(hunter.id).toBe("H-001");
     expect(hunter.name).toBe("Geralt of Rivia");
     expect(hunter.race).toBe("Human");
     expect(hunter.location).toBe("Kaer Morhen");
-  }); 
+  });
 
   test("should create a Hunter instance with a prefixed ID", () => {
-    const hunter = Hunter.createHunter(1, "Geralt of Rivia", "Human", "Kaer Morhen");
+    const hunter = Hunter.createHunter(
+      1,
+      "Geralt of Rivia",
+      "Human",
+      "Kaer Morhen",
+    );
     expect(hunter.id).toBe("H-1");
     expect(hunter.name).toBe("Geralt of Rivia");
     expect(hunter.race).toBe("Human");
@@ -41,7 +51,7 @@ describe("Hunter class", () => {
 
   test("should not allow setting invalid race", () => {
     const hunter = new Hunter("H-004", "Eskel", "Human", "Kaer Morhen");
-    
+
     expect(() => {
       // @ts-expect-error: Testing invalid type
       hunter.race = "Dragon";
@@ -49,9 +59,14 @@ describe("Hunter class", () => {
   });
 
   test("should maintain unique ID format when creating new hunters", () => {
-    const hunter1 = Hunter.createHunter(20, "Vesemir", "Lycanthropic", "Kaer Morhen");
+    const hunter1 = Hunter.createHunter(
+      20,
+      "Vesemir",
+      "Lycanthropic",
+      "Kaer Morhen",
+    );
     const hunter2 = Hunter.createHunter(21, "Ciri", "Half-Elf", "Cintra");
-    
+
     expect(hunter1.id).toBe("H-20");
     expect(hunter2.id).toBe("H-21");
   });
@@ -59,7 +74,7 @@ describe("Hunter class", () => {
   test("should correctly update location independently", () => {
     const hunter = new Hunter("H-005", "Regis", "Spectral Cat", "Toussaint");
     hunter.location = "Beauclair";
-    
+
     expect(hunter.location).toBe("Beauclair");
   });
 
@@ -83,4 +98,3 @@ describe("Hunter class", () => {
     expect(hunter.location).toBe("Redania");
   });
 });
-

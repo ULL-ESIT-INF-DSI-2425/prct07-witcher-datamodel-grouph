@@ -1,9 +1,12 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
 
-import { clearConsole, displayTitle, pressEnterToContinue, showError, showSuccess } from "../utils/menuUtils.js";
+import {
+  displayTitle,
+  pressEnterToContinue,
+  showError,
+} from "../utils/menuUtils.js";
 import { mainMenu } from "../mainMenu.js";
-import { Merchant } from "../../merchant.js";
 import { JsonMerchantCollection } from "../../data/merchantDB.js";
 import { addMerchant } from "./addMerchant.js";
 import { deleteMerchant } from "./deleteMerchant.js";
@@ -50,5 +53,3 @@ export function merchantMenu(): void {
       pressEnterToContinue().then(() => merchantMenu());
     });
 }
-
-

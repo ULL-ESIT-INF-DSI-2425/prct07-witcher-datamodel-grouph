@@ -1,9 +1,11 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
-import { clearConsole, displayTitle, pressEnterToContinue, showError } from "../utils/menuUtils.js";
+import {
+  displayTitle,
+  pressEnterToContinue,
+  showError,
+} from "../utils/menuUtils.js";
 import { mainMenu } from "../mainMenu.js";
-
-
 
 export function transactionsMenu(): void {
   displayTitle("Register Transaction");

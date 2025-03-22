@@ -147,7 +147,7 @@ export class ClientCollection {
           Name: h.name,
           Race: h.race,
           Location: h.location,
-        }))
+        })),
       );
     }
   }

@@ -1,11 +1,14 @@
 import inquirer from "inquirer";
-import { displayTitle, pressEnterToContinue, showSuccess } from "../utils/menuUtils.js";
+import {
+  displayTitle,
+  pressEnterToContinue,
+  showSuccess,
+} from "../utils/menuUtils.js";
 import { clientMenu, clientDB } from "./clientMenu.js";
-import { JsonClientCollection } from "../../data/clientDB.js"; 
 
 export function updateClient(): void {
   displayTitle("Update Client");
-  
+
   // Solicitar ID del cliente a modificar
   inquirer
     .prompt([{ type: "input", name: "id", message: "Enter the client's ID:" }])

@@ -59,7 +59,7 @@ export class Inventory {
       this.stock.set(item.id, { item, quantity });
     }
   }
-  
+
   /**
    * Method that removes an item from the stock of the inventory.
    * @param item The item to remove from the stock.
@@ -79,16 +79,16 @@ export class Inventory {
       this.stock.delete(item.id);
     }
   }
-  
+
   /**
    * Method that returns the stock level of an item.
    * @param item The item to get the stock level for.
    * @returns The stock level of the item
    */
   getStockLevel(item: Item): number {
-  const record = this.stock.get(item.id);
-  return record ? record.quantity : 0;
-}
+    const record = this.stock.get(item.id);
+    return record ? record.quantity : 0;
+  }
 
   /**
    * Method that records a sale transaction in the inventory.
@@ -364,6 +364,4 @@ export class Inventory {
   getMerchantReturns(): ReturnTransaction[] {
     return this.getReturns().filter((t) => t.from instanceof Merchant);
   }
-
-  
 }

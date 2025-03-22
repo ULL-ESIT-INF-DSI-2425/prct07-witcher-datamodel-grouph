@@ -2,11 +2,11 @@ import { LowSync } from "lowdb";
 import { JSONFileSync } from "lowdb/node";
 import { Hunter, Race } from "../hunter.js";
 import { ClientCollection } from "../collections/clientCollection.js";
-import fs from "fs";
 
 /**
  * Schema for the client database
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ClientDataBaseSchema = { clients: any[] };
 
 /**
@@ -61,7 +61,7 @@ export class JsonClientCollection extends ClientCollection {
     this.database.read();
     // Guardamos usando el método toJSON de cada cliente si existe.
     this.database.data.clients = this.clients.map((client) =>
-      typeof client.toJSON === "function" ? client.toJSON() : client
+      typeof client.toJSON === "function" ? client.toJSON() : client,
     );
     this.database.write();
   }
@@ -92,7 +92,11 @@ export class JsonClientCollection extends ClientCollection {
    * @param parameter El campo a modificar.
    * @param newValue El nuevo valor para el campo.
    */
-  modifyClient(modifyId: string, parameter: keyof Hunter, newValue: string | Race): void {
+  modifyClient(
+    modifyId: string,
+    parameter: keyof Hunter,
+    newValue: string | Race,
+  ): void {
     this.database.read();
     super.modifyClient(modifyId, parameter, newValue);
     this.saveDatabase();

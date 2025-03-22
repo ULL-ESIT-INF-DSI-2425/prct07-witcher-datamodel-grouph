@@ -12,13 +12,13 @@ export function listClients(): void {
     console.log(chalk.yellow("No clients found."));
   } else {
     console.log(chalk.green("Clients:"));
-    
+
     // Preparamos los datos para la tabla
-    const tableData = clients.map(client => ({
+    const tableData = clients.map((client) => ({
       ID: client.id,
       Name: client.name,
       Race: client.race,
-      Location: client.location
+      Location: client.location,
     }));
 
     // Muestra la tabla en la consola

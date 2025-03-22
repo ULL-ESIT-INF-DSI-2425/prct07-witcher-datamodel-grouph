@@ -14,7 +14,14 @@ const dummyFactory = (
   price: number,
 ) => {
   // Por defecto se crea un Armor; sin embargo, no se usará.
-  return Armor.createArmor(Number(id.replace("A-", "")) || 0, name, description, "Leather", weight, price);
+  return Armor.createArmor(
+    Number(id.replace("A-", "")) || 0,
+    name,
+    description,
+    "Leather",
+    weight,
+    price,
+  );
 };
 
 // Instanciamos la colección
@@ -29,7 +36,7 @@ const armor1 = Armor.createArmor(
   "Protección ligera de cuero curtido",
   "Leather",
   10,
-  120
+  120,
 );
 collection.addItem(armor1);
 
@@ -40,7 +47,7 @@ const weapon1 = Weapon.createWeapon(
   "Espada de acero forjado a mano",
   "Steel",
   5,
-  200
+  200,
 );
 collection.addItem(weapon1);
 
@@ -52,7 +59,7 @@ const potion1 = Potion.createPotion(
   "Celandine Flower",
   1,
   50,
-  "Vitality Regeneration" as Effect
+  "Vitality Regeneration" as Effect,
 );
 collection.addItem(potion1);
 
@@ -63,7 +70,7 @@ const weapon2 = Weapon.createWeapon(
   "Arma pesada de doble filo",
   "Meteoric Steel",
   8,
-  350
+  350,
 );
 collection.addItem(weapon2);
 
@@ -81,7 +88,7 @@ console.table(
     Material: item.material,
     Weight: item.weight,
     Price: item.price,
-  }))
+  })),
 );
 
 // ----- Pruebas de filtrado -----
@@ -110,7 +117,9 @@ collection.sortItemsByPrice(false);
 
 // ----- Pruebas de modificación -----
 // Actualizar el precio del item con ID del arma "Espada Larga"
-console.log("\nModificando el precio del item con ID '" + weapon1.id + "' a 250:");
+console.log(
+  "\nModificando el precio del item con ID '" + weapon1.id + "' a 250:",
+);
 collection.modifyItem(weapon1.id, "price", 250);
 // Se filtra por ID para visualizar el cambio
 collection.getItemBy("id", weapon1.id);
@@ -130,5 +139,5 @@ console.table(
     Material: item.material,
     Weight: item.weight,
     Price: item.price,
-  }))
+  })),
 );

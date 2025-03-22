@@ -1,7 +1,6 @@
 import inquirer from "inquirer";
 import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
 import { clientDB, clientMenu } from "./clientMenu.js";
-import { JsonClientCollection } from "../../data/clientDB.js"; 
 
 export function deleteClient(): void {
   displayTitle("Delete Client");

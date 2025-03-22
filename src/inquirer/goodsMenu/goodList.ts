@@ -1,8 +1,11 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
-import { displayTitle, pressEnterToContinue, showError } from "../utils/menuUtils.js";
+import {
+  displayTitle,
+  pressEnterToContinue,
+  showError,
+} from "../utils/menuUtils.js";
 import { goodsMenu, itemDB } from "./goodsMenu.js";
-import { JsonItemCollection } from "../../data/itemDB.js";
 
 export function goodList(): void {
   displayTitle("Goods List Menu");
@@ -16,7 +19,10 @@ export function goodList(): void {
           { name: chalk.magenta("List All Items"), value: "list" },
           { name: chalk.blue("Filter by Name"), value: "filterName" },
           { name: chalk.blue("Filter by Type"), value: "filterType" },
-          { name: chalk.blue("Filter by Description"), value: "filterDescription" },
+          {
+            name: chalk.blue("Filter by Description"),
+            value: "filterDescription",
+          },
           { name: chalk.white("Sort by Name"), value: "sortName" },
           { name: chalk.white("Sort by Price"), value: "sortPrice" },
           new inquirer.Separator(),
@@ -106,7 +112,7 @@ export function filterName(): void {
             Material: item.material,
             Weight: item.weight,
             Price: item.price,
-          }))
+          })),
         );
       }
 
@@ -144,7 +150,7 @@ export function filterType(): void {
             Material: item.material,
             Weight: item.weight,
             Price: item.price,
-          }))
+          })),
         );
       }
 
@@ -181,7 +187,7 @@ export function filterDescription(): void {
             Material: item.material,
             Weight: item.weight,
             Price: item.price,
-          }))
+          })),
         );
       }
 

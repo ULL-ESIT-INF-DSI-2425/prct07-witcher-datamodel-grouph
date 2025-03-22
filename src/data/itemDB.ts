@@ -9,14 +9,13 @@ import {
   GenericMaterial,
   PotionMaterial,
   WeaponMaterial,
-  Item,
 } from "../item.js";
 import { ItemCollection } from "../collections/itemCollection.js";
-import fs from "fs";
 
 /**
  * Schema for the item database
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ItemDataBaseSchema = { items: any[] };
 
 /**
@@ -40,11 +39,33 @@ export class JsonItemCollection extends ItemCollection {
         throw new Error(`Invalid ID: ${id}`);
       }
       if (id.startsWith("A-")) {
-        return new Armor(id, name, description, material as ArmorMaterial, weight, price);
+        return new Armor(
+          id,
+          name,
+          description,
+          material as ArmorMaterial,
+          weight,
+          price,
+        );
       } else if (id.startsWith("W-")) {
-        return new Weapon(id, name, description, material as WeaponMaterial, weight, price);
+        return new Weapon(
+          id,
+          name,
+          description,
+          material as WeaponMaterial,
+          weight,
+          price,
+        );
       } else if (id.startsWith("P-")) {
-        return new Potion(id, name, description, material as PotionMaterial, weight, price, "Unknown Effect");
+        return new Potion(
+          id,
+          name,
+          description,
+          material as PotionMaterial,
+          weight,
+          price,
+          "Unknown Effect",
+        );
       } else {
         throw new Error(`Unknown item type for ID: ${id}`);
       }
@@ -66,7 +87,14 @@ export class JsonItemCollection extends ItemCollection {
       .filter((i) => i && Object.keys(i).length > 0 && i.id)
       .map((i) => {
         try {
-          return this.createItem(i.id, i.name, i.description, i.material, i.weight, i.price);
+          return this.createItem(
+            i.id,
+            i.name,
+            i.description,
+            i.material,
+            i.weight,
+            i.price,
+          );
         } catch (error) {
           console.error(`Error creating item with ID ${i.id}:`, error);
           return null;
@@ -83,7 +111,7 @@ export class JsonItemCollection extends ItemCollection {
   private saveDatabase(): void {
     this.database.read();
     this.database.data.items = this.items.map((item) =>
-      typeof item.toJSON === "function" ? item.toJSON() : item
+      typeof item.toJSON === "function" ? item.toJSON() : item,
     );
     this.database.write();
   }
@@ -114,7 +142,11 @@ export class JsonItemCollection extends ItemCollection {
    * @param parameter El campo a modificar.
    * @param newValue El nuevo valor para el campo.
    */
-  modifyItem(modifyId: string, parameter: keyof BaseItem, newValue: string | GenericMaterial | number): void {
+  modifyItem(
+    modifyId: string,
+    parameter: keyof BaseItem,
+    newValue: string | GenericMaterial | number,
+  ): void {
     this.database.read();
     super.modifyItem(modifyId, parameter, newValue);
     this.saveDatabase();
@@ -123,6 +155,4 @@ export class JsonItemCollection extends ItemCollection {
   getAll(): BaseItem[] {
     return this.items;
   }
-
-  
 }

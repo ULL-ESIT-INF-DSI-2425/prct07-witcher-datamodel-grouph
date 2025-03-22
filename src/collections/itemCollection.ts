@@ -71,7 +71,6 @@ export class ItemCollection {
     }
   }
 
-  
   private printFormatted(title: string, items: BaseItem[]): void {
     console.log(`\n=== ${title} ===`);
     if (items.length === 0) {
@@ -85,7 +84,7 @@ export class ItemCollection {
           Material: item.material,
           Weight: item.weight,
           Price: item.price,
-        }))
+        })),
       );
     }
   }
@@ -101,7 +100,7 @@ export class ItemCollection {
 
   getItemsByName(name: string): BaseItem[] {
     const result = this.items.filter((i) =>
-      i.name.toLowerCase().includes(name.toLowerCase())
+      i.name.toLowerCase().includes(name.toLowerCase()),
     );
     this.printFormatted(`Items filtered by name including "${name}"`, result);
     return result;
@@ -120,9 +119,12 @@ export class ItemCollection {
 
   getItemsByDescription(description: string): BaseItem[] {
     const result = this.items.filter((i) =>
-      i.description.toLowerCase().includes(description.toLowerCase())
+      i.description.toLowerCase().includes(description.toLowerCase()),
     );
-    this.printFormatted(`Items filtered by description including "${description}"`, result);
+    this.printFormatted(
+      `Items filtered by description including "${description}"`,
+      result,
+    );
     return result;
   }
 
@@ -133,7 +135,7 @@ export class ItemCollection {
     });
     this.printFormatted(
       `Items sorted by name ${ascending ? "ascending" : "descending"}`,
-      result
+      result,
     );
     return result;
   }
@@ -145,7 +147,7 @@ export class ItemCollection {
     });
     this.printFormatted(
       `Items sorted by price ${ascending ? "ascending" : "descending"}`,
-      result
+      result,
     );
     return result;
   }
@@ -159,7 +161,7 @@ export class ItemCollection {
         Material: item.material,
         Weight: item.weight,
         Price: item.price,
-      }))
+      })),
     );
   }
 }

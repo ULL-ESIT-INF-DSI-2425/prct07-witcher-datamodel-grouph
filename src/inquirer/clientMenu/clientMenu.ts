@@ -1,6 +1,10 @@
 import inquirer from "inquirer";
-import chalk from "chalk";  
-import { displayTitle, pressEnterToContinue, showError, showSuccess } from "../utils/menuUtils.js";
+import chalk from "chalk";
+import {
+  displayTitle,
+  pressEnterToContinue,
+  showError,
+} from "../utils/menuUtils.js";
 import { mainMenu } from "../mainMenu.js";
 import { addClient } from "./addClient.js";
 import { deleteClient } from "./deleteClient.js";
@@ -8,7 +12,7 @@ import { updateClient } from "./updateClient.js";
 import { listClients } from "./listsClient.js";
 import { JsonClientCollection } from "../../data/clientDB.js";
 
-export const clientDB = new JsonClientCollection(); 
+export const clientDB = new JsonClientCollection();
 
 export function clientMenu(): void {
   displayTitle("Manage Clients");

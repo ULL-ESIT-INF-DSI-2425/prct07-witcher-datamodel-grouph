@@ -1,11 +1,16 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
 import boxen from "boxen";
-import { clearConsole, displayTitle, pressEnterToContinue, showError } from "./utils/menuUtils.js";
+import {
+  clearConsole,
+  displayTitle,
+  pressEnterToContinue,
+  showError,
+} from "./utils/menuUtils.js";
 import { goodsMenu } from "./goodsMenu/goodsMenu.js";
 import { merchantMenu } from "./merchantMenu/merchantMenu.js";
 import { clientMenu } from "./clientMenu/clientMenu.js";
-import { transactionsMenu } from "./transactionMenu/trasnsactionMenu.js";
+import { transactionsMenu } from "./transactionMenu/transactionMenu.js";
 import { reportsMenu } from "./reportsMenu/reportsMenu.js";
 
 export function mainMenu(): void {
@@ -20,7 +25,10 @@ export function mainMenu(): void {
           { name: chalk.blue("Manage Goods"), value: "goods" },
           { name: chalk.yellow("Manage Merchants"), value: "merchants" },
           { name: chalk.green("Manage Clients"), value: "clients" },
-          { name: chalk.magenta("Register Transaction"), value: "transactions" },
+          {
+            name: chalk.magenta("Register Transaction"),
+            value: "transactions",
+          },
           { name: chalk.cyan("Generate Reports"), value: "reports" },
           new inquirer.Separator(),
           { name: chalk.red("Exit"), value: "exit" },
@@ -37,7 +45,7 @@ export function mainMenu(): void {
             margin: 1,
             borderStyle: "round",
             borderColor: "cyan",
-          })
+          }),
         );
         return;
       }

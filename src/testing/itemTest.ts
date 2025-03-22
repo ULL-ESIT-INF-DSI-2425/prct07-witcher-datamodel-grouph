@@ -118,8 +118,6 @@ itemCollection.removeItem("W-1");
 itemCollection.removeItem("A-1");
 itemCollection.removeItem("P-1");
 
-
-
 // Verify the removal
 console.log("\nAll items after removing weapon1:");
 console.log(itemCollection.getItems());

@@ -242,7 +242,15 @@ try {
 console.log("\nTest 7: Recording a sale with insufficient stock...");
 try {
   // Attempt to sell more weapons than are in stock
-  inventory.recordSale(hunter, [armor, armor, armor, armor, armor, armor, armor]);
+  inventory.recordSale(hunter, [
+    armor,
+    armor,
+    armor,
+    armor,
+    armor,
+    armor,
+    armor,
+  ]);
   console.log("Sale recorded successfully.");
 } catch (error) {
   handleError(error, "recording sale with insufficient stock");

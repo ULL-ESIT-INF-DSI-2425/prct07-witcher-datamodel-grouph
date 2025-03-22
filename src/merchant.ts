@@ -13,7 +13,6 @@ export type Profession =
  * Class representing a merchant
  */
 export class Merchant {
-
   /**
    * Constructor for the Merchant class
    * @param _id - The unique identifier for the merchant
@@ -118,5 +117,4 @@ export class Merchant {
       location: this.location,
     };
   }
-  
 }

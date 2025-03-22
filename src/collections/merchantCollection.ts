@@ -44,7 +44,7 @@ export class MerchantCollection {
   getMerchants(): Merchant[] {
     return this.merchants;
   }
-  
+
   /**
    * Method to modify a merchant's information
    * @param modifyId The id of the merchant to modify
@@ -96,7 +96,7 @@ export class MerchantCollection {
    * @param profession Profession of the merchant
    * @returns The merchants that match the profession
    */
-  getMerchantByProfession(profession: Profession): Merchant[] { 
+  getMerchantByProfession(profession: Profession): Merchant[] {
     return this.getMerchantBy("profession", profession);
   }
 
@@ -108,10 +108,13 @@ export class MerchantCollection {
    */
   private getMerchantBy(
     parameter: keyof Merchant,
-    value: string | Profession
+    value: string | Profession,
   ): Merchant[] {
     const result = this.merchants.filter((m) => m[parameter] === value);
-    this.printFormatted(`Merchants filtered by ${parameter} = ${value}`, result);
+    this.printFormatted(
+      `Merchants filtered by ${parameter} = ${value}`,
+      result,
+    );
     return result;
   }
 
@@ -131,7 +134,7 @@ export class MerchantCollection {
           Name: m.name,
           Profession: m.profession,
           Location: m.location,
-        }))
+        })),
       );
     }
   }

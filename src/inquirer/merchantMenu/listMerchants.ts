@@ -14,11 +14,11 @@ export function listMerchants(): void {
     console.log(chalk.green("Merchants:"));
 
     // Preparamos los datos para la tabla
-    const tableData = merchants.map(merchant => ({
+    const tableData = merchants.map((merchant) => ({
       ID: merchant.id,
       Name: merchant.name,
       Profession: merchant.profession,
-      Location: merchant.location
+      Location: merchant.location,
     }));
 
     // Muestra la tabla en la consola

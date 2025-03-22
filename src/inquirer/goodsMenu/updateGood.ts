@@ -1,8 +1,13 @@
-import inquirer from "inquirer"; 
-import { displayTitle, pressEnterToContinue, showSuccess } from "../utils/menuUtils.js";
+import inquirer from "inquirer";
+import {
+  displayTitle,
+  pressEnterToContinue,
+  showSuccess,
+} from "../utils/menuUtils.js";
 import { goodsMenu, itemDB } from "./goodsMenu.js";
 
-export function updateGood(): void {  // ← Renombrado correctamente
+export function updateGood(): void {
+  // ← Renombrado correctamente
   displayTitle("Update Good");
   inquirer
     .prompt([
@@ -39,11 +44,18 @@ export function updateGood(): void {  // ← Renombrado correctamente
                 message: `Enter the new ${field}:`,
                 validate: (input) => {
                   if (field === "weight" || field === "price") {
-                    return !isNaN(parseFloat(input)) && parseFloat(input) > 0 ? true : `${field} must be a positive number`;
+                    return !isNaN(parseFloat(input)) && parseFloat(input) > 0
+                      ? true
+                      : `${field} must be a positive number`;
                   }
-                  return input.trim().length > 0 ? true : "This field cannot be empty";
+                  return input.trim().length > 0
+                    ? true
+                    : "This field cannot be empty";
                 },
-                filter: (input) => (field === "weight" || field === "price" ? parseFloat(input) : input),
+                filter: (input) =>
+                  field === "weight" || field === "price"
+                    ? parseFloat(input)
+                    : input,
               },
             ])
             .then((answers) => {

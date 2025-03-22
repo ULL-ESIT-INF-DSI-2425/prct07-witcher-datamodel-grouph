@@ -2,7 +2,6 @@ import inquirer from "inquirer";
 import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
 import { goodsMenu, itemDB } from "./goodsMenu.js";
 import { Armor, Weapon, Potion } from "../../item.js";
-import crypto from "crypto"; // Para generar un UUID aleatorio
 
 export function addGood(): void {
   displayTitle("Add Good");
@@ -63,7 +62,7 @@ export function addGood(): void {
     .then((answers) => {
       try {
         const newId = Date.now();
-        
+
         let newItem;
 
         switch (answers.object) {
@@ -75,7 +74,7 @@ export function addGood(): void {
               answers.material,
               answers.weight,
               answers.price,
-              "None"
+              "None",
             );
             break;
           case "armor":
@@ -85,7 +84,7 @@ export function addGood(): void {
               answers.description,
               answers.material,
               answers.weight,
-              answers.price
+              answers.price,
             );
             break;
           case "weapon":
@@ -95,7 +94,7 @@ export function addGood(): void {
               answers.description,
               answers.material,
               answers.weight,
-              answers.price
+              answers.price,
             );
             break;
           default:
@@ -104,7 +103,9 @@ export function addGood(): void {
         }
 
         itemDB.addItem(newItem);
-        console.log(`✔ Item "${answers.name}" added successfully! ID: ${newId}`);
+        console.log(
+          `✔ Item "${answers.name}" added successfully! ID: ${newId}`,
+        );
       } catch (error) {
         console.error("❌ An error occurred while adding the item:", error);
       }

@@ -1,6 +1,10 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
-import { clearConsole, displayTitle, pressEnterToContinue, showSuccess, showError } from "../utils/menuUtils.js";
+import {
+  displayTitle,
+  pressEnterToContinue,
+  showError,
+} from "../utils/menuUtils.js";
 import { mainMenu } from "../mainMenu.js";
 import { addGood } from "./addGood.js";
 import { deleteGood } from "./deleteGood.js";
@@ -8,7 +12,7 @@ import { updateGood } from "./updateGood.js";
 import { goodList } from "./goodList.js";
 import { JsonItemCollection } from "../../data/itemDB.js";
 
-export const itemDB = new JsonItemCollection(); 
+export const itemDB = new JsonItemCollection();
 
 export function goodsMenu(): void {
   displayTitle("Manage Goods");
