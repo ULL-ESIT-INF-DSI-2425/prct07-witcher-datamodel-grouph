@@ -9,6 +9,7 @@ import {
   GenericMaterial,
   PotionMaterial,
   WeaponMaterial,
+  Item,
 } from "../item.js";
 import { ItemCollection } from "../collections/itemCollection.js";
 import fs from "fs";
@@ -118,4 +119,10 @@ export class JsonItemCollection extends ItemCollection {
     super.modifyItem(modifyId, parameter, newValue);
     this.saveDatabase();
   }
+
+  getAll(): BaseItem[] {
+    return this.items;
+  }
+
+  
 }

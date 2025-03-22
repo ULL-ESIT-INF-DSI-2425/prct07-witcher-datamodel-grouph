@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
 import { displayTitle, pressEnterToContinue, showError } from "../utils/menuUtils.js";
-import { goodsMenu } from "./goodsMenu.js";
+import { goodsMenu, itemDB } from "./goodsMenu.js";
 import { JsonItemCollection } from "../../data/itemDB.js";
 
 export function goodList(): void {
@@ -28,13 +28,12 @@ export function goodList(): void {
     .then((answers) => {
       const option = answers["option"];
       if (option === "back") {
-        return goodsMenu();
+        return goodList();
       }
 
       switch (option) {
         case "list":
-          // Utiliza el método getAllItems() para imprimir todos los items
-          break;
+          return listAllItems();
         case "filterName":
           return filterName();
         case "filterType":
@@ -42,18 +41,44 @@ export function goodList(): void {
         case "filterDescription":
           return filterDescription();
         case "sortName":
-          // Ordena y muestra los items por nombre (ascendente)
+          itemDB.sortItemsByName();
+
           break;
         case "sortPrice":
-          // Ordena y muestra los items por precio (ascendente)
+          itemDB.sortItemsByPrice();
+
           break;
         default:
           showError("Invalid action");
       }
       pressEnterToContinue().then(() => {
-        goodList();
+        goodsMenu();
       });
     });
+}
+
+export function listAllItems(): void {
+  displayTitle("List All Items");
+
+  const items = itemDB.getAll();
+
+  if (items.length === 0) {
+    console.log(chalk.yellow("No items found."));
+  } else {
+    console.log(chalk.green("Available Items:"));
+
+    const tableData = items.map((item) => ({
+      ID: item.id,
+      Name: item.name,
+      Description: item.description,
+      Material: item.material,
+      Weight: item.weight,
+      Price: item.price,
+    }));
+
+    console.table(tableData);
+  }
+  pressEnterToContinue().then(() => goodList());
 }
 
 export function filterName(): void {
@@ -67,8 +92,30 @@ export function filterName(): void {
       },
     ])
     .then((answers) => {
-      
-    });
+      const filteredItems = itemDB.getItemsByName(answers.name);
+
+      console.clear();
+      displayTitle("Filtered Items");
+
+      if (filteredItems.length === 0) {
+        console.log(chalk.yellow("No items found with that name."));
+      } else {
+        console.log(chalk.green("Matching Items:"));
+        console.table(
+          filteredItems.map((item) => ({
+            ID: item.id,
+            Name: item.name,
+            Description: item.description,
+            Material: item.material,
+            Weight: item.weight,
+            Price: item.price,
+          }))
+        );
+      }
+
+      return pressEnterToContinue();
+    })
+    .then(() => goodList());
 }
 
 export function filterType(): void {
@@ -83,8 +130,30 @@ export function filterType(): void {
       },
     ])
     .then((answers) => {
-      
-    });
+      const filteredItems = itemDB.getItemsByType(answers.type);
+
+      console.clear();
+      displayTitle("Filtered Items");
+
+      if (filteredItems.length === 0) {
+        console.log(chalk.yellow("No items found for this type."));
+      } else {
+        console.log(chalk.green("Matching Items:"));
+        console.table(
+          filteredItems.map((item) => ({
+            ID: item.id,
+            Name: item.name,
+            Description: item.description,
+            Material: item.material,
+            Weight: item.weight,
+            Price: item.price,
+          }))
+        );
+      }
+
+      return pressEnterToContinue();
+    })
+    .then(() => goodList());
 }
 
 export function filterDescription(): void {
@@ -98,6 +167,28 @@ export function filterDescription(): void {
       },
     ])
     .then((answers) => {
-      
-    });
+      const filteredItems = itemDB.getItemsByDescription(answers.description);
+
+      console.clear();
+      displayTitle("Filtered Items");
+
+      if (filteredItems.length === 0) {
+        console.log(chalk.yellow("No items found with that description."));
+      } else {
+        console.log(chalk.green("Matching Items:"));
+        console.table(
+          filteredItems.map((item) => ({
+            ID: item.id,
+            Name: item.name,
+            Description: item.description,
+            Material: item.material,
+            Weight: item.weight,
+            Price: item.price,
+          }))
+        );
+      }
+
+      return pressEnterToContinue();
+    })
+    .then(() => goodList());
 }

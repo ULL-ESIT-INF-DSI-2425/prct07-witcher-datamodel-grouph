@@ -20,16 +20,16 @@ export function displayTitle(title: string): void {
 }
 
 export function pressEnterToContinue(): Promise<void> {
-  return inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "continue",
-        message: chalk.gray("Press ENTER to continue..."),
-      },
-    ])
-    .then(() => {});
+  return new Promise((resolve) => {
+    console.log("\nPress Enter to continue...");
+    process.stdin.resume();
+    process.stdin.once("data", () => {
+      process.stdin.pause();
+      resolve();
+    });
+  });
 }
+
 
 export function showSuccess(message: string): void {
   console.log(chalk.green(`✔ ${message}`));
