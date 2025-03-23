@@ -1,4 +1,4 @@
-import { Item } from "./item.js";
+import { BaseItem, Item } from "./item.js";
 import { Merchant } from "./merchant.js";
 import { Hunter } from "./hunter.js";
 import {
@@ -10,6 +10,7 @@ import {
 import { ClientCollection } from "./collections/clientCollection.js";
 import { MerchantCollection } from "./collections/merchantCollection.js";
 import { ItemCollection } from "./collections/itemCollection.js";
+import { get } from "http";
 
 /**
  * Type that represents the stock of items in the inventory.
@@ -266,23 +267,46 @@ export class Inventory {
    * Method that prints all the transactions in the inventory.
    */
   printTransactionsByClient() {
+    console.log("Transactions by Client:");
+    console.log("Sales:");
     this.getSales().forEach((t) => {
       console.log("CLIENT:", t.client.name);
       console.log("\tDate:", t.date.toDateString());
       console.log("\tItems:", t.items.map((i) => i.name).join(", "));
       console.log("\tTotal:", t.totalCrowns);
     });
+    console.log("Returns:");
+    this.getReturns().forEach((t) => {
+      if (t.from instanceof Hunter) {
+        console.log("CLIENT:", t.from.name);
+        console.log("\tDate:", t.date.toDateString());
+        console.log("\tItems:", t.items.map((i) => i.name).join(", "));
+        console.log("\tTotal:", t.totalCrowns);
+      }
+    });
   }
+
 
   /**
    * Method that prints all the transactions in the inventory.
    */
   printTransactionsByMerchant() {
+    console.log("Transactions by Merchant:");
+    console.log("Purchases:");
     this.getPurchases().forEach((t) => {
       console.log("MERCHANT:", t.merchant.name);
       console.log("\tDate:", t.date.toDateString());
       console.log("\tItems:", t.items.map((i) => i.name).join(", "));
       console.log("\tTotal:", t.totalCrowns);
+    });
+    console.log("Returns:");
+    this.getReturns().forEach((t) => {
+      if (t.from instanceof Merchant) {
+        console.log("MERCHANT:", t.from.name);
+        console.log("\tDate:", t.date.toDateString());
+        console.log("\tItems:", t.items.map((i) => i.name).join(", "));
+        console.log("\tTotal:", t.totalCrowns);
+      }
     });
   }
 
@@ -309,6 +333,30 @@ export class Inventory {
       console.log("Total:", t.totalCrowns);
     })
   ;}
+
+  // This function returns the most sold item
+  getMostSoldItem() {
+    let mostSoldItem = this.itemCollection.getItems()[0];
+    let mostSoldItemTimes = 0;
+    this.itemCollection.getItems()
+      .filter((item): item is Item => item instanceof BaseItem)
+      .forEach((item) => {
+        let timesSold = this.getTransactionsByItem(item).length;
+        if (timesSold > mostSoldItemTimes) {
+          mostSoldItem = item;
+          mostSoldItemTimes = timesSold;
+        }
+      });
+    return mostSoldItem;
+  }
+
+ // This function print the most sold item
+  printMostSoldItem() {
+    let mostSoldItem = this.getMostSoldItem();
+    console.log("Most Sold Item:");
+    console.log("Name:", mostSoldItem.name);
+    console.log("Price:", mostSoldItem.price);
+  }
 
   /**
    * Method that returns the total number of crowns earned by sales.
@@ -339,7 +387,7 @@ export class Inventory {
    * @returns The net number of crowns in the inventory
    */
   getNetCrowns(): number {
-    return this.getEarnedCrownsbySales() - this.getSpentCrownsbyPurchases();
+    return this.getEarnedCrownsbySales() - this.getSpentCrownsbyPurchases() + this.getReturnedCrowns();
   }
 
   /**

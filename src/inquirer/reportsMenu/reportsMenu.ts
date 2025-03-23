@@ -9,7 +9,7 @@ import {
 import { mainMenu } from "../mainMenu.js";
 import { historyMenu } from "./historyMenu.js";
 import { topSelling } from "./topSelling.js";
-import { financials } from "./financials.js";
+import financials from "./financials.js";
 
 export function reportsMenu(): void {
   displayTitle("Generate Reports");

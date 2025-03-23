@@ -31,12 +31,6 @@
       "location": "Kaer Morhen"
     },
     {
-      "id": "H-8",
-      "name": "Keira Metz",
-      "race": "Elf",
-      "location": "Vengerberg"
-    },
-    {
       "id": "H-9",
       "name": "Zoltan Chivay",
       "race": "Dwarf",
@@ -49,9 +43,9 @@
       "location": "Kaer Morhen"
     },
     {
-      "id": "1742653477958",
+      "id": "H-1742653477958",
       "name": "Goku",
-      "race": "Human",
+      "race": "Lycanthropic",
       "location": "geneto"
     },
     {
@@ -59,6 +53,12 @@
       "name": "Geralt of Rivia",
       "race": "Human",
       "location": "Novigrad"
+    },
+    {
+      "id": "H-1742749010325",
+      "name": "pepe",
+      "race": "Elf",
+      "location": "tacoronte"
     }
   ]
 }

@@ -1,34 +1,64 @@
 {
   "merchants": [
     {
-      "id": "1742608846996",
-      "name": "no",
-      "profession": "da",
-      "location": "risa"
+      "id": "M-1",
+      "name": "Ninja Hattori",
+      "profession": "Blacksmith",
+      "location": "Novigrad"
     },
     {
-      "id": "1742608857233",
-      "name": "skere",
-      "profession": "nose ",
-      "location": "atuda"
-    },
-    {
-      "id": "1742608866690",
-      "name": "brutal",
-      "profession": "jaja",
-      "location": "que"
-    },
-    {
-      "id": "1742609388466",
-      "name": "ada",
+      "id": "M-2",
+      "name": "Gremist",
       "profession": "Druid",
-      "location": "adada"
+      "location": "Skellige"
     },
     {
-      "id": "1742648640162",
-      "name": "Peter",
+      "id": "M-4",
+      "name": "Ivar Evil-Eye",
+      "profession": "Smuggler",
+      "location": "Skellige"
+    },
+    {
+      "id": "M-5",
+      "name": "Fergus Graem",
+      "profession": "Blacksmith",
+      "location": "Crow's Perch"
+    },
+    {
+      "id": "M-6",
+      "name": "Marcus T.K. Hodgson",
+      "profession": "General Merchant",
+      "location": "Novigrad"
+    },
+    {
+      "id": "M-7",
+      "name": "Eibhear Hattori",
+      "profession": "Blacksmith",
+      "location": "Novigrad"
+    },
+    {
+      "id": "M-8",
+      "name": "Bruno",
       "profession": "Butcher",
-      "location": "Uganda"
+      "location": "Beauclair"
+    },
+    {
+      "id": "M-9",
+      "name": "Otto Bamber",
+      "profession": "Alchemist",
+      "location": "Novigrad"
+    },
+    {
+      "id": "M-10",
+      "name": "Sjusta",
+      "profession": "General Merchant",
+      "location": "Ard Skellig"
+    },
+    {
+      "id": "M-1742748886992",
+      "name": "paco",
+      "profession": "Smuggler",
+      "location": "Tincer"
     }
   ]
 }

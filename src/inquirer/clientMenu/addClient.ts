@@ -20,8 +20,8 @@ export function addClient(): void {
       { type: "input", name: "address", message: "Enter the client's address:" },
     ])
     .then((answers) => {
-      const newId = Date.now().toString();
-      const newHunter = new Hunter(
+      const newId = Date.now();
+      const newHunter = Hunter.createHunter(
         newId,
         answers.name,
         answers.race,

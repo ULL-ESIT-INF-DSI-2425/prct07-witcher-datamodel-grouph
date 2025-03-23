@@ -33,8 +33,8 @@ export function addMerchant(): void {
       },
     ])
     .then((answers) => {
-      const newId = Date.now().toString();
-      const merchant = new Merchant(
+      const newId = Date.now();
+      const merchant = Merchant.createMerchant(
         newId,
         answers.name,
         answers.profession,
