@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
+import { displayTitle, pressEnterToContinue, showError } from "../utils/menuUtils.js";
 import { goodsMenu, itemDB } from "./goodsMenu.js";
 import { Armor, Weapon, Potion } from "../../item.js";
 
@@ -41,7 +41,7 @@ export function addGood(): void {
       {
         type: "input",
         name: "weight",
-        message: "Enter the item's weight:",
+        message: "Enter the item's weight (kg):",
         validate: (input) =>
           !isNaN(parseFloat(input)) && parseFloat(input) > 0
             ? true
@@ -98,8 +98,7 @@ export function addGood(): void {
             );
             break;
           default:
-            console.error("❌ Invalid item type. Operation aborted.");
-            return;
+            return showError("Invalid item type.");
         }
 
         itemDB.addItem(newItem);

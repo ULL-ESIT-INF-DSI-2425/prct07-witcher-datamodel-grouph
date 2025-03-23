@@ -13,6 +13,7 @@ import { clientDB, clientMenu } from "./clientMenu/clientMenu.js";
 //import { transactionsMenu } from "./transactionMenu/transactionMenu.js";
 import { reportsMenu } from "./reportsMenu/reportsMenu.js";
 import { Inventory } from "../inventory.js";
+import { transactionsMenu } from "./transactionMenu/transactionMenu.js";
 
 const clientCollection = clientDB;
 const merchantCollection = merchantDB;
@@ -57,20 +58,20 @@ export function mainMenu(): void {
       }
       switch (option) {
         case "goods":
-          goodsMenu();
-          break;
+          return goodsMenu();
+          
         case "merchants":
-          merchantMenu();
-          break;
+          return merchantMenu();
+          
         case "clients":
-          clientMenu();
-          break;
+          return clientMenu();
+          
         case "transactions":
-          //transactionsMenu();
-          break;
+          return transactionsMenu();
+          
         case "reports":
-          reportsMenu();
-          break;
+          return reportsMenu();
+          
         default:
           showError("Invalid action");
           pressEnterToContinue().then(() => mainMenu());
