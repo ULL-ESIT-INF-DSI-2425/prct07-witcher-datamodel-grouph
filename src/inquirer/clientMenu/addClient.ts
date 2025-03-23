@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
+import { displayTitle, pressEnterToContinue, showSuccess } from "../utils/menuUtils.js";
 import { clientDB, clientMenu, validRaces } from "./clientMenu.js";
 import { Hunter, Race } from "../../hunter.js";
 
@@ -39,7 +39,7 @@ export function addClient(): void {
       );
 
       clientDB.addClient(newHunter);
-      console.log(`Client "${answers.name}" added successfully!`);
+      showSuccess(`Client "${answers.name}" added successfully!`);
       pressEnterToContinue().then(() => clientMenu());
     });
 }

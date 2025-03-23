@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
+import { displayTitle, pressEnterToContinue, showSuccess } from "../utils/menuUtils.js";
 import { clientDB, clientMenu } from "./clientMenu.js";
 
 /**
@@ -17,7 +17,7 @@ export function deleteClient(): void {
       }
       clientDB.removeClient(id);
 
-      console.log(`Client with ID ${id} deleted successfully!`);
+      showSuccess(`Client "${id.name}" deleted successfully!`)
       pressEnterToContinue().then(() => clientMenu());
     });
 }

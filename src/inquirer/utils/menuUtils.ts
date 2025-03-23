@@ -33,10 +33,8 @@ export function pressEnterToContinue(): Promise<void> {
 
 export function showSuccess(message: string): void {
   console.log(chalk.green(`✔ ${message}`));
-  pressEnterToContinue();
 }
 
 export function showError(message: string): void {
   console.log(chalk.red(`✖ ${message}`));
-  pressEnterToContinue();
 }
