@@ -74,7 +74,6 @@ export class Inventory {
       throw new Error(`Not enough stock for item: ${item.name}`);
     }
     currentRecord.quantity -= quantity;
-    // Opcional: eliminar el registro si la cantidad llega a 0
     if (currentRecord.quantity === 0) {
       this.stock.delete(item.id);
     }
@@ -99,14 +98,10 @@ export class Inventory {
     if (!this.clientCollection.getClientById(client.id)) {
       throw new Error(`Client with ID ${client.id} does not exist.`);
     }
-
-    // Count the quantity of each item in the sale
     const itemQuantities = new Map<Item, number>();
     items.forEach((item) => {
       itemQuantities.set(item, (itemQuantities.get(item) || 0) + 1);
     });
-
-    // Validate stock levels
     itemQuantities.forEach((quantity, item) => {
       if (!this.itemCollection.getItems().includes(item)) {
         throw new Error(`Item with ID ${item.id} does not exist.`);
@@ -125,8 +120,6 @@ export class Inventory {
       totalCrowns,
     };
     this.transactions.push(transaction);
-
-    // Update stock levels
     itemQuantities.forEach((quantity, item) => {
       this.removeItemFromStock(item, quantity);
     });
@@ -141,8 +134,6 @@ export class Inventory {
     if (!this.merchantCollection.getMerchantById(merchant.id)) {
       throw new Error(`Merchant with ID ${merchant.id} does not exist.`);
     }
-
-    // Validate items
     items.forEach((item) => {
       if (!this.itemCollection.getItems().includes(item)) {
         throw new Error(`Item with ID ${item.id} does not exist.`);
@@ -158,8 +149,6 @@ export class Inventory {
       totalCrowns,
     };
     this.transactions.push(transaction);
-
-    // Update stock levels
     items.forEach((item) => {
       this.addItemToStock(item, 1);
     });
@@ -180,8 +169,6 @@ export class Inventory {
       if (!this.merchantCollection.getMerchantById(from.id)) {
         throw new Error(`Merchant with ID ${from.id} does not exist.`);
       }
-
-      // Validate items
       items.forEach((item) => {
         if (!this.itemCollection.getItems().includes(item)) {
           throw new Error(`Item with ID ${item.id} does not exist.`);
@@ -202,8 +189,6 @@ export class Inventory {
       totalCrowns,
     };
     this.transactions.push(transaction);
-
-    // Update stock levels
     if (from instanceof Hunter) {
       items.forEach((item) => {
         this.addItemToStock(item, 1);
@@ -308,6 +293,9 @@ export class Inventory {
     });
   }
 
+  /**
+   * Method that prints all the stock in the inventory.
+   */
   printAllStock() {
     console.log("Stock:");
     this.stock.forEach((record) => {
@@ -315,6 +303,9 @@ export class Inventory {
     });
   }
 
+  /**
+   * Method that prints the economic report of the inventory
+   */
   printEconomicReport() {
     console.log("Economic Report");
     console.log("Total Crowns Earned by Sales:", this.getEarnedCrownsbySales());
@@ -326,6 +317,9 @@ export class Inventory {
     console.log("Net Crowns:", this.getNetCrowns());
   }
 
+  /**
+   * Method that prints all the transactions in the inventory.
+   */
   printAllTransactions() {
     this.transactions.forEach((t) => {
       console.log("Date:", t.date.toDateString());
@@ -335,7 +329,10 @@ export class Inventory {
     });
   }
 
-  // This function returns the most sold item
+  /**
+   * Method that returns the most sold item in the inventory.
+   * @returns The most sold item in the inventory.
+   */
   getMostSoldItem() {
     let mostSoldItem = this.itemCollection.getItems()[0];
     let mostSoldItemTimes = 0;
@@ -352,7 +349,9 @@ export class Inventory {
     return mostSoldItem;
   }
 
-  // This function print the most sold item
+  /**
+   * Method that prints the most sold item in the inventory.
+   */
   printMostSoldItem() {
     const mostSoldItem = this.getMostSoldItem();
     console.log("Most Sold Item:");

@@ -3,6 +3,9 @@ import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
 import { clientDB, clientMenu, validRaces } from "./clientMenu.js";
 import { Hunter, Race } from "../../hunter.js";
 
+/**
+ * Function to add a client to the database
+ */
 export function addClient(): void {
   displayTitle("Add Client");
   inquirer

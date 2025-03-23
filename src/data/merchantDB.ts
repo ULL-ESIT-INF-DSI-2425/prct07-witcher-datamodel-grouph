@@ -23,18 +23,15 @@ export class JsonMerchantCollection extends MerchantCollection {
       (id, name, profession, location) =>
         new Merchant(id, name, profession, location),
     );
-
     const adapter = new JSONFileSync<MerchantDataBaseSchema>(dbFilePath);
     this.database = new LowSync(adapter, { merchants: [] });
     this.database.read();
 
-    // Initialize the database if it's empty or invalid
+
     if (!this.database.data || !Array.isArray(this.database.data.merchants)) {
       this.database.data = { merchants: [] };
       this.database.write();
     }
-
-    // Deserialize merchants into Merchant instances using the factory function
     this.database.data.merchants.forEach((m) => {
       if (m.id && m.name && m.profession && m.location) {
         const merchant = this.createMerchant(
@@ -65,8 +62,6 @@ export class JsonMerchantCollection extends MerchantCollection {
       console.warn("Skipping invalid merchant:", newMerchant);
       return;
     }
-
-    // Check if the merchant already exists
     const existingMerchant = this.merchants.find(
       (merchant) => merchant.id === newMerchant.id,
     );

@@ -6,6 +6,10 @@ import { Merchant, Profession } from "../merchant.js";
 export class MerchantCollection {
   protected merchants: Merchant[] = [];
 
+  /**
+   * Constructor for the MerchantCollection class
+   * @param createMerchant - Function to create a new merchant
+   */
   constructor(
     protected createMerchant: (
       id: string,

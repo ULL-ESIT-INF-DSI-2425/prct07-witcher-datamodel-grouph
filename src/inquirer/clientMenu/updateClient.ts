@@ -7,6 +7,9 @@ import {
 import { clientMenu, clientDB, validRaces } from "./clientMenu.js";
 import { Race } from "../../hunter.js";
 
+/**
+ * Function to update a client in the database
+ */
 export function updateClient(): void {
   displayTitle("Update Client");
   inquirer

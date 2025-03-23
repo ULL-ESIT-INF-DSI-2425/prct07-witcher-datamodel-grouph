@@ -2,6 +2,9 @@ import inquirer from "inquirer";
 import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
 import { clientDB, clientMenu } from "./clientMenu.js";
 
+/**
+ * Function to delete a client from the database
+ */
 export function deleteClient(): void {
   displayTitle("Delete Client");
   inquirer

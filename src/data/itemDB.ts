@@ -69,15 +69,11 @@ export class JsonItemCollection extends ItemCollection {
     const adapter = new JSONFileSync<ItemDataBaseSchema>(dbFilePath);
     this.database = new LowSync(adapter, { items: [] });
     this.database.read();
-
-    // Initialize the database if it's empty or invalid
     if (!this.database.data || !Array.isArray(this.database.data.items)) {
       console.log("📂 Item database was empty. Initializing...");
       this.database.data = { items: [] };
       this.database.write();
     }
-
-    // Load items from the database
     this.items = this.database.data.items
       .filter((i) => i && Object.keys(i).length > 0 && i.id)
       .map((i) => {

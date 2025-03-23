@@ -7,6 +7,9 @@ import {
 } from "../utils/menuUtils.js";
 import { clientMenu, clientDB, validRaces } from "./clientMenu.js";
 
+/**
+ * Function to list clients
+ */
 export function listClient(): void {
   displayTitle("Clients List Menu");
   inquirer
@@ -48,6 +51,9 @@ export function listClient(): void {
     });
 }
 
+/**
+ * Function to list all clients
+ */
 export function listAllClients(): void {
   displayTitle("List All Clients");
 
@@ -70,6 +76,9 @@ export function listAllClients(): void {
   pressEnterToContinue().then(() => listClient());
 }
 
+/**
+ * Function to filter clients by name
+ */
 export function filterClientByName(): void {
   displayTitle("Filter by Name");
   inquirer
@@ -105,6 +114,9 @@ export function filterClientByName(): void {
     .then(() => listClient());
 }
 
+/**
+ * Function to filter clients by race
+ */
 export function filterClientByRace(): void {
   displayTitle("Filter by Race");
   inquirer
@@ -141,6 +153,9 @@ export function filterClientByRace(): void {
     .then(() => listClient());
 }
 
+/**
+ * Function to filter clients by location
+ */
 export function filterClientByLocation(): void {
   displayTitle("Filter by Location");
   inquirer

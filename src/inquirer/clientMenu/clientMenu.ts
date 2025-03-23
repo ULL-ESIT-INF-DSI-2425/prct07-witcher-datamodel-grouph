@@ -13,8 +13,14 @@ import { listClient } from "./listsClient.js";
 import { JsonClientCollection } from "../../data/clientDB.js";
 import { Race } from "../../hunter.js";
 
+/**
+ * Collection of clients
+ */
 export const clientDB = new JsonClientCollection();
 
+/**
+ * Array of valid races
+ */
 export const validRaces: Race[] = [
   "Human",
   "Elf",
@@ -28,6 +34,9 @@ export const validRaces: Race[] = [
   "Half-Elf",
 ] as const;
 
+/**
+ * Function to display the client menu
+ */
 export function clientMenu(): void {
   displayTitle("Manage Clients");
   inquirer

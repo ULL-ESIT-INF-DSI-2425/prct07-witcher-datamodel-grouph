@@ -71,6 +71,11 @@ export class ItemCollection {
     }
   }
 
+  /**
+   * Nethod that print the result of the search in a formatted way
+   * @param title title of the search
+   * @param items items that are going to be printed
+   */
   private printFormatted(title: string, items: BaseItem[]): void {
     console.log(`\n=== ${title} ===`);
     if (items.length === 0) {
@@ -89,6 +94,12 @@ export class ItemCollection {
     }
   }
 
+  /**
+   * Method to get an item by a specific parameter
+   * @param parameter The parameter to search by
+   * @param value The value to search for
+   * @returns The item(s) that match the search
+   */
   getItemBy(
     parameter: keyof BaseItem,
     value: string | GenericMaterial | number,
@@ -98,6 +109,11 @@ export class ItemCollection {
     return result;
   }
 
+  /**
+   * Method to get an item by its id
+   * @param id The id of the item to search for
+   * @returns The item that matches the id
+   */
   getItemsByName(name: string): BaseItem[] {
     const result = this.items.filter((i) =>
       i.name.toLowerCase().includes(name.toLowerCase()),
@@ -106,6 +122,11 @@ export class ItemCollection {
     return result;
   }
 
+  /**
+   * Method to get items by type
+   * @param type The type of item to search for
+   * @returns the items that match the type
+   */
   getItemsByType(type: "Armor" | "Weapon" | "Potion"): BaseItem[] {
     const result = this.items.filter((i) => {
       if (type === "Armor") return i instanceof Armor;
@@ -117,6 +138,11 @@ export class ItemCollection {
     return result;
   }
 
+  /**
+   * Method to get items by material
+   * @param material The material of the item to search for
+   * @returns The items that match the material
+   */
   getItemsByDescription(description: string): BaseItem[] {
     const result = this.items.filter((i) =>
       i.description.toLowerCase().includes(description.toLowerCase()),
@@ -128,6 +154,11 @@ export class ItemCollection {
     return result;
   }
 
+  /**
+   * Method to get items by material
+   * @param material The material of the item to search for
+   * @returns The items that match the material
+   */
   sortItemsByName(ascending: boolean = true): BaseItem[] {
     const result = this.items.slice().sort((a, b) => {
       const comparison = a.name.localeCompare(b.name);
@@ -140,6 +171,11 @@ export class ItemCollection {
     return result;
   }
 
+  /**
+   * Method to sort items by weight
+   * @param ascending Whether to sort in ascending order (true) or descending (false)
+   * @returns The sorted items
+   */
   sortItemsByPrice(ascending: boolean = true): BaseItem[] {
     const result = this.items.slice().sort((a, b) => {
       const comparison = a.price - b.price;
@@ -152,6 +188,10 @@ export class ItemCollection {
     return result;
   }
 
+  /**
+   * Method to get all items
+   * @returns void
+   */
   getAllItems(): void {
     console.table(
       this.items.map((item) => ({

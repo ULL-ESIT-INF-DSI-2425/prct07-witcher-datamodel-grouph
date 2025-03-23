@@ -25,15 +25,11 @@ export class JsonClientCollection extends ClientCollection {
     const adapter = new JSONFileSync<ClientDataBaseSchema>(dbFilePath);
     this.database = new LowSync(adapter, { clients: [] });
     this.database.read();
-
-    // If no data or invalid data, initialize the database
     if (!this.database.data || !Array.isArray(this.database.data.clients)) {
       console.log("📂 Database was empty. Initializing...");
       this.database.data = { clients: [] };
       this.database.write();
     }
-
-    // Load clients from the database
     this.clients = this.database.data.clients
       .filter((h) => Object.keys(h).length > 0)
       .map((h) => {
@@ -94,6 +90,10 @@ export class JsonClientCollection extends ClientCollection {
     this.saveDatabase();
   }
 
+  /**
+   * getter for the clients in the collection
+   * @returns A list of all clients in the collection.
+   */
   getClients(): Hunter[] {
     return this.clients;
   }
