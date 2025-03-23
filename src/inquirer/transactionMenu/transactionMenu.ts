@@ -182,22 +182,19 @@ function sellGoods(): void {
     const item = itemCollection.getItemBy("id", itemId);
     if (!Array.isArray(item) || item.length === 0) return showError("Item not found");
     const selectedItem = item[0] as Item;
-    if (!item) return showError("Item not found");
     
     if (inventory.getStockLevel(selectedItem) > 0) {
       inventory.recordSale(client, [selectedItem]);
       inventory.removeItemFromStock(selectedItem, 1);
-      itemCollection.removeItem(itemId);
-      showSuccess(`Item "${selectedItem.name}" sold successfully!`);
+      console.log(chalk.green(`✔ Item "${selectedItem.name}" sold successfully!`));
     } else {
-      showError(`Not enough stock for item: ${selectedItem.name}`);
+      return showError(`Not enough stock for item: ${selectedItem.name}`);
     }
-    itemCollection.removeItem(itemId);
-    inventory.removeItemFromStock(selectedItem, 1);
-    showSuccess(`Item "${selectedItem.name}" sold successfully!`);
+    
     pressEnterToContinue().then(() => transactionsMenu());
   });
 }
+
 
 
 function returnGoods(): void {

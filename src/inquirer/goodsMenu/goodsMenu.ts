@@ -26,7 +26,7 @@ export function goodsMenu(): void {
           { name: chalk.green("Add Good"), value: "add" },
           { name: chalk.red("Delete Good"), value: "delete" },
           { name: chalk.blue("Update Good"), value: "update" },
-          { name: chalk.magenta("Goods List"), value: "list" },
+          { name: chalk.magenta("Inventory Status"), value: "list" },
           new inquirer.Separator(),
           { name: chalk.yellow("↩ Return to Main Menu"), value: "back" },
         ],

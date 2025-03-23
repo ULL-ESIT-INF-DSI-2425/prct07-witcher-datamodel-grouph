@@ -28,15 +28,13 @@ export function historyMenu(): void {
       }
       switch (action) {
         case "list":
-          inventory.getAllTransactions().forEach((transaction) => {
-            console.log(transaction);
-          });
+          inventory.printAllTransactions();
           break;
         case "filterClient":
-
+          inventory.printTransactionsByClient();
           break;
         case "filterMerchant":
-          
+          inventory.printTransactionsByMerchant();
           break;
         default:
           showError("Invalid action");

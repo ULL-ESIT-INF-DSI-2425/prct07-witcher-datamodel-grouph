@@ -8,7 +8,7 @@ import {
 import { goodsMenu, itemDB } from "./goodsMenu.js";
 
 export function goodList(): void {
-  displayTitle("Goods List Menu");
+  displayTitle("Inventory Status");
   inquirer
     .prompt([
       {

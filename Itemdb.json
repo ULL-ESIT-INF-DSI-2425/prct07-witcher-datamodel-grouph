@@ -1,22 +1,29 @@
 {
   "items": [
     {
-      "id": "P-1742742845500",
-      "name": "calaverico",
-      "description": "muerte",
-      "material": "mandrake",
-      "weight": 1,
-      "price": 90,
-      "effect": "Unknown Effect"
+      "id": "A-1742745370548",
+      "name": "kaka",
+      "description": "askf",
+      "material": "si",
+      "weight": 1234,
+      "price": 124
     },
     {
-      "id": "P-1742744252115",
-      "name": "koala",
-      "description": "ayuda",
-      "material": "locura",
-      "weight": 12,
-      "price": 8776,
-      "effect": "Unknown Effect"
+      "id": "W-1742746063373",
+      "name": "kasf",
+      "description": "asf",
+      "material": "asf",
+      "weight": 124,
+      "price": 124
+    },
+    {
+      "id": "P-1742746133796",
+      "name": "asg",
+      "description": "asg",
+      "material": "asgasg",
+      "weight": 124,
+      "price": 124,
+      "effect": "None"
     }
   ]
 }

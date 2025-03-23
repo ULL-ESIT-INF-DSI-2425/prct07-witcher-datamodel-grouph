@@ -293,6 +293,23 @@ export class Inventory {
     });
   }
 
+  printEconomicReport() {
+    console.log("Economic Report");
+    console.log("Total Crowns Earned by Sales:", this.getEarnedCrownsbySales());
+    console.log("Total Crowns Spent by Purchases:", this.getSpentCrownsbyPurchases());
+    console.log("Total Crowns Spent by Returns:", this.getReturnedCrowns());
+    console.log("Net Crowns:", this.getNetCrowns());
+  }
+
+  printAllTransactions() {
+    this.transactions.forEach((t) => {
+      console.log("Date:", t.date.toDateString());
+      console.log("Operation:", t.operationType);
+      console.log("Items:", t.items.map((i) => i.name).join(", "));
+      console.log("Total:", t.totalCrowns);
+    })
+  ;}
+
   /**
    * Method that returns the total number of crowns earned by sales.
    * @returns The total number of crowns earned by sales.

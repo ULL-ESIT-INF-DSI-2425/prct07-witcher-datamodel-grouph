@@ -8,7 +8,6 @@ import {
 } from "../utils/menuUtils.js";
 import { mainMenu } from "../mainMenu.js";
 import { historyMenu } from "./historyMenu.js";
-import { stockMenu } from "./stockMenu.js";
 import { topSelling } from "./topSelling.js";
 import { financials } from "./financials.js";
 
@@ -21,7 +20,6 @@ export function reportsMenu(): void {
         name: "option",
         message: chalk.white.underline("► Select an option:"),
         choices: [
-          { name: chalk.blue("Inventory Status"), value: "stock" },
           { name: chalk.green("Top Selling Items"), value: "topselling" },
           { name: chalk.yellow("Total Income & Expenses"), value: "financials"},
           { name: chalk.magenta("Transaction History"), value: "history" },
@@ -36,8 +34,6 @@ export function reportsMenu(): void {
         return mainMenu();
       }
       switch (action) {
-        case "stock":
-          return stockMenu();
         case "topselling":
           return topSelling();
         case "financials":
