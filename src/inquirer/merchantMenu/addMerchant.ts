@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
+import { displayTitle, pressEnterToContinue, showSuccess } from "../utils/menuUtils.js";
 import { merchantMenu, merchantDB, validProfessions } from "./merchantMenu.js";
 import { Merchant, Profession } from "../../merchant.js";
 
@@ -41,7 +41,7 @@ export function addMerchant(): void {
         answers.address,
       );
       merchantDB.addMerchant(merchant);
-      console.log(`Merchant "${answers.name}" added successfully!`);
+      showSuccess(`Merchant "${answers.name}" added successfully!`)
       pressEnterToContinue().then(() => merchantMenu());
     });
 }

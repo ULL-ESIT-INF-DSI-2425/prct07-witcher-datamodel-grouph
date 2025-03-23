@@ -57,7 +57,6 @@ export function merchantMenu(): void {
           return listMerchant();
         default:
           showError("Invalid action");
-          return merchantMenu();
       }
       pressEnterToContinue().then(() => merchantMenu());
     });

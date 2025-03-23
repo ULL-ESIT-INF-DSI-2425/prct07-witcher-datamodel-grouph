@@ -113,7 +113,7 @@ export function addGood(): void {
             return showError("Invalid item type.");
         }
         itemDB.addItem(newItem);
-        showSuccess(`✔ Item "${answers.name}" added successfully! ID: ${newId}`);
+        showSuccess(`Item "${answers.name}" added successfully! ID: ${newId}`);
       } catch (error) {
         console.error("An error occurred while adding the item:", error);
         pressEnterToContinue().then(() => goodsMenu());

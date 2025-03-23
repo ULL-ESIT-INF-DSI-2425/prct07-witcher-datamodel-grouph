@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
+import { displayTitle, pressEnterToContinue, showSuccess } from "../utils/menuUtils.js";
 import { merchantMenu, merchantDB } from "./merchantMenu.js";
 import { Profession } from "../../merchant.js"; // Importa Profession si es un enum o type
 
@@ -57,9 +57,7 @@ export function updateMerchant(): void {
             ])
             .then((answers) => {
               merchantDB.modifyMerchant(answer.id, field, answers.value);
-              console.log(
-                `Merchant with ID ${answer.id} updated successfully!`,
-              );
+              showSuccess(`Merchant with ID ${answer.id} updated successfully!`);
               pressEnterToContinue().then(() => merchantMenu());
             });
         });

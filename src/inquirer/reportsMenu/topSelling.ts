@@ -1,10 +1,9 @@
 import { inventory } from "../transactionMenu/transactionMenu.js";
-import { pressEnterToContinue } from "../utils/menuUtils.js";
+import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
 import { reportsMenu } from "./reportsMenu.js";
 
 export function topSelling() {
-  console.log("Top Selling Items");
+  displayTitle("Top Selling Item");
   inventory.printMostSoldItem();
-  console.log("Press any key to continue");
   pressEnterToContinue().then(() => reportsMenu());
 }

@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
+import { displayTitle, pressEnterToContinue, showSuccess } from "../utils/menuUtils.js";
 import { merchantMenu, merchantDB } from "./merchantMenu.js";
 
 export function deleteMerchant(): void {
@@ -21,7 +21,7 @@ export function deleteMerchant(): void {
     ])
     .then((answers) => {
       merchantDB.removeMerchant(answers.id);
-      console.log(`Merchant with ID ${answers.id} deleted successfully!`);
+      showSuccess(`Merchant with ID ${answers.id} deleted successfully!`)
       pressEnterToContinue().then(() => merchantMenu());
     });
 }

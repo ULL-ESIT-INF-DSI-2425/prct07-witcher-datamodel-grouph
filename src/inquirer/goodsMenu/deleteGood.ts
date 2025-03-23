@@ -14,7 +14,7 @@ export function deleteGood(): void {
     ])
     .then((answers) => {
       itemDB.removeItem(answers.id);
-      showSuccess(`✔ Item with ID ${answers.id} deleted successfully!`);
+      showSuccess(`Item with ID ${answers.id} deleted successfully!`);
       pressEnterToContinue().then(() => goodsMenu());
     });
 }
