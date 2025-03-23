@@ -7,6 +7,9 @@ import {
 } from "../utils/menuUtils.js";
 import { goodsMenu, itemDB, validArmorMaterial, validPotionMaterial, validWeaponMaterial } from "./goodsMenu.js";
 
+/**
+ * Function to update a good in the database
+ */
 export function updateGood(): void {
   displayTitle("Update Good");
 

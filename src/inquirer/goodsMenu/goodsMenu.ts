@@ -13,6 +13,9 @@ import { goodList } from "./goodList.js";
 import { JsonItemCollection } from "../../data/itemDB.js";
 import { ArmorMaterial, PotionMaterial, WeaponMaterial } from "../../item.js";
 
+/**
+ * Instance of the JsonItemCollection class
+ */
 export const itemDB = new JsonItemCollection();
 
 export const validWeaponMaterial: WeaponMaterial[] = [

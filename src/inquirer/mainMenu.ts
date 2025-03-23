@@ -24,6 +24,9 @@ const inventory = new Inventory(
   itemCollection,
 );
 
+/**
+ * Main menu prompt.
+ */
 export function mainMenu(): void {
   displayTitle("Inventory Management System");
   inquirer

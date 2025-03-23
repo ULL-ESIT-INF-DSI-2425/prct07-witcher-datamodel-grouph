@@ -11,6 +11,9 @@ import { historyMenu } from "./historyMenu.js";
 import { topSelling } from "./topSelling.js";
 import financials from "./financials.js";
 
+/**
+ * Inquirer prompt to display the reports menu.
+ */
 export function reportsMenu(): void {
   displayTitle("Generate Reports");
   inquirer

@@ -3,6 +3,9 @@ import { displayTitle, pressEnterToContinue, showSuccess } from "../utils/menuUt
 import { merchantMenu, merchantDB, validProfessions } from "./merchantMenu.js";
 import { Merchant, Profession } from "../../merchant.js";
 
+/**
+ * Inquirer prompt to add a new merchant to the database.
+ */
 export function addMerchant(): void {
   displayTitle("Add Merchant");
   inquirer

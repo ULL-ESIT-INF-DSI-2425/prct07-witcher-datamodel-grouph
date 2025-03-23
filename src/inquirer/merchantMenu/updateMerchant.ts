@@ -3,6 +3,9 @@ import { displayTitle, pressEnterToContinue, showSuccess } from "../utils/menuUt
 import { merchantMenu, merchantDB } from "./merchantMenu.js";
 import { Profession } from "../../merchant.js"; // Importa Profession si es un enum o type
 
+/**
+ * List of valid professions for merchants.
+ */
 const validProfessions: Profession[] = [
   "Blacksmith",
   "Alchemist",
@@ -12,6 +15,9 @@ const validProfessions: Profession[] = [
   "Smuggler",
 ] as const;
 
+/**
+ * Inquirer prompt to update a merchant in the database.
+ */
 export function updateMerchant(): void {
   displayTitle("Update Merchant");
   inquirer

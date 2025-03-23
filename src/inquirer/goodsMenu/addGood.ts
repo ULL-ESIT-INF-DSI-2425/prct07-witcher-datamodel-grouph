@@ -8,6 +8,9 @@ import {
 import { goodsMenu, itemDB, validArmorMaterial, validPotionMaterial, validWeaponMaterial } from "./goodsMenu.js";
 import { Armor, Weapon, Potion } from "../../item.js";
 
+/**
+ * Function to add a good to the database
+ */
 export function addGood(): void {
   displayTitle("Add Good");
 
