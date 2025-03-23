@@ -3,8 +3,9 @@ import {
   displayTitle,
   pressEnterToContinue,
   showError,
+  showSuccess,
 } from "../utils/menuUtils.js";
-import { goodsMenu, itemDB } from "./goodsMenu.js";
+import { goodsMenu, itemDB, validArmorMaterial, validPotionMaterial, validWeaponMaterial } from "./goodsMenu.js";
 import { Armor, Weapon, Potion } from "../../item.js";
 
 export function addGood(): void {
@@ -13,16 +14,11 @@ export function addGood(): void {
   inquirer
     .prompt([
       {
-        type: "input",
+        type: "list",
         name: "object",
-        message: "Enter the item's type (Potion, Armor, Weapon):",
-        validate: (input) => {
-          const validTypes = ["potion", "armor", "weapon"];
-          return validTypes.includes(input.trim().toLowerCase())
-            ? true
-            : "Invalid item type. Choose between Potion, Armor, or Weapon.";
-        },
-        filter: (input) => input.trim().toLowerCase(),
+        message: "Select the item's type:",
+        choices: ["Potion", "Armor", "Weapon"],
+        filter: (input) => input.toLowerCase(),
       },
       {
         type: "input",
@@ -37,10 +33,22 @@ export function addGood(): void {
         filter: (input) => input.trim(),
       },
       {
-        type: "input",
+        type: "list",
         name: "material",
-        message: "Enter the item's material:",
-        filter: (input) => input.trim(),
+        message: "Select the item's material:",
+        choices: (answers) => {
+          switch (answers.object) {
+            case "potion":
+              return validPotionMaterial;
+            case "armor":
+              return validArmorMaterial;
+            case "weapon":
+              return validWeaponMaterial;
+            default:
+              return [];
+          }
+        },
+        loop: false,
       },
       {
         type: "input",
@@ -78,7 +86,7 @@ export function addGood(): void {
               answers.material,
               answers.weight,
               answers.price,
-              "None",
+              "None"
             );
             break;
           case "armor":
@@ -88,7 +96,7 @@ export function addGood(): void {
               answers.description,
               answers.material,
               answers.weight,
-              answers.price,
+              answers.price
             );
             break;
           case "weapon":
@@ -98,21 +106,18 @@ export function addGood(): void {
               answers.description,
               answers.material,
               answers.weight,
-              answers.price,
+              answers.price
             );
             break;
           default:
             return showError("Invalid item type.");
         }
-
         itemDB.addItem(newItem);
-        console.log(
-          `✔ Item "${answers.name}" added successfully! ID: ${newId}`,
-        );
+        showSuccess(`✔ Item "${answers.name}" added successfully! ID: ${newId}`);
       } catch (error) {
-        console.error("❌ An error occurred while adding the item:", error);
+        console.error("An error occurred while adding the item:", error);
+        pressEnterToContinue().then(() => goodsMenu());
       }
-
       pressEnterToContinue().then(() => goodsMenu());
     });
 }

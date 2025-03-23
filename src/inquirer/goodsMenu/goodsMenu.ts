@@ -11,8 +11,48 @@ import { deleteGood } from "./deleteGood.js";
 import { updateGood } from "./updateGood.js";
 import { goodList } from "./goodList.js";
 import { JsonItemCollection } from "../../data/itemDB.js";
+import { ArmorMaterial, PotionMaterial, WeaponMaterial } from "../../item.js";
 
 export const itemDB = new JsonItemCollection();
+
+export const validWeaponMaterial: WeaponMaterial[] = [
+  "Steel",
+  "Elven Steel",
+  "Meteoric Steel",
+  "Silver",
+  "Reinforced Silver",
+  "Ebony Wood",
+  "Monster Bone",
+  "Volcanic Glass",
+  "Mithril",
+  "Adamantite",
+] as const;
+
+export const validArmorMaterial: ArmorMaterial[] = [
+  "Leather",
+  "Hardened Leather",
+  "Steel Mesh",
+  "Silver Mesh",
+  "Dragon Scales",
+  "Adamantite Plates",
+  "Mithril",
+  "Enchanted Fabric",
+  "Monster Bone",
+  "Insectoid Chitin",
+] as const;
+
+export const validPotionMaterial: PotionMaterial[] = [
+  "Celandine Flower",
+  "Mandrake",
+  "Vervain",
+  "Bryonia Root",
+  "Crushed Kikimora Skull",
+  "Nekker Gland",
+  "Wraith Essence",
+  "Griffin Marrow",
+  "Endrega Mucus",
+  "Ghoul Blood",
+] as const;
 
 export function goodsMenu(): void {
   displayTitle("Manage Goods");

@@ -109,6 +109,9 @@ export class ItemCollection {
     return result;
   }
 
+  getItemById(id: string): BaseItem | undefined {
+    return this.items.find((i) => i.id === id);
+  }
   /**
    * Method to get an item by its id
    * @param id The id of the item to search for

@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
+import { displayTitle, pressEnterToContinue, showSuccess } from "../utils/menuUtils.js";
 import { goodsMenu, itemDB } from "./goodsMenu.js";
 
 export function deleteGood(): void {
@@ -14,7 +14,7 @@ export function deleteGood(): void {
     ])
     .then((answers) => {
       itemDB.removeItem(answers.id);
-      console.log(`✔ Item with ID ${answers.id} deleted successfully!`);
+      showSuccess(`✔ Item with ID ${answers.id} deleted successfully!`);
       pressEnterToContinue().then(() => goodsMenu());
     });
 }

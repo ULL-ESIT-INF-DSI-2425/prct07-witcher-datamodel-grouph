@@ -183,22 +183,13 @@
       "price": 1
     },
     {
-      "id": "1742749726939",
-      "name": "juguito",
-      "description": "sabe bien",
-      "material": "Vervain",
-      "weight": 3,
-      "price": 123,
-      "effect": "None"
-    },
-    {
-      "id": "1742749770447",
-      "name": "vino",
-      "description": "vinito",
-      "material": "Vervain",
-      "weight": 2,
-      "price": 5,
-      "effect": "None"
+      "id": "P-1742764508616",
+      "name": "Vision Nocturna",
+      "description": "Ves por la noche",
+      "material": "Mandrake",
+      "weight": 0.5,
+      "price": 80,
+      "effect": "Unknown Effect"
     }
   ]
 }
