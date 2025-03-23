@@ -11,7 +11,6 @@ import { historyMenu } from "./historyMenu.js";
 import { stockMenu } from "./stockMenu.js";
 import { topSelling } from "./topSelling.js";
 import { financials } from "./financials.js";
-import { Inventory } from "../../inventory.js";
 
 export function reportsMenu(): void {
   displayTitle("Generate Reports");

@@ -1,21 +1,21 @@
 {
   "items": [
     {
-      "id": "P-1742607943210",
-      "name": "kakaroto",
-      "description": "sisi",
-      "material": "Mandrake",
-      "weight": 4,
-      "price": 100000000,
+      "id": "P-1742742845500",
+      "name": "calaverico",
+      "description": "muerte",
+      "material": "mandrake",
+      "weight": 1,
+      "price": 90,
       "effect": "Unknown Effect"
     },
     {
-      "id": "P-1742653422952",
-      "name": "pito",
-      "description": "da mucho pito",
-      "material": "la",
-      "weight": 90,
-      "price": 8888888,
+      "id": "P-1742744252115",
+      "name": "koala",
+      "description": "ayuda",
+      "material": "locura",
+      "weight": 12,
+      "price": 8776,
       "effect": "Unknown Effect"
     }
   ]

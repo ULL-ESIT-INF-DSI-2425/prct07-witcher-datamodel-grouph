@@ -155,6 +155,7 @@ function buyGoods(): void {
         return showError("Invalid item type");
     }
     itemCollection.addItem(newItem);
+    inventory.addItemToStock(newItem, 1);
     inventory.recordPurchase(merchant, [newItem]);
     showSuccess(`Item "${answers.name}" added successfully! ID: ${newId}`);
     pressEnterToContinue().then(() => transactionsMenu());
@@ -185,12 +186,14 @@ function sellGoods(): void {
     
     if (inventory.getStockLevel(selectedItem) > 0) {
       inventory.recordSale(client, [selectedItem]);
+      inventory.removeItemFromStock(selectedItem, 1);
       itemCollection.removeItem(itemId);
       showSuccess(`Item "${selectedItem.name}" sold successfully!`);
     } else {
       showError(`Not enough stock for item: ${selectedItem.name}`);
     }
     itemCollection.removeItem(itemId);
+    inventory.removeItemFromStock(selectedItem, 1);
     showSuccess(`Item "${selectedItem.name}" sold successfully!`);
     pressEnterToContinue().then(() => transactionsMenu());
   });
@@ -266,6 +269,7 @@ function returnGoods(): void {
         return showError("Invalid item type");
     }
     itemCollection.addItem(newItem);
+    inventory.addItemToStock(newItem, 1);
     inventory.recordReturn(entity, [newItem], reason);
     showSuccess(`Item "${name}" returned successfully! ID: ${newId}`);
     pressEnterToContinue().then(() => transactionsMenu());

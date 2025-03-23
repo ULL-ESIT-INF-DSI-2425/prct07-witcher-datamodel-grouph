@@ -2,6 +2,9 @@ import chalk from "chalk";
 import inquirer from "inquirer";
 import { displayTitle, showError, pressEnterToContinue } from "../utils/menuUtils.js";
 import { reportsMenu } from "./reportsMenu.js";
+import { inventory } from "../transactionMenu/transactionMenu.js";
+import { itemDB } from "../goodsMenu/goodsMenu.js";
+import { ItemCollection } from "../../collections/itemCollection.js";
 
 export function stockMenu(): void {
   displayTitle("Inventory Status");
@@ -30,7 +33,7 @@ export function stockMenu(): void {
       }
       switch (action) {
         case "list":
-          console.log("List All Goods function pending...");
+          
           break;
         case "filterType":
           console.log("Filter by Category function pending...");

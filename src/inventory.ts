@@ -286,6 +286,13 @@ export class Inventory {
     });
   }
 
+  printAllStock() {
+    console.log("Stock:");
+    this.stock.forEach((record) => {
+      console.log(`${record.item.name}: ${record.quantity}`);
+    });
+  }
+
   /**
    * Method that returns the total number of crowns earned by sales.
    * @returns The total number of crowns earned by sales.
