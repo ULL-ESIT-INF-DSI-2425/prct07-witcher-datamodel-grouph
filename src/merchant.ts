@@ -45,7 +45,7 @@ export class Merchant {
 
   /**
    * Getter for the profession property
-   * @returns The profession of the merchant
+   * @returns The profession of the merchant 
    */
   get profession(): Profession {
     return this._profession;
