@@ -21,7 +21,10 @@ export function reportsMenu(): void {
         message: chalk.white.underline("► Select an option:"),
         choices: [
           { name: chalk.green("Top Selling Items"), value: "topselling" },
-          { name: chalk.yellow("Total Income & Expenses"), value: "financials"},
+          {
+            name: chalk.yellow("Total Income & Expenses"),
+            value: "financials",
+          },
           { name: chalk.magenta("Transaction History"), value: "history" },
           new inquirer.Separator(),
           { name: chalk.yellow("↩ Return to Main Menu"), value: "back" },

@@ -1,6 +1,10 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
-import { displayTitle, pressEnterToContinue, showError } from "../utils/menuUtils.js";
+import {
+  displayTitle,
+  pressEnterToContinue,
+  showError,
+} from "../utils/menuUtils.js";
 import { clientMenu, clientDB, validRaces } from "./clientMenu.js";
 
 export function listClient(): void {
@@ -92,7 +96,7 @@ export function filterClientByName(): void {
             Name: client.name,
             Race: client.race,
             Location: client.location,
-          }))
+          })),
         );
       }
 
@@ -128,7 +132,7 @@ export function filterClientByRace(): void {
             Name: client.name,
             Race: client.race,
             Location: client.location,
-          }))
+          })),
         );
       }
 
@@ -163,7 +167,7 @@ export function filterClientByLocation(): void {
             Name: client.name,
             Race: client.race,
             Location: client.location,
-          }))
+          })),
         );
       }
 
@@ -171,4 +175,3 @@ export function filterClientByLocation(): void {
     })
     .then(() => listClient());
 }
-

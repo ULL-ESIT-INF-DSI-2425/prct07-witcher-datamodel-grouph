@@ -6,7 +6,8 @@ export function deleteMerchant(): void {
   displayTitle("Delete Merchant");
   inquirer
     .prompt([
-      { type: "input",
+      {
+        type: "input",
         name: "id",
         message: "Enter the Merchant's ID:",
         validate: (input) => {

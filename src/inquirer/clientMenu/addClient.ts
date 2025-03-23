@@ -8,16 +8,23 @@ export function addClient(): void {
   inquirer
     .prompt([
       { type: "input", name: "name", message: "Enter the client's name:" },
-      { type: "input", name: "race", message: "Enter the client's race:",
+      {
+        type: "input",
+        name: "race",
+        message: "Enter the client's race:",
         validate: (input) => {
           const trimmedInput = input.trim() as Race;
           return validRaces.includes(trimmedInput)
             ? true
             : `Invalid race. Choose form ${validRaces.join(", ")}.`;
-        }
+        },
       },
 
-      { type: "input", name: "address", message: "Enter the client's address:" },
+      {
+        type: "input",
+        name: "address",
+        message: "Enter the client's address:",
+      },
     ])
     .then((answers) => {
       const newId = Date.now();

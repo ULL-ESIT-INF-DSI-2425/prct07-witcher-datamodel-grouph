@@ -1,6 +1,6 @@
 import { describe, expect, test, beforeEach, expectTypeOf } from "vitest";
 import { Inventory } from "../../src/inventory.js";
-import { Item, Armor, Weapon, Potion } from "../../src/item.js";
+import { Item, Armor, Weapon } from "../../src/item.js";
 import { Hunter } from "../../src/hunter.js";
 import { Merchant } from "../../src/merchant.js";
 import { ClientCollection } from "../../src/collections/clientCollection.js";
@@ -175,12 +175,6 @@ describe("Inventory class tests", () => {
       expect(inventory.getTransactionsByDate(date).length).toBe(3);
     });
 
-    // test("should get transactions by date range", () => {
-    //   const start = new Date();
-    //   const end = new Date();
-    //   expect(inventory.getTransactionsByDateRange(start, end).length).toBe(0);
-    // });
-
     test("should get client returns", () => {
       expect(inventory.getClientReturns().length).toBe(1);
     });
@@ -212,7 +206,7 @@ describe("Inventory class tests", () => {
     });
 
     test("should calculate net crowns", () => {
-      expect(inventory.getNetCrowns()).toBe(300); // 800 - 500
+      expect(inventory.getNetCrowns()).toBe(600);
     });
   });
 

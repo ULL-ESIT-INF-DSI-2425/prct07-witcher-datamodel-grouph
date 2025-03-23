@@ -1,5 +1,9 @@
 import inquirer from "inquirer";
-import { displayTitle, pressEnterToContinue, showError } from "../utils/menuUtils.js";
+import {
+  displayTitle,
+  pressEnterToContinue,
+  showError,
+} from "../utils/menuUtils.js";
 import { goodsMenu, itemDB } from "./goodsMenu.js";
 import { Armor, Weapon, Potion } from "../../item.js";
 

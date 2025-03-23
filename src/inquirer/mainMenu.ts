@@ -10,7 +10,6 @@ import {
 import { goodsMenu, itemDB } from "./goodsMenu/goodsMenu.js";
 import { merchantDB, merchantMenu } from "./merchantMenu/merchantMenu.js";
 import { clientDB, clientMenu } from "./clientMenu/clientMenu.js";
-//import { transactionsMenu } from "./transactionMenu/transactionMenu.js";
 import { reportsMenu } from "./reportsMenu/reportsMenu.js";
 import { Inventory } from "../inventory.js";
 import { transactionsMenu } from "./transactionMenu/transactionMenu.js";
@@ -18,7 +17,12 @@ import { transactionsMenu } from "./transactionMenu/transactionMenu.js";
 const clientCollection = clientDB;
 const merchantCollection = merchantDB;
 const itemCollection = itemDB;
-const inventory = new Inventory(clientCollection, merchantCollection, itemCollection);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const inventory = new Inventory(
+  clientCollection,
+  merchantCollection,
+  itemCollection,
+);
 
 export function mainMenu(): void {
   displayTitle("Inventory Management System");
@@ -59,19 +63,19 @@ export function mainMenu(): void {
       switch (option) {
         case "goods":
           return goodsMenu();
-          
+
         case "merchants":
           return merchantMenu();
-          
+
         case "clients":
           return clientMenu();
-          
+
         case "transactions":
           return transactionsMenu();
-          
+
         case "reports":
           return reportsMenu();
-          
+
         default:
           showError("Invalid action");
           pressEnterToContinue().then(() => mainMenu());

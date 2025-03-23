@@ -10,7 +10,6 @@ import {
 import { ClientCollection } from "./collections/clientCollection.js";
 import { MerchantCollection } from "./collections/merchantCollection.js";
 import { ItemCollection } from "./collections/itemCollection.js";
-import { get } from "http";
 
 /**
  * Type that represents the stock of items in the inventory.
@@ -286,7 +285,6 @@ export class Inventory {
     });
   }
 
-
   /**
    * Method that prints all the transactions in the inventory.
    */
@@ -320,7 +318,10 @@ export class Inventory {
   printEconomicReport() {
     console.log("Economic Report");
     console.log("Total Crowns Earned by Sales:", this.getEarnedCrownsbySales());
-    console.log("Total Crowns Spent by Purchases:", this.getSpentCrownsbyPurchases());
+    console.log(
+      "Total Crowns Spent by Purchases:",
+      this.getSpentCrownsbyPurchases(),
+    );
     console.log("Total Crowns Spent by Returns:", this.getReturnedCrowns());
     console.log("Net Crowns:", this.getNetCrowns());
   }
@@ -331,17 +332,18 @@ export class Inventory {
       console.log("Operation:", t.operationType);
       console.log("Items:", t.items.map((i) => i.name).join(", "));
       console.log("Total:", t.totalCrowns);
-    })
-  ;}
+    });
+  }
 
   // This function returns the most sold item
   getMostSoldItem() {
     let mostSoldItem = this.itemCollection.getItems()[0];
     let mostSoldItemTimes = 0;
-    this.itemCollection.getItems()
+    this.itemCollection
+      .getItems()
       .filter((item): item is Item => item instanceof BaseItem)
       .forEach((item) => {
-        let timesSold = this.getTransactionsByItem(item).length;
+        const timesSold = this.getTransactionsByItem(item).length;
         if (timesSold > mostSoldItemTimes) {
           mostSoldItem = item;
           mostSoldItemTimes = timesSold;
@@ -350,9 +352,9 @@ export class Inventory {
     return mostSoldItem;
   }
 
- // This function print the most sold item
+  // This function print the most sold item
   printMostSoldItem() {
-    let mostSoldItem = this.getMostSoldItem();
+    const mostSoldItem = this.getMostSoldItem();
     console.log("Most Sold Item:");
     console.log("Name:", mostSoldItem.name);
     console.log("Price:", mostSoldItem.price);
@@ -387,7 +389,11 @@ export class Inventory {
    * @returns The net number of crowns in the inventory
    */
   getNetCrowns(): number {
-    return this.getEarnedCrownsbySales() - this.getSpentCrownsbyPurchases() + this.getReturnedCrowns();
+    return (
+      this.getEarnedCrownsbySales() -
+      this.getSpentCrownsbyPurchases() +
+      this.getReturnedCrowns()
+    );
   }
 
   /**

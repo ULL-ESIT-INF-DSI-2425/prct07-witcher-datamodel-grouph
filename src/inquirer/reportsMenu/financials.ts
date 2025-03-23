@@ -1,11 +1,6 @@
 import { inventory } from "../transactionMenu/transactionMenu.js";
-import {
-  displayTitle,
-  pressEnterToContinue,
-  showError,
-} from "../utils/menuUtils.js";
+import { pressEnterToContinue } from "../utils/menuUtils.js";
 import { reportsMenu } from "./reportsMenu.js";
-
 
 export default function financials() {
   console.log("Financials");

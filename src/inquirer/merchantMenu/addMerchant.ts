@@ -24,7 +24,7 @@ export function addMerchant(): void {
           return validProfessions.includes(trimmedInput)
             ? true
             : `Invalid profession. Choose from ${validProfessions.join(", ")}.`;
-        }
+        },
       },
       {
         type: "input",

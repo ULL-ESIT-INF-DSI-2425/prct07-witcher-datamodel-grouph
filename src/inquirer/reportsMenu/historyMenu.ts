@@ -1,6 +1,10 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
-import { displayTitle, showError, pressEnterToContinue } from "../utils/menuUtils.js";
+import {
+  displayTitle,
+  showError,
+  pressEnterToContinue,
+} from "../utils/menuUtils.js";
 import { reportsMenu } from "./reportsMenu.js";
 import { inventory } from "../transactionMenu/transactionMenu.js";
 
@@ -15,7 +19,10 @@ export function historyMenu(): void {
         choices: [
           { name: chalk.green("List All Transactions"), value: "list" },
           { name: chalk.blue("Filter by Client"), value: "filterClient" },
-          { name: chalk.magenta("Filter by Merchant"), value: "filterMerchant" },
+          {
+            name: chalk.magenta("Filter by Merchant"),
+            value: "filterMerchant",
+          },
           new inquirer.Separator(),
           { name: chalk.yellow("↩ Return to Reports Menu"), value: "back" },
         ],

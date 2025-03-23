@@ -1,8 +1,11 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
-import { displayTitle, pressEnterToContinue, showError } from "../utils/menuUtils.js";
+import {
+  displayTitle,
+  pressEnterToContinue,
+  showError,
+} from "../utils/menuUtils.js";
 import { merchantMenu, merchantDB, validProfessions } from "./merchantMenu.js";
-import { Merchant } from "../../merchant.js";
 
 export function listMerchant(): void {
   displayTitle("Merchants List Menu");
@@ -15,7 +18,10 @@ export function listMerchant(): void {
         choices: [
           { name: chalk.magenta("List All Merchants"), value: "list" },
           { name: chalk.blue("Filter by Name"), value: "filterName" },
-          { name: chalk.blue("Filter by Profession"), value: "filterProfession" },
+          {
+            name: chalk.blue("Filter by Profession"),
+            value: "filterProfession",
+          },
           { name: chalk.blue("Filter by Location"), value: "filterLocation" },
           new inquirer.Separator(),
           { name: chalk.yellow("↩ Return to Merchants Menu"), value: "back" },
@@ -93,7 +99,7 @@ export function filterMerchantByName(): void {
             Name: merchant.name,
             Profession: merchant.profession,
             Location: merchant.location,
-          }))
+          })),
         );
       }
 
@@ -114,7 +120,9 @@ export function filterMerchantByProfession(): void {
       },
     ])
     .then((answers) => {
-      const filteredMerchants = merchantDB.getMerchantByProfession(answers.profession);
+      const filteredMerchants = merchantDB.getMerchantByProfession(
+        answers.profession,
+      );
 
       console.clear();
       displayTitle("Filtered Merchants");
@@ -129,7 +137,7 @@ export function filterMerchantByProfession(): void {
             Name: merchant.name,
             Profession: merchant.profession,
             Location: merchant.location,
-          }))
+          })),
         );
       }
 
@@ -149,7 +157,9 @@ export function filterMerchantByLocation(): void {
       },
     ])
     .then((answers) => {
-      const filteredMerchants = merchantDB.getMerchantByLocation(answers.location);
+      const filteredMerchants = merchantDB.getMerchantByLocation(
+        answers.location,
+      );
 
       console.clear();
       displayTitle("Filtered Merchants");
@@ -164,7 +174,7 @@ export function filterMerchantByLocation(): void {
             Name: merchant.name,
             Profession: merchant.profession,
             Location: merchant.location,
-          }))
+          })),
         );
       }
 
@@ -172,5 +182,3 @@ export function filterMerchantByLocation(): void {
     })
     .then(() => listMerchant());
 }
-
-
