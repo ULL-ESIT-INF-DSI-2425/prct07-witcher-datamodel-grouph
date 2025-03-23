@@ -7,6 +7,9 @@ import {
 } from "../utils/menuUtils.js";
 import { goodsMenu, itemDB } from "./goodsMenu.js";
 
+/**
+ * Function to list goods
+ */
 export function goodList(): void {
   displayTitle("Inventory Status");
   inquirer
@@ -60,6 +63,9 @@ export function goodList(): void {
     });
 }
 
+/**
+ * Function to list all items
+ */
 export function listAllItems(): void {
   displayTitle("List All Items");
 
@@ -84,6 +90,9 @@ export function listAllItems(): void {
   pressEnterToContinue().then(() => goodList());
 }
 
+/**
+ * Function to filter items by name
+ */
 export function filterName(): void {
   displayTitle("Filter by Name");
   inquirer
@@ -121,6 +130,9 @@ export function filterName(): void {
     .then(() => goodList());
 }
 
+/**
+ * Function to filter items by type
+ */
 export function filterType(): void {
   displayTitle("Filter by Type");
   inquirer
@@ -159,6 +171,9 @@ export function filterType(): void {
     .then(() => goodList());
 }
 
+/**
+ * Function to filter items by description
+ */
 export function filterDescription(): void {
   displayTitle("Filter by Description");
   inquirer
@@ -196,6 +211,9 @@ export function filterDescription(): void {
     .then(() => goodList());
 }
 
+/**
+ * Function to sort items by name
+ */
 export function sortName(): void {
   displayTitle("Filter Name");
   inquirer
@@ -218,6 +236,9 @@ export function sortName(): void {
     });
 }
 
+/**
+ * Function to sort items by price
+ */
 export function sortPrice(): void {
   displayTitle("Filter Price");
   inquirer

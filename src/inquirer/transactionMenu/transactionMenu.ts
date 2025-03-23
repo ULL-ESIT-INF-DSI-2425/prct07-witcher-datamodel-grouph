@@ -17,12 +17,18 @@ const clientCollection = clientDB;
 const itemCollection = itemDB;
 const merchantCollection = merchantDB;
 
+/**
+ * Inventory instance to manage transactions.
+ */
 export const inventory = new Inventory(
   clientCollection,
   merchantCollection,
   itemCollection,
 );
 
+/**
+ * Inquirer prompt to manage transactions.
+ */
 export function transactionsMenu(): void {
   displayTitle("Transactions Menu");
   inquirer
@@ -58,6 +64,9 @@ export function transactionsMenu(): void {
     });
 }
 
+/**
+ * Inquirer prompt to buy goods from a merchant.
+ */
 function buyGoods(): void {
   inquirer
     .prompt([
@@ -167,6 +176,9 @@ function buyGoods(): void {
     });
 }
 
+/**
+ * Inquirer prompt to sell goods to a client.
+ */
 function sellGoods(): void {
   displayTitle("Sell Good");
   inquirer
@@ -205,6 +217,9 @@ function sellGoods(): void {
     });
 }
 
+/**
+ * Inquirer prompt to return an item to the merchant.
+ */
 function returnGoods(): void {
   displayTitle("Return Item");
   inquirer

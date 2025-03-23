@@ -7,6 +7,9 @@ import {
 } from "../utils/menuUtils.js";
 import { merchantMenu, merchantDB, validProfessions } from "./merchantMenu.js";
 
+/**
+ * Inquirer prompt to list merchants.
+ */
 export function listMerchant(): void {
   displayTitle("Merchants List Menu");
   inquirer
@@ -51,6 +54,9 @@ export function listMerchant(): void {
     });
 }
 
+/**
+ * Display all merchants in the database.
+ */
 export function listAllMerchants(): void {
   displayTitle("List All Merchants");
 
@@ -73,6 +79,9 @@ export function listAllMerchants(): void {
   pressEnterToContinue().then(() => listMerchant());
 }
 
+/**
+ * Inquirer prompt to filter merchants by name.
+ */
 export function filterMerchantByName(): void {
   displayTitle("Filter by Name");
   inquirer
@@ -108,6 +117,9 @@ export function filterMerchantByName(): void {
     .then(() => listMerchant());
 }
 
+/**
+ * Inquirer prompt to filter merchants by profession.
+ */
 export function filterMerchantByProfession(): void {
   displayTitle("Filter by Profession");
   inquirer
@@ -146,6 +158,9 @@ export function filterMerchantByProfession(): void {
     .then(() => listMerchant());
 }
 
+/**
+ * Inquirer prompt to filter merchants by location.
+ */
 export function filterMerchantByLocation(): void {
   displayTitle("Filter by Location");
   inquirer

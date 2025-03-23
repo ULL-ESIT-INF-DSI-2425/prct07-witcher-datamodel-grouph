@@ -6,8 +6,10 @@ import {
 } from "../utils/menuUtils.js";
 import { goodsMenu, itemDB } from "./goodsMenu.js";
 
+/**
+ * Function to update a good in the database
+ */
 export function updateGood(): void {
-  // ← Renombrado correctamente
   displayTitle("Update Good");
   inquirer
     .prompt([

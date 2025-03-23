@@ -2,6 +2,9 @@ import inquirer from "inquirer";
 import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
 import { merchantMenu, merchantDB } from "./merchantMenu.js";
 
+/**
+ * Inquirer prompt to delete a merchant from the database.
+ */
 export function deleteMerchant(): void {
   displayTitle("Delete Merchant");
   inquirer

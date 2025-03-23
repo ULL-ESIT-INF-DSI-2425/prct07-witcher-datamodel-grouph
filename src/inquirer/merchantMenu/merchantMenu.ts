@@ -13,8 +13,14 @@ import { updateMerchant } from "./updateMerchant.js";
 import { listMerchant } from "./listMerchants.js";
 import { Profession } from "../../merchant.js";
 
+/**
+ * Inquirer prompt to manage merchants.
+ */
 export const merchantDB = new JsonMerchantCollection();
 
+/**
+ * List of valid professions for merchants.
+ */
 export const validProfessions: Profession[] = [
   "Blacksmith",
   "Alchemist",
@@ -24,6 +30,9 @@ export const validProfessions: Profession[] = [
   "Smuggler",
 ] as const;
 
+/**
+ * Inquirer prompt to manage merchants.
+ */
 export function merchantMenu(): void {
   displayTitle("Manage Merchants");
   inquirer

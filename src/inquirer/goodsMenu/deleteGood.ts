@@ -2,6 +2,9 @@ import inquirer from "inquirer";
 import { displayTitle, pressEnterToContinue } from "../utils/menuUtils.js";
 import { goodsMenu, itemDB } from "./goodsMenu.js";
 
+/**
+ * Function to delete a good from the database
+ */
 export function deleteGood(): void {
   displayTitle("Delete Good");
   inquirer

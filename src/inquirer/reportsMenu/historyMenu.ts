@@ -8,6 +8,9 @@ import {
 import { reportsMenu } from "./reportsMenu.js";
 import { inventory } from "../transactionMenu/transactionMenu.js";
 
+/**
+ * Inquirer prompt to display transaction history.
+ */
 export function historyMenu(): void {
   displayTitle("Transaction History");
   inquirer

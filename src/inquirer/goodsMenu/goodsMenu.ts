@@ -12,8 +12,14 @@ import { updateGood } from "./updateGood.js";
 import { goodList } from "./goodList.js";
 import { JsonItemCollection } from "../../data/itemDB.js";
 
+/**
+ * Instance of the JsonItemCollection class
+ */
 export const itemDB = new JsonItemCollection();
 
+/**
+ * Function to display the goods menu
+ */
 export function goodsMenu(): void {
   displayTitle("Manage Goods");
   inquirer
