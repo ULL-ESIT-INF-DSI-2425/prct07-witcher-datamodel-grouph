@@ -59,6 +59,12 @@
       "name": "pepe",
       "race": "Elf",
       "location": "tacoronte"
+    },
+    {
+      "id": "H-1742766988328",
+      "name": "Vegeta",
+      "race": "Elf",
+      "location": "Planeta Vegeta"
     }
   ]
 }

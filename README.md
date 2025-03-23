@@ -20,8 +20,16 @@ The system utilizes **Node.js** and **Inquirer.js** to provide and interactive c
 - **Generating basic reports** to analyze stock levels and trends
 
 ## Usage
-First of all, compile the code using *tsc*
-The command you must execute to start using the application is: *node ./dist/inquirer/mainMenu.js*
+Install the required dependencies using the following command:
+```bash
+ $ pnpm install
+```
+Compile the code using **tsc**.
+
+The command you must execute to start using the application is:
+```bash
+ $ node ./dist/inquirer/mainMenu.js
+```
 
 ## 🏰 Contributors 
 
